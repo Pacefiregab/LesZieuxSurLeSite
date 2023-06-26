@@ -2,6 +2,7 @@ version: "3.4"
 
 services:
   php:
+    container_name: lesZieuxSurLeSite-php
     build:
       context: .
       target: app_php
@@ -25,6 +26,7 @@ services:
       MERCURE_JWT_SECRET: ${CADDY_MERCURE_JWT_SECRET:-!ChangeThisMercureHubJWTSecretKey!}
 
   caddy:
+    container_name: lesZieuxSurLeSite-caddy
     build:
       context: .
       target: app_caddy
@@ -54,12 +56,14 @@ services:
         protocol: udp
 
   adminer:
+      container_name: lesZieuxSurLeSite-adminer
       image: adminer
       restart: always
       ports:
         - 8080:8080
 
   db:
+    container_name: lesZieuxSurLeSite-mysql
     image: mysql:5.6
     restart: always
     environment:
