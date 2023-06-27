@@ -68,12 +68,12 @@ class PersonaController extends AbstractController
     }
 
     #[Route('/api/{id}', name: 'api_index_persona', methods: ['GET'])]
-    public function apiIndex(Persona $persona): JsonResponse
+    public function apiIndex(): JsonResponse
     {
         $data = [
-            'id' => $persona->getId(),
-            'name' => $persona->getName(),
-            'libelle' => $persona->getLibelle(),
+            'nombreSessions' => rand(0, 10),
+            'tauxSucces' => rand(-100, 100),
+            'nombreInterfaces' => rand(0, 10),
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
