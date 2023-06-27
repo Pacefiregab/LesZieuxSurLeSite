@@ -4,6 +4,10 @@
 {% block title %}My cool blog posts{% endblock %}
 
 {% block body %}
-    {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
-    {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
+    <h1>Les zyeux sur le site</h1>
+    <div>
+        {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
+    </div>
+
 {% endblock %}

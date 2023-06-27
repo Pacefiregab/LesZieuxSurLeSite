@@ -1,4 +1,4 @@
-:root {
+root {
     --color_background: #F4F5F7;
     --color_card: #FFFFFF;
     --color_primary: #F29F67;
@@ -11,4 +11,7 @@
     --margin: 10px;
     --padding: 10px;
     --border_radius: 24px;
+
+    --font-lexend: 'Lexend', sans-serif;
 }
+
