@@ -6,28 +6,14 @@
 {% block body %}
     <h1>Les zyeux sur le site</h1>
     {% include 'dashboard/filtrePersona.html.twig' with {'items' : personas} %}
-    {% for persona in personas %}
-        {% if loop.first %}
-            <div class="dashboardStatsArea">
-                {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':'1', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Nombre d'interfaces", 'data':'30', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-                {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            </div>
-        {% endif %}
-        <div class="dashboardStatsArea inactive">
-            {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':'1', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Nombre d'interfaces", 'data':'30', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-        </div>
-    {% endfor %}
-
+    <div id="dashboardStatsArea">
+        {% include 'dashboard/card.html.twig' with {'id' : 'nombreSessions', 'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'nombreInterfqces', 'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'tquxSucces', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'fwefw', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'rthrh', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'qwdqas', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'id' : 'werds', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+    </div>
 
 {% endblock %}
