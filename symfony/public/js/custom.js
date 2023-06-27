@@ -28,33 +28,122 @@
   });
 
   $(document).on('keydown', function (event) {
+    // TODO change
     if (event.key == 'i' && event.ctrlKey) {
-      // on scroll down or up event
-      $(document).on('scroll', function (event) {
-        sendTrackingData(event)
-      })
+      initEventCapture();
     }
-
-    $(document).on('click', function (event) {
-      sendTrackingData(event)
-    });
+    ;
   });
 })(window.jQuery);
 
-function sendTrackingData(event) {
-  $.ajax({
-    url: '127.0.0.1/tracking',
-    type: 'POST',
-  }).json({
-    'flag': $(this).data('flag') || null,
-    'type': 'click',
-    'date': new Date(),
-    'x': event.pageX,
-    'y': event.pageY,
-  }).then(function (response) {
-    console.log(response);
+let eyeRecord = []
+let clickRecord = []
+let scrollRecord = []
+
+let sreenWidth = 1920
+let screenHeight = 1080
+let headerHeight = 75
+
+let scrollPosition = 0
+let windowWidth = document.body.clientWidth;
+let windowHeight = document.body.clientHeight;
+
+const flag = $('input[name="flag"]').val();
+
+function initEventCapture() {
+  // wait to connect
+  const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
+  ws.onopen = () => {
+    ws.send('startGazePoint');
+    setTimeout(() => sendRecord(ws), 120000)
+  }
+
+  ws.onmessage = (m) => treatMessage(m);
+
+  ws.onclose = () => {
+    console.log('close');
+    $(document).off();
+    eyeRecord = []
+    clickRecord = []
+    scrollRecord = []
+  }
+
+  console.log(flag)
+
+  $(document).on('click', function (event) {
+    clickRecord.push({
+      X: event.pageX, Y: event.pageY, time: event.timeStamp,
+    })
+
+    const $target = $(event.target);
+
+    if ($target.data('flag') === flag) {
+      sendRecord(ws);
+    }
+  });
+
+  $(document).on('scroll', function (event) {
+    scrollPosition = window.scrollY
+    scrollRecord.push({
+      X: scrollPosition, time: event.timeStamp,
+    })
   });
 }
 
+function treatMessage(message) {
+  const msg = JSON.parse(message.data);
+  const {eyeX, eyeY} = processEyePosition(msg.data.X, msg.data.Y);
+
+  $('h1.text-white').html(eyeX + ' : ' + eyeY);
+
+  eyeRecord.push({
+    X: eyeX, Y: eyeY, time: msg.data.Timestamp,
+  })
+}
+
+function sendRecord(ws) {
+  ws.close();
+  $.ajax({
+    url: "http://localhost:8000/api/record",
+    type: "POST",
+    method: "POST",
+    data: {
+      eyeRecord,
+      clickRecord,
+      scrollRecord,
+      windowHeight,
+      windowWidth,
+    }
+  })
+    .then((data) => {
+      ws.close();
+    })
+}
+
+function processEyePosition(eyeX, eyeY) {
+  let iX;
+  if (eyeX < 0) {
+    //si la position de l'oeil est négative en largeur, alors on est en dehors de l'écran
+    iX = 0;
+  } else if (eyeX > sreenWidth) {
+    //si la position de l'oeil est supérieur à la taille de la fenêtre, alors on est en dehors de l'écran
+    iX = sreenWidth;
+  } else {
+    iX = Math.floor(eyeX);
+  }
 
 
+  let iY;
+  if (eyeY < 0) {
+    //si la position de l'oeil est négative en hauteur, alors on est en dehors de l'écran
+    iY = 0;
+  } else if (eyeY < headerHeight) {
+    //si Y est inférieur à une certaine valeur , alors l'utilisateur regarde le header
+    iY = Math.floor(eyeY);
+  } else {
+    //sinon, on ajoute la valeur du eye tracker avec la valeur de scroll
+    iY = Math.floor(eyeY) + scrollPosition;
+  }
+
+  return {eyeX: iX, eyeY: iY}
+}
