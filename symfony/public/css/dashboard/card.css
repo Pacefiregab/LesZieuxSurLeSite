@@ -45,3 +45,9 @@ div.card .info {
     display: inline-block;
     margin-bottom: 8px;
 }
+
+div#dashboardStatsArea{
+    width: fit-content;
+    height: max(80vh);
+    overflow: hidden;
+}
