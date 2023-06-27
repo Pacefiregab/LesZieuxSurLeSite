@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Persona;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -63,6 +65,17 @@ class PersonaController extends AbstractController
         return $this->render('persona/show.html.twig', [
             'controller_name' => 'PersonaController',
         ]);
+    }
+
+    #[Route('/api/{id}', name: 'api_index_persona', methods: ['GET'])]
+    public function apiIndex(Persona $persona): JsonResponse
+    {
+        $data = [
+            'id' => $persona->getId(),
+            'name' => $persona->getName(),
+            'libelle' => $persona->getLibelle(),
+        ];
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 
 }

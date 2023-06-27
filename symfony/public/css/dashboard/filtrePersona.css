@@ -3,6 +3,8 @@ div.filtre_persona{
 }
 div.persona {
     border-radius: var(--border_radius);
+    width: 100%;
+    text-align: center;
 }
 
 div.persona:hover{

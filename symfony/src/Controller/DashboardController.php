@@ -27,6 +27,8 @@ class DashboardController extends AbstractController
                     $personas[] = $persona;
                 }
             }
+
+
             return $this->render('dashboard/index.html.twig', [
                 'personas' => $personas,
             ]);
