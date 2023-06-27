@@ -67,7 +67,7 @@ class PersonaController extends AbstractController
         ]);
     }
 
-    #[Route('/api/{id}', name: 'api_index_persona', methods: ['GET'])]
+    #[Route('/api', name: 'api_index_persona', methods: ['GET'])]
     public function apiIndex(): JsonResponse
     {
         $data = [
