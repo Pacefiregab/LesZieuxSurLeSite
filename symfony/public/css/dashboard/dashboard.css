@@ -11,3 +11,8 @@ h1{
     line-height: 1.2;
     text-align: center;
 }
+
+#dashboardContent{
+    display: flex;
+    flex-direction: row;
+}

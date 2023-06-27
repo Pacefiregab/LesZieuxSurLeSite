@@ -38,3 +38,6 @@ div.card {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     height: max(150px, auto);
 }
+
+#content h1{
+margin : 15px 0 25px 0 ;}

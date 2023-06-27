@@ -35,14 +35,13 @@ div#dashboardStatsArea {
     width: fit-content;
     height: max(80vh);
     overflow-y: scroll;
-    margin-top: max(10vh)
 }
 
 div#dashboardStatsArea:before {
     position: relative;
     z-index: 2;
 
-    box-shadow: 0px 10px 10px -10px #000 inset;
+    box-shadow: 0 10px 10px -10px #000 inset;
 
     height: 20px;
     margin-bottom: -20px;
