@@ -1,0 +1,9 @@
+div.card{
+    background-color:  var(--color-card);
+    font-family: 'Roboto', sans-serif;
+    border-radius: var(--border_radius);
+    color: var(--color_font);
+}
+div.card h3{
+    font-size: 1.5rem;
+}

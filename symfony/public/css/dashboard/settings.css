@@ -1,0 +1,14 @@
+root {
+    --color_background: #F4F5F7;
+    --color_card: #FFFFFF;
+    --color_primary: #F29F67;
+    --color_secondary: #34B1AA;
+    --color_tertiary: #F2C94C;
+    --color_danger: #FF0000;
+    --color_success: #00FF00;
+    --color_font: #000000;
+
+    --margin: 10px;
+    --padding: 10px;
+    --border_radius: 24px;
+}
