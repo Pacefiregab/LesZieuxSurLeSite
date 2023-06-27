@@ -1,0 +1,14 @@
+div.filtre_persona{
+    width: 60%;
+}
+div.persona {
+    border-radius: var(--border_radius);
+}
+
+div.persona:hover{
+    cursor: pointer;
+}
+div.persona.active{
+    background-color: var(--color_primary);
+}
+
