@@ -1,6 +1,7 @@
-root {
+:root {
     --color_background: #F4F5F7;
     --color_card: #FFFFFF;
+    --color_grey: #5F5F5F;
     --color_primary: #F29F67;
     --color_secondary: #34B1AA;
     --color_tertiary: #F2C94C;
@@ -15,3 +16,8 @@ root {
     --font-lexend: 'Lexend', sans-serif;
 }
 
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box  ;
+}

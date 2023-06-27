@@ -5,9 +5,14 @@
 
 {% block body %}
     <h1>Les zyeux sur le site</h1>
-    <div>
-        {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
-        {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15,'evolution':'-3%', 'info': 'sur les 30 derniers jours '} %}
+    <div id="dashboardStatsArea">
+        {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+        {% include 'dashboard/card.html.twig' with {'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
     </div>
 
 {% endblock %}

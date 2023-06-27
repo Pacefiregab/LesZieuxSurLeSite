@@ -1,6 +1,11 @@
 <div class="card">
     <h3>{{ title }}</h3>
-    <p>{{ data }}</p>
-    <p>{{ evolution }}</p>
-    <p>{{ info }}</p>
+    <span class="data">{{ data }}</span>
+    {% if '+' in  evolution  %}
+    <span class="evolution positive">&#x2B06;{{ evolution }}</span>
+ {% else %}
+ <span class="evolution negative">&#x2B07;{{ evolution }}</span>
+{% endif %}
+
+    <span class="info">{{ info }}</span>
 </div>
