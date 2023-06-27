@@ -21,3 +21,20 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+div.card {
+    background-color: var(--color_card);
+    font-family: 'Roboto', sans-serif;
+    border-radius: var(--border_radius);
+    color: var(--color_font);
+    /* border: 1px solid var(--color_font); */
+    box-sizing: content-box;
+    display: flex;
+    margin: var(--margin);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    height: max(150px, auto);
+}
