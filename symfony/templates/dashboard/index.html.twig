@@ -4,5 +4,6 @@
 {% block title %}My cool blog posts{% endblock %}
 
 {% block body %}
-    OUIIIIII
+    {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15, 'info': 'sur les 30 derniers jours '} %}
+    {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':15, 'info': 'sur les 30 derniers jours '} %}
 {% endblock %}
