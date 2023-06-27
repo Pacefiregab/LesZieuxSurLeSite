@@ -4,7 +4,9 @@
 {% block title %}My cool blog posts{% endblock %}
 
 {% block body %}
+    
     <h1>Les zyeux sur le site</h1>
+
     <div id="dashboardStatsArea">
         {% include 'dashboard/card.html.twig' with {'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
         {% include 'dashboard/card.html.twig' with {'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
