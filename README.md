@@ -11,3 +11,10 @@
  - 1 - Installer le logiciel [Tobii Eye Tracking Core Software](https://files.update.tech.tobii.com/Tobii_Eye_Tracking_Core_v2.13.1.7294_x86.exe)
  - 2 - Telecharger le [Serveur](https://github.com/rezreal/Tobii-EyeX-Web-Socket-Server/releases/tag/v1.0.1)
  - 3 - Lancer le serveur
+
+## Commandes a run a chaque update du cocker (en attendant une maj du dockerfile)
+
+```bash
+composer install
+php bin/console d:s:u
+```
