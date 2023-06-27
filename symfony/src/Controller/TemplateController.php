@@ -2,67 +2,86 @@
 
 namespace App\Controller;
 
+use App\Entity\Template;
+use App\Form\TemplateType;
+use App\Repository\TemplateRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/template')]
+#[Route('/templates')]
 class TemplateController extends AbstractController
 {
-    #[Route('/', name: 'index_template', methods: ['GET'])]
+    private TemplateRepository $templateRepository;
+
+    public function __construct(TemplateRepository $templateRepository)
+    {
+        $this->templateRepository = $templateRepository;
+    }
+
+    #[Route('/', name:'templates_index', methods:'GET')]
     public function index(): Response
     {
-        return $this->render('template/index.html.twig', [
-            'controller_name' => 'TemplateController',
+        $templates = $this->templateRepository->findAll();
+
+        return $this->render('templates/index.html.twig', [
+            'templates' => $templates,
         ]);
     }
 
-    #[Route('/create', name: 'create_template', methods: ['GET'])]
-    public function create(): Response
+    #[Route('/create', name:'templates_create', methods:['GET', 'POST'])]
+    public function create(Request $request): Response
     {
-        return $this->render('template/create.html.twig', [
-            'controller_name' => 'TemplateController',
+        $template = new Template();
+        $form = $this->createForm(TemplateType::class, $template);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->templateRepository->save($template);
+
+            return $this->redirectToRoute('templates_index');
+        }
+
+        return $this->render('templates/create.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/create', name: 'create_template_add', methods: ['POST'])]
-    public function add(): Response
+
+    #[Route('/{id}/edit', name:'templates_edit', methods:['GET', 'POST'])]
+    public function edit(Request $request, Template $template): Response
     {
-        return $this->render('template/create.html.twig', [
-            'controller_name' => 'TemplateController',
+        $form = $this->createForm(TemplateType::class, $template);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->templateRepository->save($template);
+
+            return $this->redirectToRoute('templates_index');
+        }
+
+        return $this->render('templates/edit.html.twig', [
+            'template' => $template,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit_template', methods: ['GET'])]
-    public function edit(int $id): Response
+    #[Route('/', name:'templates_delete', methods:'DELETE')]
+    public function delete(Request $request, Template $template): Response
     {
-        return $this->render('template/edit.html.twig', [
-            'controller_name' => 'TemplateController',
-        ]);
+        if ($this->isCsrfTokenValid('delete' . $template->getId(), $request->request->get('_token'))) {
+            $this->templateRepository->remove($template);
+        }
+
+        return $this->redirectToRoute('templates_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_template_url', methods: ['PUT'])]
-    public function modify(int $id): Response
+    #[Route('/{id}', name:'templates_show', methods:'GET')]
+    public function show(Template $template): Response
     {
-        return $this->render('template/edit.html.twig', [
-            'controller_name' => 'TemplateController',
+        return $this->render('templates/show.html.twig', [
+            'template' => $template,
         ]);
     }
-
-    #[Route('/delete/{id}', name: 'delete_template', methods: ['DELETE'])]
-    public function delete(): Response
-    {
-        return $this->render('template/delete.html.twig', [
-            'controller_name' => 'TemplateController',
-        ]);
-    }
-
-    #[Route('/show/{id}', name: 'show_template', methods: ['GET'])]
-    public function show(int $id): Response
-    {
-        return $this->render('template/show.html.twig', [
-            'controller_name' => 'TemplateController',
-        ]);
-    }
-
 }
