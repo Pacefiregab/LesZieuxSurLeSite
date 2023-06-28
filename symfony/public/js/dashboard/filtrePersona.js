@@ -34,12 +34,12 @@ export class filtrePersona{
     this.personas.forEach(persona => {
         let id = persona.getAttribute('data-bs-target');
         persona.addEventListener('click', () => {
-            //Si persona n'a pas la classe active
+
             if(!this.isActive(persona)){
-                //On ajoute la classe active à persona
+                this.personas.forEach(persona => {
+                    persona.classList.remove('active');
+                });
                 persona.classList.add('active');
-                //On ajoute la classe show à la div qui a l'id de persona
-                document.querySelector(id).classList.add('show');
             }
 
             this.rest.call('/persona/api', 'GET', null, (data) => {
