@@ -32,7 +32,7 @@ div.card {
     display: flex;
     margin: var(--margin);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 230px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);

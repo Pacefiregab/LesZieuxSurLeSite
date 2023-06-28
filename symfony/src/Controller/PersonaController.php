@@ -120,7 +120,7 @@ class PersonaController extends AbstractController
     #[Route('/{id}', name: 'personas_show', methods: 'GET')]
     public function show(Persona $persona): Response
     {
-        $sessions = $persona->getAllSessions();
+        $sessions = $persona->getSessions();
 
         return $this->render('persona/show.html.twig', [
             'persona' => $persona,
