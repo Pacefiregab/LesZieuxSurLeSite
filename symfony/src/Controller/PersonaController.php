@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/persona')]
+#[Route('/personas')]
 class PersonaController extends AbstractController
 {
     private PersonaRepository $personaRepository;
