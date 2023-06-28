@@ -2,67 +2,96 @@
 
 namespace App\Controller;
 
+use App\Entity\Persona;
+use App\Form\PersonaType;
+use App\Repository\PersonaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/persona')]
+
+#[Route('/personas')]
 class PersonaController extends AbstractController
 {
-    #[Route('/', name: 'index_persona', methods: ['GET'])]
+    private PersonaRepository $personaRepository;
+
+    protected FormFactoryInterface $formFactory;
+
+    public function __construct(
+        PersonaRepository $personaRepository,
+        FormFactoryInterface $formFactory
+    ) {
+        $this->personaRepository = $personaRepository;
+        $this->formFactory = $formFactory;
+    }
+
+
+    #[Route('/', name: 'personas_index', methods: 'GET')]
     public function index(): Response
     {
+        $personas = $this->personaRepository->findAll();
+
         return $this->render('persona/index.html.twig', [
-            'controller_name' => 'PersonaController',
+            'personas' => $personas,
         ]);
     }
 
-    #[Route('/create', name: 'create_persona', methods: ['GET'])]
-    public function create(): Response
+    #[Route('/create', name: 'personas_create_post', methods: ['GET', 'POST'])]
+    public function add(Request $request): Response
     {
-        return $this->render('persona/create.html.twig', [
-            'controller_name' => 'PersonaController',
-        ]);
+        $data = $request->request->all();
+
+        $form = $this->formFactory->create(PersonaType::class, new Persona());
+        $form->submit($data);
+
+
+        if (!$form->isValid()) {
+            return Response::HTTP_BAD_REQUEST;
+        }
+
+        $persona = $form->getData();
+        $this->personaRepository->save($persona, true);
+
+        return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/create', name: 'add_persona', methods: ['POST'])]
-    public function add(): Response
+
+    #[Route('/{id}/edit', name: 'personas_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Persona $persona): Response
     {
-        return $this->render('persona/create.html.twig', [
-            'controller_name' => 'PersonaController',
-        ]);
+        $data = $request->request->all();
+        $form = $this->formFactory->create(PersonaType::class, $persona);
+        $form->submit($data);
+
+
+        if (!$form->isValid()) {
+            dd($form->getErrors());
+            return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $persona = $form->getData();
+
+        $this->personaRepository->save($persona, true);
+
+        return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_persona', methods: ['GET'])]
-    public function edit(): Response
+
+    #[Route('/{id}', name: 'personas_delete', methods: 'DELETE')]
+    public function delete(Request $request, Persona $persona): Response
     {
-        return $this->render('persona/edit.html.twig', [
-            'controller_name' => 'PersonaController',
-        ]);
+        $this->personaRepository->remove($persona, true);
+
+        return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_persona', methods: ['POST'])]
-    public function modify(): Response
-    {
-        return $this->render('persona/edit.html.twig', [
-            'controller_name' => 'PersonaController',
-        ]);
-    }
-
-    #[Route('/delete/{id}', name: 'delete_persona', methods: ['DELETE'])]
-    public function delete(): Response
-    {
-        return $this->render('persona/delete.html.twig', [
-            'controller_name' => 'PersonaController',
-        ]);
-    }
-
-    #[Route('/show/{id}', name: 'show_persona', methods: ['GET'])]
-    public function show(): Response
+    #[Route('/{id}', name: 'personas_show', methods: 'GET')]
+    public function show(Persona $persona): Response
     {
         return $this->render('persona/show.html.twig', [
-            'controller_name' => 'PersonaController',
+            'persona' => $persona,
         ]);
     }
-
 }

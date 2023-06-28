@@ -20,20 +20,14 @@ class Tracking
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?int $x = null;
-
-    #[ORM\Column]
-    private ?int $y = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
-    #[ORM\Column]
     private ?string $type = null;
 
     #[ORM\ManyToOne(targetEntity: Session::class, inversedBy: 'clicks')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Session $session = null;
+
+    #[ORM\Column]
+    private array $data = [];
 
     public function getId(): ?int
     {
@@ -96,6 +90,18 @@ class Tracking
     public function setSession(?Session $session): static
     {
         $this->session = $session;
+
+        return $this;
+    }
+
+    public function getData(): array
+    {
+        return $this->data;
+    }
+
+    public function setData(array $data): static
+    {
+        $this->data = $data;
 
         return $this;
     }

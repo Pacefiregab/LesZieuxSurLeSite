@@ -19,6 +19,9 @@ class Persona
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $libelle = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $flag = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Persona
     public function setLibelle(?string $libelle): static
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(string $flag): static
+    {
+        $this->flag = $flag;
 
         return $this;
     }

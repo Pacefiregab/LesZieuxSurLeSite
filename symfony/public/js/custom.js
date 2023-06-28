@@ -104,7 +104,7 @@ function treatMessage(message) {
 function sendRecord(ws) {
   ws.close();
   $.ajax({
-    url: "http://localhost/record/api/",
+    url: "https://localhost/record/api/",
     type: "POST",
     method: "POST",
     data: {
