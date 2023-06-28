@@ -1,14 +1,10 @@
 let data = JSON.parse(document.querySelector('[name=template_data]').value);
 
-console.log(data);
 
-    var white_color = data.dataset.whiteColor;
-    var dark_color = data.dataset.darkColor;
-    var primary_color = data.dataset.primaryColor;
-    var secondary_color = data.dataset.secondaryColor;
-
-
-
+    var white_color = data.whiteColor;
+    var dark_color = data.darkColor;
+    var primary_color = data.primaryColor;
+    var secondary_color = data.secondaryColor;
 
     var root = document.querySelector(':root');
 //Change white color    
