@@ -31,8 +31,8 @@
     // TODO change
     if (event.key == 'i' && event.ctrlKey) {
       initEventCapture();
-    }
-    ;
+    };
+
   });
 })(window.jQuery);
 
@@ -42,7 +42,7 @@ let scrollRecord = []
 
 let sreenWidth = 1920
 let screenHeight = 1080
-let headerHeight = 75
+let headerHeight = 85
 
 let scrollPosition = 0
 let windowWidth = document.body.clientWidth;
@@ -94,7 +94,7 @@ function treatMessage(message) {
   const msg = JSON.parse(message.data);
   const {eyeX, eyeY} = processEyePosition(msg.data.X, msg.data.Y);
 
-  $('h1.text-white').html(eyeX + ' : ' + eyeY);
+  $('.navbar-brand').html(eyeX + ' : ' + eyeY);
 
   eyeRecord.push({
     X: eyeX, Y: eyeY, time: msg.data.Timestamp,
@@ -104,13 +104,13 @@ function treatMessage(message) {
 function sendRecord(ws) {
   ws.close();
   $.ajax({
-    url: "http://localhost:8000/api/record",
+    url: "http://localhost/record/api/",
     type: "POST",
     method: "POST",
     data: {
-      eyeRecord,
-      clickRecord,
-      scrollRecord,
+      eyeRecord: JSON.stringify(eyeRecord),
+      clickRecord: JSON.stringify(clickRecord) ,
+      scrollRecord: JSON.stringify(scrollRecord),
       windowHeight,
       windowWidth,
     }
