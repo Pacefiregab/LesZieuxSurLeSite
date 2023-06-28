@@ -87,7 +87,7 @@ class PersonaController extends AbstractController
             'interface2' => 20,
             'interface3' => 50,
         ];
-
+        //detail dois avoir la route personas_show
         $data = [
             'nombreSessions' => [
                 'donnee' => rand(0, 100),
@@ -102,6 +102,7 @@ class PersonaController extends AbstractController
                 'diff'=> rand(-100, 100),
             ],
             'graph' => $graph,
+            'detail' => $this->generateUrl('personas_show', ['id' => 1]),
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }

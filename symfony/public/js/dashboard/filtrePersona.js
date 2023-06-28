@@ -34,6 +34,11 @@ export class filtrePersona {
     chartGenerate;
 
     /**
+     * @var {Node} bouton_detail - bouton pour afficher les détails
+     */
+    bouton_detail = document.querySelector('#details');
+
+    /**
      * Constructeur de la classe filtrePersona
      *
      */
@@ -42,6 +47,7 @@ export class filtrePersona {
         this.apiCall('/personas/api/', 'GET');
         this.personas.forEach(persona => {
             let id = persona.getAttribute('data-bs-target');
+
             persona.addEventListener('click', () => {
 
                 if (!persona.classList.contains('active')) {
@@ -105,9 +111,10 @@ export class filtrePersona {
             this.afficherResultat(this.tauxReussite, data.tauxReussite);
             this.afficherResultat(this.nombreInterfaces, data.nombreInterfaces);
             this.chartGenerate.buildChart(data.graph);
-
+            this.bouton_detail.setAttribute('onclick', 'window.location.href = "' + data.detail+'"');
         }, (error) => {
             console.log(error);
         });
     }
+
 }

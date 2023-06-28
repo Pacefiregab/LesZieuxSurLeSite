@@ -20,6 +20,8 @@
             {% include 'dashboard/card.html.twig' with {'id' : 'tempsMoyen', 'title': "Temps moyen", 'data':'1:35', 'evolution':'+6s', 'info': 'sur les 30 derniers jours '} %}
             {% include 'dashboard/card.html.twig' with {'id' : 'tempsMax', 'title': "Temps maximum", 'data':'1:59', 'evolution':'-8s', 'info': 'pour le personna réussi, sur les 30 derniers jours '} %}
         </div>
+        <button id="details" class="btn btn-primary">Details</button>
+
     </div>
 
 {% endblock %}
