@@ -26,7 +26,7 @@ class Session
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Tracking::class)]
     private $trackings;
 
-    #[ORM\ManyToOne(inversedBy: 'session')]
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Template $template = null;
 
