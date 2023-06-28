@@ -20,5 +20,6 @@ h1 {
 }
 
 #chart {
-    flex-grow: 1
+    flex-grow: 1;
+    padding: 15px;
 }
