@@ -29,11 +29,17 @@ export class filtrePersona {
     nombreInterfaces = document.querySelector('#nombreInterfaces');
 
     /**
+     * @var {ChartGenerate} chartGenerate - container du graphique
+     */
+    chartGenerate;
+
+    /**
      * Constructeur de la classe filtrePersona
      *
      */
-    constructor() {
 
+    constructor() {
+        this.chartGenerate = new ChartGenerate()
         this.personas.forEach(persona => {
             let id = persona.getAttribute('data-bs-target');
             persona.addEventListener('click', () => {
@@ -46,11 +52,10 @@ export class filtrePersona {
                 }
 
                 this.rest.call('/persona/api', 'GET', null, (data) => {
-                    console.log(data);
                     this.nombreSessions.querySelector('span').innerHTML = data.nombreSessions;
                     this.tauxSucces.querySelector('span').innerHTML = data.tauxSucces;
                     this.nombreInterfaces.querySelector('span').innerHTML = data.nombreInterfaces;
-                    new ChartGenerate().buildChart(); //data sous la forme {test:12, ok:23 }
+                    this.chartGenerate.buildChart({test: 12, ok: 23}); //data sous la forme {test:12, ok:23 }
                 }, (error) => {
                     console.log(error);
                 });

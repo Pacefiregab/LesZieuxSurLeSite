@@ -3,13 +3,18 @@ export class ChartGenerate {
      * @var {HTMLElement} -Element du dom
      */
     ctx;
+    myChart;
 
     constructor() {
         this.ctx = document.getElementById('myChart');
     }
 
     buildChart(data) {
-        new Chart(this.ctx, {
+        if (this.myChart){
+            this.myChart.destroy()
+        }
+
+        this.myChart = new Chart(this.ctx, {
             type: 'bar',
             data: {
                 labels: Object.keys(data),
