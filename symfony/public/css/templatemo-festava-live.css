@@ -15,7 +15,6 @@ https://templatemo.com/tm-583-festava-live
   --primary-color:                #F8CB2E;
   --secondary-color:              #EE5007;
   --section-bg-color:             #f0f8ff;
-  --custom-btn-bg-color:          #EE5007;
   --custom-btn-bg-hover-color:    #c01f27;
   --dark-color:                   #000000;
   --p-color:                      #717275;
@@ -44,7 +43,7 @@ https://templatemo.com/tm-583-festava-live
 }
 
 body {
-  background-color: var(--white-color);
+  background-color: var(--section-bg-color);
   font-family: var(--body-font-family); 
 }
 
@@ -92,6 +91,10 @@ h5 {
 
 h6 {
   font-size: var(--h6-font-size);
+}
+
+.white {
+  color: var(--white-color)!important;
 }
 
 p {
@@ -221,6 +224,14 @@ strong {
   background-color: var(--section-bg-color);
 }
 
+.pricing-section {
+  background-color: var(--dark-color);
+}
+
+.pricing-thumb {
+  background-color: var(--section-bg-color);
+}
+
 .section-overlay {
   background-color: var(--dark-color);
   position: absolute;
@@ -237,7 +248,7 @@ strong {
 }
 
 .tab-content {
-  background-color: var(--white-color);
+  background-color: var(--section-bg-color);
   border-radius: var(--border-radius-medium);
   padding: 45px;
 }
@@ -247,6 +258,10 @@ strong {
   border-radius: var(--border-radius-large);
   border-bottom: 0;
   padding: 15px;
+}
+
+.tab-empty-case {
+  background-color: var(--section-bg-color) !important;
 }
 
 .nav-tabs .nav-link {
@@ -293,7 +308,7 @@ strong {
   CUSTOM BUTTON               
 -----------------------------------------*/
 .custom-btn {
-  background: var(--custom-btn-bg-color);
+  background: var(--secondary-color);
   border: 2px solid transparent;
   border-radius: var(--border-radius-large);
   color: var(--white-color);
@@ -311,8 +326,8 @@ strong {
 
 .custom-border-btn {
   background: transparent;
-  border: 2px solid var(--custom-btn-bg-color);
-  color: var(--custom-btn-bg-color);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 .navbar-expand-lg .navbar-nav .nav-link.custom-btn:hover,
@@ -559,7 +574,7 @@ strong {
 }
 
 .ticket-form {
-  background: var(--white-color);
+  background: var(--section-bg-color);
   border-radius: var(--border-radius-medium);
   padding: 50px;
 }
@@ -665,12 +680,14 @@ strong {
 }
 
 .schedule-table thead th {
+  color: var(--white-color);
   background-color: var(--secondary-color);
 }
 
 .schedule-table th,
 .schedule-table tr,
 .schedule-table td {
+  color: var(--white-color);
   border-bottom-color: #363a3e;
   padding: 30px;
 }
@@ -800,7 +817,7 @@ strong {
 }
 
 .custom-form button[type="submit"] {
-  background: var(--custom-btn-bg-color);
+  background: var(--secondary-color);
   border: none;
   border-radius: var(--border-radius-large);
   color: var(--white-color);
@@ -829,7 +846,7 @@ strong {
 
 .site-footer-top {
   background-color: var(--secondary-color);
-  background-image: url('../images/nainoa-shizuru-NcdG9mK3PBY-unsplash.jpg');
+  background-image: url('../images/nainoa-shizuru-unsplash-blur.jpg');
   background-repeat: no-repeat;
   margin-bottom: 70px;
   padding-top: 30px;

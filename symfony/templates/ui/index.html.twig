@@ -16,11 +16,11 @@
 
         <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
 
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
-        <link href="css/templatemo-festava-live.css" rel="stylesheet">
+        <link href="{{ asset('css/templatemo-festava-live.css') }}" rel="stylesheet">
 
     </head>
 
@@ -98,21 +98,21 @@
                         <div class="col-12 mt-auto mb-5 text-center">
                             <small>Festoch Sympatoch Présente</small>
 
-                            <h1 class="text-white mb-5">La Grosse soirée 2023</h1>
+                            <h1 class="white mb-5">La Grosse soirée 2023</h1>
 
                             <a class="btn custom-btn smoothscroll" href="#section_2">C'est parti !</a>
                         </div>
 
                         <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
                             <div class="date-wrap">
-                                <h5 class="text-white">
+                                <h5 class="white">
                                     <i class="custom-icon bi-clock me-2"></i>
                                     10 - 12<sup>th</sup>, Dec 2023
                                 </h5>
                             </div>
 
                             <div class="location-wrap mx-auto py-3 py-lg-0">
-                                <h5 class="text-white">
+                                <h5 class="white">
                                     <i class="custom-icon bi-geo-alt me-2"></i>
                                     Jardin Ortholan, Auch
                                 </h5>
@@ -120,7 +120,7 @@
 
                             <div class="social-share">
                                 <ul class="social-icon d-flex align-items-center justify-content-center">
-                                    <span class="text-white me-3">Partagez:</span>
+                                    <span class="white me-3">Partagez:</span>
 
                                     <li class="social-icon-item">
                                         <a href="#" class="social-icon-link">
@@ -147,7 +147,7 @@
 
                 <div class="video-wrap">
                     <video autoplay="" loop="" muted="" class="custom-video" poster="">
-                        <source src="video/pexels-2022395.mp4" type="video/mp4">
+                        <source src="{{ asset('video/pexels-2022395.mp4') }}" type="video/mp4">
 
                         Your browser does not support the video tag.
                     </video>
@@ -157,27 +157,27 @@
 
             <section class="about-section section-padding" id="section_2">
                 <div class="container">
-                    <div class="row">
+                    <div class="row rowReversable">
 
-                        <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center order-2">
+                        <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
                             <div class="services-info">
-                                <h2 class="text-white mb-4">Information sur le festoch 2023</h2>
+                                <h2 class="white mb-4">Information sur le festoch 2023</h2>
 
-                                <p class="text-white">Mesdames et messieurs, le festival "Festoch Sympatoch" d'Auch est l'endroit idéal pour célébrer la variété française avec des artistes exceptionnels tels que Jean-Pierre Fromage, Jean-Pascal l'Agitateur et Gildor.</p>
+                                <p class="white">Mesdames et messieurs, le festival "Festoch Sympatoch" d'Auch est l'endroit idéal pour célébrer la variété française avec des artistes exceptionnels tels que Jean-Pierre Fromage, Jean-Pascal l'Agitateur et Gildor.</p>
 
-                                <h6 class="text-white mt-4">Une expérience musicale inoubliable</h6>
+                                <h6 class="white mt-4">Une expérience musicale inoubliable</h6>
 
-                                <p class="text-white">Venez nous rejoindre à Auch et laissez-vous emporter par la magie de ce festival unique en son genre.</p>
+                                <p class="white">Venez nous rejoindre à Auch et laissez-vous emporter par la magie de ce festival unique en son genre.</p>
 
-                                <h6 class="text-white mt-4">Des soirées de folies !</h6>
+                                <h6 class="white mt-4">Des soirées de folies !</h6>
 
-                                <p class="text-white">Partager avec tous vos amis ! Merci !</p>
+                                <p class="white">Partager avec tous vos amis ! Merci !</p>
                             </div>
                         </div>
 
-                        <div class="col-lg-6 col-12 order-1">
+                        <div class="col-lg-6 col-12">
                             <div class="about-text-wrap">
-                                <img src="images/pexels-alexander-suhorucov-6457579.jpg" class="about-image img-fluid">
+                                <img src="{{ asset('images/pexels-alexander-suhorucov-6457579.jpg') }}" class="about-image img-fluid">
 
                                 <div class="about-text-info d-flex">
                                     <div class="d-flex">
@@ -210,7 +210,7 @@
                         <div class="col-lg-5 col-12">
                             <div class="artists-thumb">
                                 <div class="artists-image-wrap">
-                                    <img src="images/artists/jpfromage.png" class="artists-image img-fluid">
+                                    <img src="{{ asset('images/artists/jpfromage.png') }}" class="artists-image img-fluid">
                                 </div>
 
                                 <div class="artists-hover">
@@ -242,7 +242,7 @@
                         <div class="col-lg-5 col-12">
                             <div class="artists-thumb">
                                 <div class="artists-image-wrap">
-                                    <img src="images/artists/gildor.png" class="artists-image img-fluid">
+                                    <img src="{{ asset('images/artists/gildor.png') }}" class="artists-image img-fluid">
                                 </div>
 
                                 <div class="artists-hover">
@@ -271,7 +271,7 @@
                             </div>
 
                             <div class="artists-thumb">
-                                <img src="images/artists/jean-pascal-lacoste.jpg" class="artists-image img-fluid">
+                                <img src="{{ asset('images/artists/jean-pascal-lacoste.jpg') }}" class="artists-image img-fluid">
 
                                 <div class="artists-hover">
                                     <p>
@@ -309,7 +309,7 @@
                     <div class="row">
 
                         <div class="col-12 text-center">
-                            <h2 class="text-white mb-4">Agenda des concerts</h1>
+                            <h2 class="white mb-4">Agenda des concerts</h1>
 
                             <div class="table-responsive">
                                 <table class="schedule-table table table-dark">
@@ -340,7 +340,7 @@
                                                 <div class="section-overlay"></div>
                                             </td>
 
-                                            <td style="background-color: #F3DCD4"></td>
+                                            <td class="tab-empty-case"></td>
 
                                             <td class="table-background-image-wrap rock-background-image">
                                                 <h3>Rock & Roll</h3>
@@ -356,7 +356,7 @@
                                         <tr>
                                             <th scope="row">Scène 2</th>
 
-                                            <td style="background-color: #ECC9C7"></td>
+                                            <td class="tab-empty-case"></td>
 
                                             <td>
                                                 <h3>DJ Set</h3>
@@ -366,7 +366,7 @@
                                                 <p>Par Jean Pascal</p>
                                             </td>
 
-                                            <td style="background-color: #D9E3DA"></td>
+                                            <td class="tab-empty-case"></td>
                                         </tr>
 
                                         <tr>
@@ -382,7 +382,7 @@
                                                 <div class="section-overlay"></div>
                                             </td>
 
-                                            <td style="background-color: #D1CFC0"></td>
+                                            <td class="tab-empty-case"></td>
 
                                             <td>
                                                 <h3>Free Styles</h3>
@@ -403,7 +403,7 @@
 
             <section class="pricing-section section-padding section-bg" id="section_5">
                 <div class="container">
-                    <div class="row">
+                    <div class="row rowReversable">
 
                         <div class="col-lg-8 col-12 mx-auto">
                             <h2 class="text-center mb-4">Planifier votre Festoch</h2>
@@ -591,7 +591,7 @@
                     <div class="row">
 
                         <div class="col-lg-6 col-12">
-                            <h2 class="text-white mb-lg-0">Festoch Sympatoch</h2>
+                            <h2 class="white mb-lg-0">Festoch Sympatoch</h2>
                         </div>
 
                         <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
@@ -667,13 +667,13 @@
                     <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
                         <h5 class="site-footer-title mb-3">Vous avez un question?</h5>
 
-                        <p class="text-white d-flex mb-1">
+                        <p class="white d-flex mb-1">
                             <a href="tel: 090-080-0760" class="site-footer-link">
                                 090-080-0760
                             </a>
                         </p>
 
-                        <p class="text-white d-flex">
+                        <p class="white d-flex">
                             <a href="mailto:hello@company.com" class="site-footer-link">
                                 festochSympatoch@company.com
                             </a>
@@ -683,7 +683,7 @@
                     <div class="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
                         <h5 class="site-footer-title mb-3">Adresse</h5>
 
-                        <p class="text-white d-flex mt-3 mb-2">
+                        <p class="white d-flex mt-3 mb-2">
                             9 Quai Lissagaray, 32000 Auch, France</p>
 
                         <a class="link-fx-1 color-contrast-higher mt-3" href="#">
@@ -722,6 +722,9 @@
             </div>
         </footer>
 
+        <!-- TEMPLATE DATA -->
+        <div id="template_data" data-reverse-row="false" data-white-color="#ffffff"></div>
+
 <!--
 
 T e m p l a t e M o
@@ -729,11 +732,12 @@ T e m p l a t e M o
 -->
 
         <!-- JAVASCRIPT FILES -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.sticky.js"></script>
-        <script src="js/click-scroll.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="{{ asset('js/change-interface.js') }}"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.sticky.js') }}"></script>
+        <script src="{{ asset('js/click-scroll.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
 
     </body>
 </html>
