@@ -2,68 +2,88 @@
 
 namespace App\Controller;
 
+use App\Entity\Tracking;
+use App\Form\TrackingType;
+use App\Repository\TrackingRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/tracking')]
+#[Route('/trackings')]
 class TrackingController extends AbstractController
 {
-    #[Route('/', name: 'app_tracking', methods: ['GET'])]
+    private TrackingRepository $trackingRepository;
+
+    private FormFactoryInterface $formFactory;
+
+    public function __construct(TrackingRepository $trackingRepository, FormFactoryInterface $formFactory)
+    {
+        $this->trackingRepository = $trackingRepository;
+        $this->formFactory = $formFactory;
+    }
+
+    #[Route('/', name: 'trackings', methods: 'GET')]
     public function index(): Response
     {
-        return $this->render('tracking/index.html.twig', [
-            'controller_name' => 'TrackingController',
+        $trackings = $this->trackingRepository->findAll();
+
+        return $this->render('trackings/index.html.twig', [
+            'trackings' => $trackings,
         ]);
     }
 
-    #[Route('/create', name: 'create_tracking', methods: ['GET'])]
-    public function create(): Response
+    #[Route('/create', name: 'trackings_create', methods: ['GET', 'POST'])]
+    public function create(Request $request): Response
     {
-        return $this->render('tracking/create.html.twig', [
-            'controller_name' => 'TrackingController',
-        ]);
+        $data = $request->request->all();
+
+        $form = $this->formFactory->create(TrackingType::class, new Tracking());
+        $form->submit($data);
+
+
+        if (!$form->isValid()) {
+            return Response::HTTP_BAD_REQUEST;
+        }
+
+        $tracking = $form->getData();
+        $this->trackingRepository->save($tracking, true);
+
+        return $this->redirectToRoute('traking_index');
     }
 
-    #[Route('/create', name: 'create_tracking_post', methods: ['POST'])]
-    public function add(): Response
+    #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Tracking $tracking): Response
     {
-        return $this->render('tracking/create.html.twig', [
-            'controller_name' => 'TrackingController',
-        ]);
+        $data = $request->request->all();
+
+        $form = $this->formFactory->create(TrackingType::class, $tracking);
+        $form->submit($data);
+
+
+        if (!$form->isValid()) {
+            return Response::HTTP_BAD_REQUEST;
+        }
+
+        $tracking = $form->getData();
+        $this->trackingRepository->save($tracking, true);
+
+        return $this->redirectToRoute('traking_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_tracking', methods: ['GET'])]
-    public function edit(): Response
+    #[Route('/{id}', name: 'trackings_delete', methods: 'DELETE')]
+    public function delete(Request $request, Tracking $tracking): Response
     {
-        return $this->render('tracking/edit.html.twig', [
-            'controller_name' => 'TrackingController',
-        ]);
+        $this->trackingRepository->remove($tracking);
+        return $this->redirectToRoute('trackings_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_tracking_put', methods: ['PUT'])]
-    public function modify(): Response
+    #[Route('/{id}', name: 'trackings_show', methods: 'GET')]
+    public function show(Request $request, Tracking $tracking): Response
     {
-        return $this->render('tracking/edit.html.twig', [
-            'controller_name' => 'TrackingController',
+        return $this->render('trackings/show.html.twig', [
+            'tracking' => $tracking,
         ]);
     }
-
-    #[Route('/delete/{id}', name: 'delete_tracking', methods: ['DELETE'])]
-    public function delete(): Response
-    {
-        return $this->render('tracking/delete.html.twig', [
-            'controller_name' => 'TrackingController',
-        ]);
-    }
-
-    #[Route('/show/{id}', name: 'show_tracking', methods: ['GET'])]
-    public function show(): Response
-    {
-        return $this->render('tracking/show.html.twig', [
-            'controller_name' => 'TrackingController',
-        ]);
-    }
-
-
 }

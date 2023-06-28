@@ -2,67 +2,87 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
+use App\Form\SessionType;
+use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/session')]
+#[Route('/sessions')]
 class SessionController extends AbstractController
 {
-    #[Route('/', name: 'index_session', methods: ['GET'])]
+    private SessionRepository $sessionRepository;
+
+    public function __construct(SessionRepository $sessionRepository)
+    {
+        $this->sessionRepository = $sessionRepository;
+    }
+
+
+    #[Route('/', name: 'session_index', methods: 'GET')]
     public function index(): Response
     {
+        $sessions = $this->sessionRepository->findAll();
 
-        return $this->render('session/index.html.twig', [
-            'controller_name' => 'SessionController',
+        return $this->render('sessions/index.html.twig', [
+            'sessions' => $sessions,
         ]);
     }
 
-    #[Route('/create', name: 'create_session', methods: ['GET'])]
-    public function create(): Response
+
+    #[Route('/create', name: 'session_create', methods: ['GET', 'POST'])]
+    public function create(Request $request): Response
     {
-        return $this->render('session/create.html.twig', [
-            'controller_name' => 'SessionController',
+        $session = new Session();
+        $form = $this->createForm(SessionType::class, $session);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->sessionRepository->save($session);
+
+            return $this->redirectToRoute('sessions_index');
+        }
+
+        return $this->render('sessions/create.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/create', name: 'create_session', methods: ['POST'])]
-    public function add(): Response
+
+    #[Route('/{id}/edit', name: 'session', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Session $session): Response
     {
-        return $this->render('session/create.html.twig', [
-            'controller_name' => 'SessionController',
+        $form = $this->createForm(SessionType::class, $session);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->sessionRepository->save($session);
+
+            return $this->redirectToRoute('sessions_index');
+        }
+
+        return $this->render('sessions/edit.html.twig', [
+            'session' => $session,
+            'form' => $form->createView(),
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit_session', methods: ['GET'])]
-    public function edit(): Response
+    #[Route('/{id}', name: 'templates_delete', methods: 'DELETE')]
+    public function delete(Session $session): Response
     {
-        return $this->render('session/edit.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
+        $this->sessionRepository->remove($session, true);
+
+
+        return $this->redirectToRoute('sessions_index');
     }
 
-    #[Route('/edit/{id}', name: 'edit_session_post', methods: ['PUT'])]
-    public function modify(): Response
+    #[Route('/{id}', name: 'templates_show', methods: 'GET')]
+    public function show(Session $session): Response
     {
-        return $this->render('session/edit.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    #[Route('/delete/{id}', name: 'delete_session', methods: ['DELETE'])]
-    public function delete(): Response
-    {
-        return $this->render('session/delete.html.twig', [
-            'controller_name' => 'SessionController',
-        ]);
-    }
-
-    #[Route('/show/{id}', name: 'show_session', methods: ['GET'])]
-    public function show(): Response
-    {
-        return $this->render('session/show.html.twig', [
-            'controller_name' => 'SessionController',
+        return $this->render('sessions/show.html.twig', [
+            'session' => $session,
         ]);
     }
 }
