@@ -29,7 +29,6 @@ class PersonaController extends AbstractController
         $this->formFactory = $formFactory;
     }
 
-
     #[Route('/', name: 'personas_index', methods: 'GET')]
     public function index(): Response
     {
@@ -61,7 +60,7 @@ class PersonaController extends AbstractController
     }
 
 
-    #[Route('/{id}/edit', name: 'personas_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'personas_edit', methods: ['POST'])]
     public function edit(Request $request, Persona $persona): Response
     {
         $data = $request->request->all();

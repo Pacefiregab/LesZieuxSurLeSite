@@ -1,6 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block sidebar %}
+    {% include 'dashboard/filtrePersona.html.twig' with {
+        'items' : personas,
+    } %}
+{% endblock %}
 
-    oui
+{% block body %}
+    <div id="chart">
+        {% include 'persona/form.html.twig' with {
+            persona : personas|first
+        } %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    <script type="module" src="/js/persona_form/import.js"></script>
 {% endblock %}
