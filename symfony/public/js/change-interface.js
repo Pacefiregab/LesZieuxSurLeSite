@@ -1,21 +1,20 @@
+let data = JSON.parse(document.querySelector('[name=template_data]').value);
 
-    var data = document.querySelector('#template_data');
 
-    var rowReverse = data.dataset.reverseRow;
-    var white_color = data.dataset.whiteColor;
+    var white_color = data.whiteColor;
+    var dark_color = data.darkColor;
+    var primary_color = data.primaryColor;
+    var secondary_color = data.secondaryColor;
 
-var r = document.querySelector(':root');
-
-//Change row order
-    console.log('reverse row: ' + rowReverse);
-    if (rowReverse == 'true') {
-        document.querySelector('.rowReversable :nth-child(1)').classList.add('order-2');
-        document.querySelector('.rowReversable :nth-child(2)').classList.add('order-1');
-    }
-
-//Change white color
-    console.log('white color: ' + white_color);
     var root = document.querySelector(':root');
+//Change white color    
     root.style.setProperty('--white-color', white_color);
+//Change black color
+    root.style.setProperty('--dark-color', dark_color);
+//Change primary color
+    root.style.setProperty('--primary-color', primary_color);
+//Change secondary color
+    root.style.setProperty('--secondary-color', secondary_color);
+
 
 
