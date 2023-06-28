@@ -39,7 +39,7 @@ export class filtrePersona {
      */
     constructor() {
         this.chartGenerate = new ChartGenerate()
-        this.apiCall('/personas/api', 'GET');
+        this.apiCall('/personas/api/', 'GET');
         this.personas.forEach(persona => {
             let id = persona.getAttribute('data-bs-target');
             persona.addEventListener('click', () => {
