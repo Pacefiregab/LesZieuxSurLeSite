@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+   <script type="module" src="/js/persona/import.js"></script>
+   {% include 'persona/filtreSessions.html.twig' with {'sessions' : sessions} %}
+
+{% endblock %}

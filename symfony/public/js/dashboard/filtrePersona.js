@@ -44,19 +44,19 @@ export class filtrePersona {
      */
     constructor() {
         this.chartGenerate = new ChartGenerate()
-        this.apiCall('/personas/api/', 'GET');
+        let id = this.personas[0].childNodes[1].getAttribute('data-bs-target');
+        this.apiCall('/personas/api/'+id , 'GET');
         this.personas.forEach(persona => {
-            let id = persona.getAttribute('data-bs-target');
-
             persona.addEventListener('click', () => {
-
+                id = persona.childNodes[1].getAttribute('data-bs-target');
+                console.log(id)
                 if (!persona.classList.contains('active')) {
                     this.personas.forEach(persona => {
                         persona.classList.remove('active');
                     });
                     persona.classList.add('active');
                 }
-                this.apiCall('/personas/api/', 'GET');
+                this.apiCall('/personas/api/'+id, 'GET');
 
             });
         });

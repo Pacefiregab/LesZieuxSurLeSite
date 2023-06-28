@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Persona;
 use App\Form\PersonaType;
 use App\Repository\PersonaRepository;
+use mysql_xdevapi\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,8 +81,8 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/api', name: 'api_index_persona', methods: ['GET'])]
-    public function apiIndex(): JsonResponse
+    #[Route('/api/{id}', name: 'api_index_persona', methods: ['GET'])]
+    public function apiIndex(Persona $persona): JsonResponse
     {
         $graph = [
             'interface1' => 30,
@@ -103,7 +104,7 @@ class PersonaController extends AbstractController
                 'diff'=> rand(-100, 100),
             ],
             'graph' => $graph,
-            'detail' => $this->generateUrl('personas_show', ['id' => 1]),
+            'detail' => $this->generateUrl('personas_show', ['id' => $persona->getId()]),
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
@@ -119,8 +120,23 @@ class PersonaController extends AbstractController
     #[Route('/{id}', name: 'personas_show', methods: 'GET')]
     public function show(Persona $persona): Response
     {
+        $sessions = $persona->getSessions();
+
         return $this->render('persona/show.html.twig', [
             'persona' => $persona,
+            //todo : a supprimer
+            'sessions' => [[
+                'id' => 1,
+                'name' => 'session 1',
+            ],
+            [
+                'id' => 2,
+                'name' => 'session 2',
+            ],
+            [
+                'id' => 3,
+                'name' => 'session 3',
+            ]]
         ]);
     }
 

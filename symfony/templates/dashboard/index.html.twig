@@ -4,10 +4,11 @@
 {% block title %}My cool blog posts{% endblock %}
 
 {% block sidebar %}
-    {% include 'dashboard/filtrePersona.html.twig' with {'items' : personas} %}
+    {% include 'dashboard/filtreSession.html.twig' with {'items' : personas} %}
 {% endblock %}
 
 {% block body %}
+    <script type="module" src="/js/dashboard/import.js"></script>
     <div id="chart" class="card">
         <canvas id="myChart"></canvas>
     </div>
