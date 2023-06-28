@@ -12,6 +12,7 @@ class SessionController extends AbstractController
     #[Route('/', name: 'index_session', methods: ['GET'])]
     public function index(): Response
     {
+
         return $this->render('session/index.html.twig', [
             'controller_name' => 'SessionController',
         ]);

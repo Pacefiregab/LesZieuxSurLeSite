@@ -7,6 +7,8 @@ export class ChartGenerate {
 
     constructor() {
         this.ctx = document.getElementById('myChart');
+        //vider ctx
+
     }
 
     buildChart(data) {

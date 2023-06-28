@@ -70,10 +70,26 @@ class PersonaController extends AbstractController
     #[Route('/api', name: 'api_index_persona', methods: ['GET'])]
     public function apiIndex(): JsonResponse
     {
+        $graph = [
+            'interface1' => 30,
+            'interface2' => 20,
+            'interface3' => 50,
+        ];
+
         $data = [
-            'nombreSessions' => rand(0, 10),
-            'tauxSucces' => rand(-100, 100),
-            'nombreInterfaces' => rand(0, 10),
+            'nombreSessions' => [
+                'donnee' => rand(0, 100),
+                'diff'=> rand(-100, 100),
+            ],
+            'tauxReussite' => [
+                'donnee' => rand(0, 100),
+                'diff'=> rand(-100, 100),
+            ],
+            'nombreInterfaces' => [
+                'donnee' => rand(0, 100),
+                'diff'=> rand(-100, 100),
+            ],
+            'graph' => $graph,
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
