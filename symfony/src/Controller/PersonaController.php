@@ -79,23 +79,6 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
-
-    #[Route('/{id}', name: 'personas_delete', methods: 'DELETE')]
-    public function delete(Request $request, Persona $persona): Response
-    {
-        $this->personaRepository->remove($persona, true);
-
-        return $this->redirectToRoute('personas_index');
-    }
-
-    #[Route('/{id}', name: 'personas_show', methods: 'GET')]
-    public function show(Persona $persona): Response
-    {
-        return $this->render('persona/show.html.twig', [
-            'persona' => $persona,
-        ]);
-    }
-
     #[Route('/api', name: 'api_index_persona', methods: ['GET'])]
     public function apiIndex(): JsonResponse
     {
@@ -122,5 +105,22 @@ class PersonaController extends AbstractController
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
+
+    #[Route('/{id}', name: 'personas_delete', methods: 'DELETE')]
+    public function delete(Request $request, Persona $persona): Response
+    {
+        $this->personaRepository->remove($persona, true);
+
+        return $this->redirectToRoute('personas_index');
+    }
+
+    #[Route('/{id}', name: 'personas_show', methods: 'GET')]
+    public function show(Persona $persona): Response
+    {
+        return $this->render('persona/show.html.twig', [
+            'persona' => $persona,
+        ]);
+    }
+
 
 }
