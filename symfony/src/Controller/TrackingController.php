@@ -39,12 +39,55 @@ class TrackingController extends AbstractController
     {
         $data = $request->request->all();
 
+        //traitement des données pour l'oeil
+        $eye = array("type" => Tracking::TYPE_EYE
+                        , "data" => $data['eyeRecord']
+                        , "session" => $data['session_id']);
+        $eye = json_encode($eye);
+
         $form = $this->formFactory->create(TrackingType::class, new Tracking());
-        $form->submit($data);
+        $form->submit($eye);
 
 
         if (!$form->isValid()) {
-            return Response::HTTP_BAD_REQUEST;
+            dd($form->getErrors());
+            return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $tracking = $form->getData();
+        $this->trackingRepository->save($tracking, true);
+
+        //traitement des données le scroll
+        $scroll = array("type" => Tracking::TYPE_SCROLL
+                        , "data" => $data['scrollRecord']
+                        , "session" => $data['session_id']);
+        $scroll = json_encode($scroll);
+
+        $form = $this->formFactory->create(TrackingType::class, new Tracking());
+        $form->submit($scroll);
+
+
+        if (!$form->isValid()) {
+            dd($form->getErrors());
+            return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
+        }
+
+        $tracking = $form->getData();
+        $this->trackingRepository->save($tracking, true);
+
+        //traitement des données pour le click
+        $click = array("type" => Tracking::TYPE_CLICK
+                        , "data" => $data['clickRecord']
+                        , "session" => $data['session_id']);
+        $click = json_encode($click);
+
+        $form = $this->formFactory->create(TrackingType::class, new Tracking());
+        $form->submit($click);
+
+
+        if (!$form->isValid()) {
+            dd($form->getErrors());
+            return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         $tracking = $form->getData();

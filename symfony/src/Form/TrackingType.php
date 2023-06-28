@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Tracking;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -12,11 +14,9 @@ class TrackingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('x')
-            ->add('y')
-            ->add('date')
-            ->add('type')
-            ->add('session')
+            ->add('data', CollectionType::class)
+            ->add('type', TextType::class)
+            ->add('session', SessionType::class)
         ;
     }
 
