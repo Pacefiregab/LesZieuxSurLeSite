@@ -8,6 +8,10 @@
     <div id="dashboardContent">
         {% include 'dashboard/filtrePersona.html.twig' with {'items' : personas} %}
 
+        <div id="chart" class="card">
+            Je suis un graphique
+        </div>
+
         <div id="dashboardStatsArea">
             {% include 'dashboard/card.html.twig' with {'id' : 'nombreSessions', 'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
             {% include 'dashboard/card.html.twig' with {'id' : 'nombreInterfaces', 'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
