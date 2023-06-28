@@ -8,6 +8,7 @@ use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/sessions')]
@@ -84,5 +85,18 @@ class SessionController extends AbstractController
         return $this->render('sessions/show.html.twig', [
             'session' => $session,
         ]);
+    }
+
+    #[Route('/api/{id}', name: 'api_index_persona', methods: 'GET')]
+    public function api(Session $session): JsonResponse
+    {
+        $data = [
+            'date_session' => $session->getDateStart()->format('d/m/Y'),
+            'name_persona' => $session->getPersona()->getName(),
+            'duree_session' => '1:30',
+            'nom_template' => $session->getTemplate()->getName(),
+        ];
+
+        return new JsonResponse($data, Response::HTTP_OK);
     }
 }

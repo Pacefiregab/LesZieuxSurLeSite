@@ -20,20 +20,21 @@ export class filtreSession {
      */
     constructor() {
 
-        // let id = this.sessions[0].childNodes[1].getAttribute('data-bs-target');
+        let id = this.sessions[0].childNodes[1].getAttribute('data-bs-target');
+        console.log(id)
         this.apiCall('/sessions/api/'+id , 'GET');
         this.sessions.forEach(session => {
             session.addEventListener('click', () => {
-                // id = session.childNodes[1].getAttribute('data-bs-target');
-                //
-                // if (!session.classList.contains('active')) {
-                //     this.sessions.forEach(session => {
-                //         session.classList.remove('active');
-                //     });
-                //     session.classList.add('active');
-                // }
+                id = session.childNodes[1].getAttribute('data-bs-target');
 
-                // this.apiCall('/session/api/'+id, 'GET');
+                if (!session.classList.contains('active')) {
+                    this.sessions.forEach(session => {
+                        session.classList.remove('active');
+                    });
+                    session.classList.add('active');
+                }
+
+                this.apiCall('/sessions/api/'+id, 'GET');
 
             });
         });

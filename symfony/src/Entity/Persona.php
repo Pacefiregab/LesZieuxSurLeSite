@@ -102,4 +102,13 @@ class Persona
 
         return $this;
     }
+
+    public function getAllSessions(): array
+    {
+        $sessions = [];
+        foreach ($this->sessions as $session) {
+            $sessions[] = $session->getId();
+        }
+        return $sessions;
+    }
 }
