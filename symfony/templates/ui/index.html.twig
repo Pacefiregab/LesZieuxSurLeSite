@@ -43,7 +43,7 @@
 				</div>
 			</header>
 
-			<nav class="navbar navbar-expand-lg">
+			<nav class="navbar navbar-expand-lg {{(data.stickyHeader??true) ? '' : 'no-sticky'}}">
 				<div class="container">
 					<a class="navbar-brand" href="index.html">
 						Festoch Sympatoch
@@ -760,7 +760,7 @@
 				<!-- TEMPLATE DATA -->
 				<input type="hidden" name="flag" value="{{ persona.flag }}">
 				<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
-				<input type="hidden" name="header_hidden" value="{{ data.hideHeader }}">
+				<input type="hidden" name="header_hidden" value="{{ data.stickyHeader }}">
 					
 				<!-- JAVASCRIPT FILES -->
                 <script src="{{ asset('js/change-interface.js') }}"> </script>

@@ -706,6 +706,14 @@ strong {
   border-bottom: 0;
 }
 
+.no-sticky {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin-top: 20px;
+}
+
 .schedule-table thead th:last-child {
   border-right-color: transparent;
 }
