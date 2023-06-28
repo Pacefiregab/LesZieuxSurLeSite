@@ -1,4 +1,4 @@
-import {filtreSession} from "/js/persona/filtreSession.js";
+import {filtreSession} from "/js/persona_show/filtreSession.js";
 
-let filtrePersona1 = new filtreSession();
+let filtreSession1 = new filtreSession();
 
