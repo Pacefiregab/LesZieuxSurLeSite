@@ -14,12 +14,7 @@ https://templatemo.com/tm-583-festava-live
   --white-color:                  #ffffff;
   --primary-color:                #F8CB2E;
   --secondary-color:              #EE5007;
-  --section-bg-color:             #f0f8ff;
-  --custom-btn-bg-hover-color:    #c01f27;
   --dark-color:                   #000000;
-  --p-color:                      #717275;
-  --border-color:                 #7fffd4;
-  --link-hover-color:             #B22727;
 
   --body-font-family:             'Outfit', sans-serif;
 
@@ -43,7 +38,8 @@ https://templatemo.com/tm-583-festava-live
 }
 
 body {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
   font-family: var(--body-font-family); 
 }
 
@@ -98,13 +94,11 @@ h6 {
 }
 
 p {
-  color: var(--p-color);
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-light);
 }
 
 ul li {
-  color: var(--p-color);
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-light);
 }
@@ -122,7 +116,7 @@ a {
 }
 
 a:hover {
-  color: var(--link-hover-color);
+  color: var(--secondary-color);
 }
 
 b,
@@ -143,7 +137,7 @@ strong {
 }
 
 .link-fx-1:hover {
-  color: var(--link-hover-color);
+  color: var(--secondary-color);
 }
 
 .link-fx-1:hover::before {
@@ -221,7 +215,8 @@ strong {
 }
 
 .section-bg {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
 }
 
 .pricing-section {
@@ -229,7 +224,8 @@ strong {
 }
 
 .pricing-thumb {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
 }
 
 .section-overlay {
@@ -248,20 +244,23 @@ strong {
 }
 
 .tab-content {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
   border-radius: var(--border-radius-medium);
   padding: 45px;
 }
 
 .nav-tabs {
-  background-color: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
   border-radius: var(--border-radius-large);
   border-bottom: 0;
   padding: 15px;
 }
 
 .tab-empty-case {
-  background-color: var(--section-bg-color) !important;
+  background-color: var(--white-color) !important;
+  filter: brightness(95%) !important;
 }
 
 .nav-tabs .nav-link {
@@ -285,7 +284,6 @@ strong {
 }
 
 .nav-tabs h5 {
-  color: var(--p-color); 
   margin-bottom: 0;
 }
 
@@ -320,7 +318,8 @@ strong {
 }
 
 .custom-btn:hover {
-  background: var(--custom-btn-bg-hover-color);
+  background: var(--secondary-color);
+  filter: brightness(70%);
   color: var(--white-color);
 }
 
@@ -332,7 +331,8 @@ strong {
 
 .navbar-expand-lg .navbar-nav .nav-link.custom-btn:hover,
 .custom-border-btn:hover {
-  background: var(--custom-btn-bg-hover-color);
+  background: var(--secondary-color);
+  filter: brightness(70%);
   border-color: transparent;
   color: var(--white-color);
 }
@@ -574,7 +574,8 @@ strong {
 }
 
 .ticket-form {
-  background: var(--section-bg-color);
+  background-color: var(--white-color);
+  filter: brightness(95%);
   border-radius: var(--border-radius-medium);
   padding: 50px;
 }
@@ -793,7 +794,7 @@ strong {
 }
 
 .pricing-thumb .link-fx-1:hover {
-  color: var(--link-hover-color);
+  color: var(--secondary-color);
 }
 
 
@@ -809,7 +810,6 @@ strong {
   CUSTOM FORM               
 -----------------------------------------*/
 .custom-form .form-control {
-  color: var(--p-color);
   margin-bottom: 24px;
   padding-top: 13px;
   padding-bottom: 13px;
@@ -829,7 +829,8 @@ strong {
 
 .custom-form button[type="submit"]:hover,
 .custom-form button[type="submit"]:focus {
-  background: var(--custom-btn-bg-hover-color);
+  background: var(--secondary-color);
+  filter: brightness(70%);
   border-color: transparent;
 }
 
@@ -936,7 +937,7 @@ strong {
 /*---------------------------------------
   RESPONSIVE STYLES               
 -----------------------------------------*/
-@media screen and (max-width: 991px) {
+@media screen and (max-width: 1050px) {
   h1 {
     font-size: 62px;
   }
@@ -1008,14 +1009,14 @@ strong {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 826px) {
   .custom-btn {
     font-size: 14px;
     padding: 10px 20px;
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 530px) {
   h1 {
     font-size: 52px;
   }
