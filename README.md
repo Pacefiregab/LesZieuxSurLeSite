@@ -18,3 +18,7 @@
 composer install
 php bin/console d:s:u
 ```
+
+### Credits
+
+Eye tracker websocket server : [rezreal](https://github.com/rezreal/Tobii-EyeX-Web-Socket-Server) 
