@@ -33,6 +33,7 @@
       initEventCapture();
     };
 
+    headerHeight =  $('[name=header_hidden]').val ? 0 : 85;
   });
 })(window.jQuery);
 
