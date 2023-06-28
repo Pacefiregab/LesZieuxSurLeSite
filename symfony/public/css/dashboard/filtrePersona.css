@@ -7,8 +7,13 @@ div.persona {
     border-radius: var(--border_radius);
     width: 100%;
     text-align: center;
+    justify-content: center;
+    height : 50px;
 }
 
+div .nom_persona{
+    margin-top:12px;
+}
 div.persona:hover{
     cursor: pointer;
 }
