@@ -744,19 +744,17 @@
 					</div>
 				</div>
 			</footer>
-
 			<!-- TEMPLATE DATA -->
-            <input type="hidden" name="template_data" val="">
-			<div id="template_data" data-reverse-row="true" data-white-color="white" data-dark-color="black" data-primary-color="#F8CB2E" data-secondary-color="#EE5007"></div>
-
+			<input type="hidden" name="flag" value="{{ persona.flag }}">
+			<input type="hidden" name="template_data" value="{{ data }}">
 			<!--
-					
-					T e m p l a t e M o
-					
-					-->
+			
+								
+								T e m p l a t e M o
+								
+								-->
 
-			<!-- JAVASCRIPT FILES -->
-			<script src="{{ asset('js/change-interface.js') }}"></script>
+			<!-- JAVASCRIPT FILES --><script src="{{ asset('js/change-interface.js') }}"> </script>
 			<script src="{{ asset('js/jquery.min.js') }}"></script>
 			<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 			<script src="{{ asset('js/jquery.sticky.js') }}"></script>

@@ -1,5 +1,6 @@
+let data = JSON.parse(document.querySelector('[name=template_data]').value);
 
-    var data = document.querySelector('#template_data');
+console.log(data);
 
     var rowReverse = data.dataset.reverseRow;
     var white_color = data.dataset.whiteColor;
