@@ -1,5 +1,4 @@
 
-
 div.card h3 {
     font-size: 0.8rem;
     display: inline-block;
@@ -35,6 +34,13 @@ div#dashboardStatsArea {
     width: fit-content;
     height: max(80vh);
     overflow-y: scroll;
+    border-radius: var(--border_radius);
+    box-shadow: inset 0 11px 8px -10px #CCC,
+    inset 0 -11px 8px -10px #CCC;
+}
+
+div#dashboardStatsArea::-webkit-scrollbar {
+    display: none;
 }
 
 div#dashboardStatsArea:before {
