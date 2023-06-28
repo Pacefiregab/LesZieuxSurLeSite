@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block sidebar %}
-   {%include 'persona/filtreSessions.html.twig' with {'sessions' : sessions} %}
+   {%include 'sideBar.html.twig' with {
+       'items' : sessions|map(session => {
+           id : session.id,
+           name : session.title
+       })
+   } %}
 {% endblock %}
 
 {% block body %}
