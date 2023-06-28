@@ -17,7 +17,7 @@ class UiController extends AbstractController
     public function index(Session $session): Response
     {
         return $this->render('ui/index.html.twig', [
-            'data' => json_encode($session->getTemplate()->getData()),
+            'data' => $session->getTemplate()->getData(),
             'persona' => $session->getPersona(),
         ]);
     }

@@ -28,7 +28,7 @@
 
 		<main>
 
-			<header class="site-header">
+			<header class="site-header {{ (data.hideHeader??false) ? 'd-none' : ''}}">
 				<div class="container">
 					<div class="row">
 
@@ -42,7 +42,6 @@
 					</div>
 				</div>
 			</header>
-
 
 			<nav class="navbar navbar-expand-lg">
 				<div class="container">
@@ -159,7 +158,7 @@
 				<div class="container">
 					<div class="row rowReversable">
 
-						<div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center">
+						<div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center {{ (data.reverseRow??false) ? 'order-2' : ''}}">
 							<div class="services-info">
 								<h2 class="white mb-4">Information sur le festoch 2023</h2>
 
@@ -175,7 +174,7 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6 col-12">
+						<div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-1' : ''}}">
 							<div class="about-text-wrap">
 								<img src="{{ asset('images/pexels-alexander-suhorucov-6457579.jpg') }}" class="about-image img-fluid">
 
@@ -408,7 +407,7 @@
 					</div>
 					<div class="row rowReversable">
 
-						<div class="col-lg-6 col-12 order-2">
+						<div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-2' : ''}}">
 							<div class="pricing-thumb">
 								<div class="d-flex">
 									<div>
@@ -447,7 +446,7 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6 col-12 mt-4 mt-lg-0 order-1">
+						<div class="col-lg-6 col-12 mt-4 mt-lg-0 {{ (data.reverseRow??false) ? 'order-1' : ''}}">
 							<div class="pricing-thumb">
 								<div class="d-flex">
 									<div>
@@ -744,9 +743,11 @@
 					</div>
 				</div>
 			</footer>
+        
 			<!-- TEMPLATE DATA -->
 			<input type="hidden" name="flag" value="{{ persona.flag }}">
-			<input type="hidden" name="template_data" value="{{ data }}">
+			<input type="hidden" name="template_data" value="{{  data|json_encode() }}">
+            <input type="hidden" name="header_hidden" value="{{ (data.hideHeader??false) }}">
 			<!--
 
 
