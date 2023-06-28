@@ -34,42 +34,6 @@ class Tracking
         return $this->id;
     }
 
-    public function getX(): ?int
-    {
-        return $this->x;
-    }
-
-    public function setX(int $x): static
-    {
-        $this->x = $x;
-
-        return $this;
-    }
-
-    public function getY(): ?int
-    {
-        return $this->y;
-    }
-
-    public function setY(int $y): static
-    {
-        $this->y = $y;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): static
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
