@@ -8,14 +8,11 @@
         <script type="module" src="/js/dashboard/import.js"></script>
     </head>
     <body>
-        <div id="sidebar">
-            {% block sidebar %}
+        <h1>Les zyeux sur le site</h1>
+        <div id="dashboardContent">
+                {% block sidebar %}{% endblock %}
 
-            {% endblock %}
-        </div>
-
-        <div id="content">
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
         </div>
     </body>
 

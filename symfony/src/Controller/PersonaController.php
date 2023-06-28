@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-#[Route('/personas')]
+#[Route('/persona')]
 class PersonaController extends AbstractController
 {
     private PersonaRepository $personaRepository;
@@ -39,7 +39,7 @@ class PersonaController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name: 'personas_create_post', methods: ['GET', 'POST'])]
+    #[Route('/create', name: 'personas_create_post', methods: ['POST'])]
     public function add(Request $request): Response
     {
         $data = $request->request->all();
@@ -49,7 +49,8 @@ class PersonaController extends AbstractController
 
 
         if (!$form->isValid()) {
-            return Response::HTTP_BAD_REQUEST;
+            dd($form->getErrors());
+            return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
         }
 
         $persona = $form->getData();
