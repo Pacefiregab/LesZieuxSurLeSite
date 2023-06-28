@@ -30,6 +30,10 @@ class Session
     #[ORM\JoinColumn(nullable: false)]
     private ?Template $template = null;
 
+    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Persona $persona = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,6 +95,18 @@ class Session
     public function setTemplate(?Template $template): static
     {
         $this->template = $template;
+
+        return $this;
+    }
+
+    public function getPersona(): ?Persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(?Persona $persona): static
+    {
+        $this->persona = $persona;
 
         return $this;
     }
