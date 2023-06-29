@@ -758,10 +758,11 @@
 				</footer>
 
 				<!-- TEMPLATE DATA -->
-				<input type="hidden" name="flag" value="{{ persona.flag }}">
+				<input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
 				<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
 				<input type="hidden" name="header_hidden" value="{{ data.stickyHeader }}">
-					
+                <input type="hidden" name="session_id" value="{{ session.id }}">
+
 				<!-- JAVASCRIPT FILES -->
                 <script src="{{ asset('js/change-interface.js') }}"> </script>
 				<script src="{{ asset('js/jquery.min.js') }}"></script>
