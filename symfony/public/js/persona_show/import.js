@@ -1,4 +1,3 @@
-import {filtreSession} from "/js/persona_show/filtreSession.js";
+import {index} from "/js/persona_form/index.js";
 
-let filtreSession1 = new filtreSession();
-
+let index = new index();

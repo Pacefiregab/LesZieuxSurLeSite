@@ -29,7 +29,7 @@ class PersonaController extends AbstractController
         $this->formFactory = $formFactory;
     }
 
-    #[Route('/', name: 'personas_index', methods: 'GET')]
+    #[Route('/index', name: 'personas_index', methods: 'GET')]
     public function index(): Response
     {
         $personas = $this->personaRepository->findAll();
@@ -59,6 +59,17 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
+    #[Route('/form/{id}', name: 'personas_form_get', methods: ['GET'])]
+    public function form(?Persona $persona ): JsonResponse {
+        $persona = $persona ?? new Persona();
+        $html = $this->renderView('persona/form.html.twig', [
+            'persona' => $persona,
+        ]);
+
+        return new JsonResponse([
+            'html' => $html,
+        ]);
+    }
 
     #[Route('/{id}/edit', name: 'personas_edit', methods: ['POST'])]
     public function edit(Request $request, Persona $persona): Response

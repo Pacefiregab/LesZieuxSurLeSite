@@ -1,4 +1,4 @@
-<div class="filtre_persona card">
+<div class="filtre_persona card side-bar">
     {% if items is empty %}
         <p class="no_result">Aucun résultat</p>
     {% endif %}
@@ -8,5 +8,5 @@
             <p class="nom_persona" data-bs-target="{{ item.id }}">{{ item.name }}</p>
         </div>
     {% endfor %}
-    <a class="gotoPersonas">+</a>
+    <a data-bs-target="0" class="gotoPersonas">+</a>
 </div>
