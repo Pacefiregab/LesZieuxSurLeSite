@@ -1,0 +1,81 @@
+:root {
+    --color_background: #F4F5F7;
+    --color_card: #FFFFFF;
+    --color_grey: #5F5F5F;
+    --color_primary: #F29F67;
+    --color_secondary: #34B1AA;
+    --color_tertiary: #F2C94C;
+    --color_danger: #FF0000;
+    --color_success: #00FF00;
+    --color_font: #000000;
+
+    --margin: 10px;
+    --padding: 10px;
+    --border_radius: 24px;
+
+    --font-lexend: 'Lexend', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div.card {
+    background-color: var(--color_card);
+    font-family: 'Roboto', sans-serif;
+    border-radius: var(--border_radius);
+    color: var(--color_font);
+    /* border: 1px solid var(--color_font); */
+    box-sizing: content-box;
+    display: flex;
+    margin: var(--margin);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 230px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    height: max(150px, auto);
+}
+
+#content h1{
+margin : 15px 0 25px 0 ;}
+
+div.filtre_persona{
+    justify-content: normal;
+    overflow: hidden;
+    width: 20%;
+    position: relative;
+}
+div.persona {
+    border-radius: var(--border_radius);
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    height : 50px;
+}
+
+div .nom_persona{
+    margin-top:12px;
+}
+div.persona:hover{
+    cursor: pointer;
+}
+div.persona.active{
+    background-color: var(--color_primary);
+}
+
+a.gotoPersonas{
+    border-radius: var(--border_radius);
+    background-color: var(--color_background);
+    width:40px;
+    height:40px;
+    padding-top: 6px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    position: absolute;
+    bottom:10px;
+    z-index: 99;
+}
