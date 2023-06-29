@@ -85,7 +85,7 @@ function initEventCapture() {
   $(document).on('scroll', function (event) {
     scrollPosition = window.scrollY
     scrollRecord.push({
-      X: scrollPosition, time: event.timeStamp,
+      Y: scrollPosition, X:0, time: event.timeStamp,
     })
   });
 }
@@ -115,7 +115,7 @@ function sendRecord(ws) {
       scrollRecord: JSON.stringify(scrollRecord),
       windowHeight,
       windowWidth,
-      session_id: 10 //valeur a modifier
+      session_id: 1 //valeur a modifier
     }
   })
     .then((data) => {
