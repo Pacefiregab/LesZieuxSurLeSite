@@ -1,0 +1,22 @@
+div.filtre_session{
+    justify-content: normal;
+    overflow: hidden;
+    width: 20%;
+}
+div.session {
+    border-radius: var(--border_radius);
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    height : 50px;
+}
+
+div .nom_session{
+    margin-top:12px;
+}
+div.session:hover{
+    cursor: pointer;
+}
+div.session.active{
+    background-color: var(--color_primary);
+}

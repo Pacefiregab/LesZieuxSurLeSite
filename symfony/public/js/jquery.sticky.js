@@ -214,6 +214,8 @@
   });
 })(jQuery);
 
-$(document).ready(function(){
-      $(".navbar").sticky({topSpacing:0});
-    });
+$(document).ready(function () {
+  if (document.querySelector('[name=header_hidden]').value == 1) {
+    $(".navbar").sticky({ topSpacing: 0 });
+  }
+});

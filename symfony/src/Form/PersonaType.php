@@ -23,7 +23,12 @@ class PersonaType extends AbstractType
                 'constraints' => [
                     new NotBlank(),
                 ]
-            ],);
+            ])
+            ->add('flag', TextType::class, [
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -4,16 +4,18 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}LesZieuxSurLeSite{% endblock %}</title>
+        <link href="/css/import.css" rel="stylesheet">
     </head>
     <body>
-        <div id="sidebar">
-            {% block sidebar %}
+        <h1>Les zyeux sur le site</h1>
+        <div id="dashboardContent">
+            {% block sidebar %}{% endblock %}
 
-            {% endblock %}
-        </div>
-
-        <div id="content">
             {% block body %}{% endblock %}
         </div>
     </body>
+    {% block javascript %}
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="/js/general.js"></script>
 </html>
