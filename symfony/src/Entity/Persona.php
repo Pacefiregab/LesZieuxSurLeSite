@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PersonaRepository::class)]
 class Persona
 {
+    public const FLAGS = [
+        'oui',
+        'non',
+        'todo',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

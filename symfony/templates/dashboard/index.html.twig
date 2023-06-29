@@ -3,6 +3,28 @@
 
 {% block title %}My cool blog posts{% endblock %}
 
-{% block body %}
-    OUIIIIII
+{% block sidebar %}
+    {% include 'sideBar.html.twig' with {'items' : personas} %}
 {% endblock %}
+
+{% block body %}
+    <script type="module" src="/js/dashboard/import.js"></script>
+    <div id="chart" class="card">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div id="rightColDashboard">
+        <div id="dashboardStatsArea">
+            {% include 'dashboard/card.html.twig' with {'id' : 'nombreSessions', 'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'nombreInterfaces', 'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'tauxSucces', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMin', 'title': "Temps minimum", 'data':'0:39', 'evolution':'-4s', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMoyen', 'title': "Temps moyen", 'data':'1:35', 'evolution':'+6s', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMax', 'title': "Temps maximum", 'data':'1:59', 'evolution':'-8s', 'info': 'pour le personna réussi, sur les 30 derniers jours '} %}
+        </div>
+
+        <button id="details">Details</button>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,32 @@
+<form action="{{ persona.id
+        ? path('personas_edit', {id: persona.id})
+        : path('personas_create_post')
+    }}"
+    method="post">
+    <libele>
+        Nom
+        <input type="text" name="name" value="{{ persona.name }}">
+    </libele>
+    <libele>
+        Libelle
+        <input type="text" name="libelle" value="{{ persona.libelle }}">
+    </libele>
+    <libele>
+        Drapeau
+        <select name="flag">
+            {% for flag in constant('App\\Entity\\Persona::FLAGS') %}
+                <option
+                    value="flag"
+                    {{ persona.flag is same as(flag) ? 'selected' }}
+                >
+                    {{ flag }}
+                </option>
+            {% endfor %}
+        </select>
+    </libele>
+
+    <button type="submit">
+        Valider
+    </button>
+</form>
+

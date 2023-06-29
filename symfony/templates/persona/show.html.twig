@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar %}
+   {%include 'sideBar.html.twig' with {
+       'items' : sessions|map(session => {
+           id : session.id,
+           name : session.title
+       })
+   } %}
+{% endblock %}
+
+{% block body %}
+
+
+
+{% endblock %}
+
+{% block javascript %}
+   <script type="module" src="/js/persona_show/import.js"></script>
+{% endblock %}

@@ -86,7 +86,7 @@ function initEventCapture() {
   $(document).on('scroll', function (event) {
     scrollPosition = window.scrollY
     scrollRecord.push({
-      X: scrollPosition, time: event.timeStamp,
+      Y: scrollPosition, X:0, time: event.timeStamp,
     })
   });
 }
@@ -97,15 +97,17 @@ function treatMessage(message) {
 
   $('.navbar-brand').html(eyeX + ' : ' + eyeY);
 
-  eyeRecord.push({
-    X: eyeX, Y: eyeY, time: msg.data.Timestamp,
-  })
+  if(eyeX || eyeY) {
+    eyeRecord.push({
+      X: eyeX, Y: eyeY, time: msg.data.Timestamp,
+    })
+  }
 }
 
 function sendRecord(ws) {
   ws.close();
   $.ajax({
-    url: "https://localhost/record/api/",
+    url: "https://localhost/trackings/create",
     type: "POST",
     method: "POST",
     data: {
@@ -114,6 +116,7 @@ function sendRecord(ws) {
       scrollRecord: JSON.stringify(scrollRecord),
       windowHeight,
       windowWidth,
+      session_id: 1 //valeur a modifier
     }
   })
     .then((data) => {
