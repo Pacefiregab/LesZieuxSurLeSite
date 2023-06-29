@@ -58,6 +58,7 @@ class TrackingController extends AbstractController
         }*/
 
         $tracking = $form->getData();
+        dd($tracking);
         $this->trackingRepository->save($tracking, true);
 
         //traitement des données le scroll
@@ -77,7 +78,7 @@ class TrackingController extends AbstractController
         }*/
 
         $tracking = $form->getData();
-        dump($form);
+        dump($tracking);
         $this->trackingRepository->save($tracking, true);
 
         //traitement des données pour le click

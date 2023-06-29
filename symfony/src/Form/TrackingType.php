@@ -17,7 +17,7 @@ class TrackingType extends AbstractType
         $builder
             ->add('data', CollectionType::class)
             ->add('type', TextType::class)
-            ->add('session', Session::class)
+            ->add('session', SessionType::class)
         ;
     }
 
