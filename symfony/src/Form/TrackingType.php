@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Session;
 use App\Entity\Tracking;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -16,7 +17,7 @@ class TrackingType extends AbstractType
         $builder
             ->add('data', CollectionType::class)
             ->add('type', TextType::class)
-            ->add('session', SessionType::class)
+            ->add('session', Session::class)
         ;
     }
 

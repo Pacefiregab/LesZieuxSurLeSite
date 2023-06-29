@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Session;
 use App\Entity\Tracking;
 use App\Form\TrackingType;
 use App\Repository\TrackingRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,60 +37,64 @@ class TrackingController extends AbstractController
     }
 
     #[Route('/create', name: 'trackings_create', methods: ['GET', 'POST'])]
-    public function create(Request $request): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $data = $request->request->all();
+        $session = $entityManager->getRepository(Session::class)->find($data['session_id']);
 
         //traitement des données pour l'oeil
-        $eye = array("type" => Tracking::TYPE_EYE
-                        , "data" => $data['eyeRecord']
-                        , "session" => $data['session_id']);
-        $eye = json_encode($eye);
+        $eye = ["type" => Tracking::TYPE_EYE,
+            "data" => $data['eyeRecord'],
+            "session" => $session,
+        ];
 
         $form = $this->formFactory->create(TrackingType::class, new Tracking());
         $form->submit($eye);
 
-
+        /*
         if (!$form->isValid()) {
             dd($form->getErrors());
             return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
-        }
+        }*/
 
         $tracking = $form->getData();
         $this->trackingRepository->save($tracking, true);
 
         //traitement des données le scroll
-        $scroll = array("type" => Tracking::TYPE_SCROLL
-                        , "data" => $data['scrollRecord']
-                        , "session" => $data['session_id']);
-        $scroll = json_encode($scroll);
+        $scroll = [
+            "type" => Tracking::TYPE_SCROLL,
+            "data" => $data['scrollRecord'],
+            "session" => $session,
+        ];
 
         $form = $this->formFactory->create(TrackingType::class, new Tracking());
         $form->submit($scroll);
 
-
+        /*
         if (!$form->isValid()) {
             dd($form->getErrors());
             return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
-        }
+        }*/
 
         $tracking = $form->getData();
+        dump($form);
         $this->trackingRepository->save($tracking, true);
 
         //traitement des données pour le click
-        $click = array("type" => Tracking::TYPE_CLICK
-                        , "data" => $data['clickRecord']
-                        , "session" => $data['session_id']);
+        $click = ["type" => Tracking::TYPE_CLICK,
+            "data" => $data['clickRecord'],
+            "session" => $session,
+        ];
         $click = json_encode($click);
 
         $form = $this->formFactory->create(TrackingType::class, new Tracking());
         $form->submit($click);
 
-
+        /*
         if (!$form->isValid()) {
             dd($form->getErrors());
             return new Response('formulaire invalide : ' . $form->getErrors(), Response::HTTP_BAD_REQUEST);
-        }
+        }*/
 
         $tracking = $form->getData();
         $this->trackingRepository->save($tracking, true);
