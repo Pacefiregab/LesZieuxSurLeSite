@@ -42,13 +42,13 @@ div.card {
 #content h1{
 margin : 15px 0 25px 0 ;}
 
-div.filtre_persona{
+div.filtre{
     justify-content: normal;
     overflow: hidden;
     width: 20%;
     position: relative;
 }
-div.persona {
+div.element_filtre {
     border-radius: var(--border_radius);
     width: 100%;
     text-align: center;
@@ -56,17 +56,17 @@ div.persona {
     height : 50px;
 }
 
-div .nom_persona{
+div .nom_element{
     margin-top:12px;
 }
-div.persona:hover{
+div.element_filtre:hover{
     cursor: pointer;
 }
-div.persona.active{
+div.element_filtre.active{
     background-color: var(--color_primary);
 }
 
-a.gotoPersonas{
+a.gotoElement{
     border-radius: var(--border_radius);
     background-color: var(--color_background);
     width:40px;
