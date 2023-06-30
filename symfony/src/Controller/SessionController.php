@@ -87,7 +87,7 @@ class SessionController extends AbstractController
         ]);
     }
 
-    #[Route('/api/{id}', name: 'api_index_persona', methods: 'GET')]
+    #[Route('/api/{id}', name: 'api_index_session', methods: 'GET')]
     public function api(Session $session): JsonResponse
     {
         $data = [
