@@ -41,14 +41,16 @@ body {
   background-color: var(--white-color);
   font-family: var(--body-font-family); 
 }
-
-/* body.modal_open main{
+body.modal_open {
+  overflow: hidden;
+}
+body.modal_open main{
   -webkit-filter: blur(10px);
   -moz-filter: blur(10px);
   -o-filter: blur(10px);
   -ms-filter: blur(10px);
   filter: blur(10px);
-}  */
+} 
 
 
 /*---------------------------------------
@@ -719,8 +721,9 @@ strong {
     top: 0;
     right: 0;
     left: 0;
-    margin-top: 20px;
+    margin-top: 51px;
 }
+
 
 .schedule-table thead th:last-child {
   border-right-color: transparent;

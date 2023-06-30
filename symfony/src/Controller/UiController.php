@@ -25,8 +25,10 @@ class UiController extends AbstractController
     #[Route('/{session}/heatmap', name: 'app_ui_heatmap')]
     public function heatmap(Session $session): Response
     {
+        $data = $session->getTemplate()->getData();
+        $data ["stickyHeader"] = false;
         return $this->render('ui/index.html.twig', [
-            'data' => $session->getTemplate()->getData(),
+            'data' => $data,
             'persona' => $session->getPersona(),
             'heatmap' => true,
             'heatmapData' => '[{ x: 10, y: 15, value: 5 },{ x: 20, y: 25, value: 8 },]' /*$session->getHeatmapData()*/,

@@ -24,32 +24,28 @@
 
 	</head>
 
-	<body class="modal_open">
+	<body class="{{ not (heatmap??false) ? 'modal_open' : ''}}">
+    {% if not (heatmap??false)%}
 		<div id="startModal" class="modal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title">Modal title</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+						<h5 class="modal-title" id="exampleModalCenterTitle">Objectif :</h5>
 					</div>
-					<div class="modal-body">
-						<p>Modal body text goes here.</p>
-					</div>
+					<div class="modal-body">{{persona.libelle}}</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary">Save changes</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button id="startSessionButton" class="btn btn-primary" type="button" data-bs-dismiss="modal">Démarrer</button>
 					</div>
 				</div>
 			</div>
 		</div>
+        {% endif %}
 		<main>
-			{% if (heatmap??false)%}
+			{% if not (heatmap??false)%}
 				<div id="heatmap" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; pointer-events: none;"></div>
 			{% endif %}
 
-			<header class="site-header {{ (data.hideHeader??false) ? 'd-none' : ''}}">
+			<header class="site-header">
 				<div class="container">
 					<div class="row">
 
@@ -64,7 +60,7 @@
 				</div>
 			</header>
 
-			<nav class="navbar navbar-expand-lg {{(data.stickyHeader??true) ? '' : 'no-sticky'}}">
+			<nav class="navbar navbar-expand-lg {{(data.stickyHeader??true) ? '' : 'no-sticky '}}">
 				<div class="container">
 					<a class="navbar-brand" href="index.html">
 						Festoch Sympatoch
@@ -632,7 +628,6 @@
 					</div>
 				</div>
 			</section>
-</main>
 
 			<footer class="site-footer">
 				<div class="site-footer-top">
@@ -776,21 +771,21 @@
 					</div>
 				</div>
 			</footer>
+		</main>
 
 		<!-- TEMPLATE DATA -->
 		<input type="hidden" name="flag" value="{{ persona.flag }}">
 		<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
 		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
-		<input
-		type="hidden" name="heatmap" value="{{ (heatmapData??false) }}">
+		<input type="hidden" name="heatmap" value="{{ (heatmapData??false) }}">
 
 		<!-- JAVASCRIPT FILES -->
-		<script src="{{ asset('js/heatmap.min.js') }}"></script>
-		<script src="{{ asset('js/change-interface.js') }}"></script>
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('js/heatmap.min.js') }}"></script>
+		<script src="{{ asset('js/change-interface.js') }}"></script>
 		<script src="{{ asset('js/click-scroll.js') }}"></script>
-        <script src="{{ asset('js/jquery.sticky.js') }}"></script>
+		<script src="{{ asset('js/jquery.sticky.js') }}"></script>
 		<script src="{{ asset('js/custom.js') }}"></script>
 
 	</body>
