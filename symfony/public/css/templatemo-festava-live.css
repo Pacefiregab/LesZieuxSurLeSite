@@ -42,6 +42,14 @@ body {
   font-family: var(--body-font-family); 
 }
 
+/* body.modal_open main{
+  -webkit-filter: blur(10px);
+  -moz-filter: blur(10px);
+  -o-filter: blur(10px);
+  -ms-filter: blur(10px);
+  filter: blur(10px);
+}  */
+
 
 /*---------------------------------------
   TYPOGRAPHY               
