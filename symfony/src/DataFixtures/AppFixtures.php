@@ -100,11 +100,6 @@ class AppFixtures extends Fixture
             $session->setTemplate($this->faker->randomElement($templates));
             $session->setDateStart(new DateTime());
             $session->setDateEnd($this->faker->dateTimeBetween($session->getDateStart(), '+2 minutes'));
-
-            /*$randomDate = new DateTime($this->faker->dateTime()->format("yyyy-mm-dd HH:mm:ss.fff")); // ("yyyy-mm-dd HH:mm:ss.fff");
-            $session->setDateEnd($randomDate);
-            $randomDate->add(new DateInterval('PT' . $this->faker->numberBetween(10, 120) . 'S'));
-            $session->setDateStart($randomDate); //->format('yyyy-mm-dd HH:mm:ss.fff') */
             $session->setTitle("session n'" . $i);
             $session->setPersona($this->faker->randomElement($personas));
             $session->setIsSuccess($this->faker->boolean());
