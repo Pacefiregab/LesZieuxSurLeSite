@@ -73,7 +73,7 @@ class AppFixtures extends Fixture
             $template->setData(array(
                 "reverseRow" => $this->faker->boolean(),
                 "hideHeader" => $this->faker->boolean(),
-                "stickyHeader" => $this->faker->boolean(),
+                "stickyHeader" => false,
                 "specialButtonForTicket" => $this->faker->boolean(),
                 "contactMapFirst" => $this->faker->boolean(),
                 "changeCheckBoxSelect" => $this->faker->boolean(),
