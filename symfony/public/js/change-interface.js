@@ -22,10 +22,10 @@ if (document.querySelector("[name=heatmap]").value != false) {
     // Obtenez une référence à la div contenant la heatmap
     var heatmapContainer = document.body;
     heatmapData = {
-        max: 40,
+        max: 30,
         data: JSON.parse(document.querySelector("[name=heatmap]").value)
     }
-    
+
     // Créez une instance de Heatmap.js
     var heatmapInstance = h337.create({
         container: heatmapContainer,
