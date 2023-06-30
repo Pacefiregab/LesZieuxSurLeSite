@@ -1,12 +1,12 @@
-<div class="filtre card">
+<div class="filtre_persona filtre card side-bar">
     {% if items is empty %}
         <p class="no_result">Aucun résultat</p>
     {% endif %}
     {% for item in items %}
         {# le premier élément prend en classe active #}
-        <div class="element_filtre {% if loop.first %}active{% endif %}">
-            <p class="nom_element" data-bs-target="{{ item.id }}">{{ item.name }}</p>
+        <div class="persona element_filtre {% if loop.first %}active{% endif %}">
+            <p class="nom_persona nom_element" data-bs-target="{{ item.id }}">{{ item.name }}</p>
         </div>
     {% endfor %}
-    <a class="gotoElement">+</a>
+    <a data-bs-target="0" class="gotoPersonas gotoElement">+</a>
 </div>

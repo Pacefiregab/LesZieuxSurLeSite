@@ -1,29 +1,21 @@
 import {Rest} from "/js/Rest.js";
 
+let rest = new Rest();
 
-export class index {
-    /**
-     * @var {Rest} rest - objet Rest
-     */
-    rest = new Rest();
-
-
-    /**
-     * Constructeur de la classe index
-     *
-     */
-    constructor() {
-
-    }
-
-
-    /**
-     * Methode qui fais appel à l'api pour les données
-     * @param {String} url - url de l'api
-     * @param {String} methode - methode de l'api
-     */
-    apiCall(url,methode  ) {
-
-    }
-
-}
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-bs-target]').forEach(function (element) {
+        element.addEventListener('click', function (event) {
+            let id = this.getAttribute('data-bs-target');
+            document.querySelector('.side-bar .active')?.classList.remove('active');
+            this.parentNode.classList.add('active');
+            rest.call(
+                '/personas/form/' + id || '',
+                'GET',
+                null,
+                (data) => {
+                    document.querySelector('.form-persona').innerHTML = data.html;
+                }
+            );
+        });
+    });
+});

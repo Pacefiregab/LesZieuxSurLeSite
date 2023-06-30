@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    <div id="formPersona">
+    <div id="chart" class="form-persona">
         {% include 'persona/form.html.twig' with {
             persona : personas|first
         } %}
@@ -15,5 +15,5 @@
 {% endblock %}
 
 {% block javascript %}
-    <script type="module" src="/js/persona_form/import.js"></script>
+    <script type="module" src="/js/persona_form/index.js"></script>
 {% endblock %}
