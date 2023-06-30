@@ -1,21 +1,38 @@
+let data = JSON.parse(document.querySelector("[name=template_data]").value);
+console.log(data);
+if (data.length > 0) {
 
-    var data = document.querySelector('#template_data');
+    var white_color = data.whiteColor;
+    var dark_color = data.darkColor;
+    var primary_color = data.primaryColor;
+    var secondary_color = data.secondaryColor;
 
-    var rowReverse = data.dataset.reverseRow;
-    var white_color = data.dataset.whiteColor;
-
-var r = document.querySelector(':root');
-
-//Change row order
-    console.log('reverse row: ' + rowReverse);
-    if (rowReverse == 'true') {
-        document.querySelector('.rowReversable :nth-child(1)').classList.add('order-2');
-        document.querySelector('.rowReversable :nth-child(2)').classList.add('order-1');
+    var root = document.querySelector(":root");
+    //Change white color
+    root.style.setProperty("--white-color", white_color);
+    //Change black color
+    root.style.setProperty("--dark-color", dark_color);
+    //Change primary color
+    root.style.setProperty("--primary-color", primary_color);
+    //Change secondary color
+    root.style.setProperty("--secondary-color", secondary_color);
+}
+//Charge heatmap
+if (document.querySelector("[name=heatmap]").value != false) {
+    // Obtenez une référence à la div contenant la heatmap
+    var heatmapContainer = document.body;
+    heatmapData = {
+        max: 40,
+        data: JSON.parse(document.querySelector("[name=heatmap]").value)
     }
+    
+    // Créez une instance de Heatmap.js
+    var heatmapInstance = h337.create({
+        container: heatmapContainer,
+    });
 
-//Change white color
-    console.log('white color: ' + white_color);
-    var root = document.querySelector(':root');
-    root.style.setProperty('--white-color', white_color);
+    // Configurez vos données de heatmap (vous devrez les fournir selon vos besoins)
 
-
+    // Ajoutez les données de la heatmap à l'instance de Heatmap.js
+    heatmapInstance.setData(heatmapData);
+}

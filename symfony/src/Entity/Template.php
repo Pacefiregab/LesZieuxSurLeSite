@@ -18,7 +18,7 @@ class Template
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json', nullable: false)]
     private array $data = [];
 
     #[ORM\OneToMany(mappedBy: 'template', targetEntity: session::class)]
