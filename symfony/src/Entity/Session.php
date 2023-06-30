@@ -14,10 +14,10 @@ class Session
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_start = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(length: 255)]
@@ -33,6 +33,9 @@ class Session
     #[ORM\ManyToOne(inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Persona $persona = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isSuccess = null;
 
     public function getId(): ?int
     {
@@ -107,6 +110,18 @@ class Session
     public function setPersona(?Persona $persona): static
     {
         $this->persona = $persona;
+
+        return $this;
+    }
+
+    public function getIsSuccess()
+    {
+        return $this->isSuccess;
+    }
+
+    public function setIsSuccess($isSuccess)
+    {
+        $this->isSuccess = $isSuccess;
 
         return $this;
     }
