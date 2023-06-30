@@ -1,29 +1,34 @@
 <form action="{{ persona.id
-        ? path('personas_edit', {id: persona.id})
-        : path('personas_create_post')
-    }}"
-    method="post">
-    <libele>
-        Nom
-        <input type="text" name="name" value="{{ persona.name }}">
-    </libele>
-    <libele>
-        Libelle
-        <input type="text" name="libelle" value="{{ persona.libelle }}">
-    </libele>
-    <libele>
-        Drapeau
-        <select name="flag">
-            {% for flag in constant('App\\Entity\\Persona::FLAGS') %}
-                <option
-                    value="flag"
-                    {{ persona.flag is same as(flag) ? 'selected' }}
-                >
-                    {{ flag }}
-                </option>
-            {% endfor %}
-        </select>
-    </libele>
+? path('personas_edit', {id: persona.id})
+: path('personas_create_post') }}"
+      method="post">
+
+    <div id="fields">
+        <div class="card">
+            <label for="name">Nom du persona</label>
+            <input type="text" id="name" name="name" value="{{ persona.name }}">
+        </div>
+
+        <div class="card">
+            <label for="libelle"> Libelle du persona</label>
+            <input type="text" id="libelle" name="libelle" value="{{ persona.libelle }}">
+        </div>
+
+        <div class="card">
+            <label for="flag"> Drapeau </label>
+
+            <select name="flag" id="flag">
+                {% for flag, libelle in constant('App\\Entity\\Persona::FLAGS_LIBELLE') %}
+                    <option
+                        value="{{ flag }}"
+                        {{ persona.flag is same as(flag) ? 'selected' }}
+                    >
+                        {{ libelle }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
 
     <button type="submit">
         Valider

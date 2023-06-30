@@ -10,11 +10,35 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PersonaRepository::class)]
 class Persona
 {
-    public const FLAGS = [
-        'oui',
-        'non',
-        'todo',
+    public const FLAGS_LIBELLE = [
+        self::FLAG_YT_GILDOR => 'Youtube de Gildor',
+        self::FLAG_YT_JPFROMAGE => 'Youtube de Jean Pierre Fromage',
+        self::FLAG_YT_JPLACOSTE => 'Youtube de Jean Pascal Lacoste',
+        self::FLAG_CONTACT => 'Soumetre le formulaire de contact',
+        self::FLAG_TWITTER => 'Twitter',
+        self::FLAG_INSTAGRAM => 'Instagram',
+        self::FLAG_FREESYLE_ARTIST => 'Artiste Performant lors des Freestyles',
     ];
+
+    public const FLAGS = [
+        self::FLAG_YT_GILDOR,
+        self::FLAG_YT_JPFROMAGE,
+        self::FLAG_YT_JPLACOSTE,
+        self::FLAG_CONTACT,
+        self::FLAG_TWITTER,
+        self::FLAG_INSTAGRAM,
+        self::FLAG_FREESYLE_ARTIST
+    ];
+
+    public const FLAG_YT_GILDOR = 'gdYt';
+    public const FLAG_YT_JPFROMAGE = 'jpfYt';
+    public const FLAG_YT_JPLACOSTE = 'jplYt';
+    public const FLAG_CONTACT = 'contact';
+    public const FLAG_TWITTER = 'twitter';
+    public const FLAG_INSTAGRAM = 'instagram';
+    public const FLAG_FREESYLE_ARTIST = 'freestyle_artist';
+
+
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
