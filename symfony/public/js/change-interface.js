@@ -2,6 +2,17 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector("[name=heatmap]").value == false) {
         $("#startModal").modal("show");
         $("#startModal").on("hidden.bs.modal", function (e) {
+            var element = document.documentElement;
+
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.mozRequestFullScreen) {
+                element.mozRequestFullScreen();
+            } else if (element.webkitRequestFullscreen) {
+                element.webkitRequestFullscreen();
+            } else if (element.msRequestFullscreen) {
+                element.msRequestFullscreen();
+            }
             document.querySelector("body").classList.remove("modal_open");
         });
     }
@@ -40,8 +51,8 @@ if (document.querySelector("[name=heatmap]").value != false) {
     var heatmapContainer = document.body;
     heatmapData = {
         max: 30,
-        data: JSON.parse(document.querySelector("[name=heatmap]").value)
-    }
+        data: JSON.parse(document.querySelector("[name=heatmap]").value),
+    };
 
     // Créez une instance de Heatmap.js
     var heatmapInstance = h337.create({

@@ -19,15 +19,15 @@ class UiController extends AbstractController
 {
     #[Route(['/{session}','/'] ,name: 'app_ui')]
     public function index(?Session $session, EntityManagerInterface $entityManager): Response {
-        if (!$session) {
-            $session = new Session();
+        if (!$session->getId()) {
             $persona = $entityManager->getRepository(Persona::class)->findOneBy([]);
-            $session->setTemplate(new Template());
+            $template = $entityManager->getRepository(Template::class)->findOneBy([]);
+            $session->setTitle('New Session');
+            $session->setTemplate($template);
             $session->setPersona($persona);
 
             $entityManager->persist($session);
             $entityManager->flush();
-
         }
         return $this->render('ui/index.html.twig', [
             'data' => $session->getTemplate()?->getData() ?? [],
@@ -35,7 +35,6 @@ class UiController extends AbstractController
             'session' => $session,
         ]);
     }
-
 
     #[Route('/{session}/heatmap', name: 'app_ui_heatmap')]
     public function heatmap(Session $session): Response
