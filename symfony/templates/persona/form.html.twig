@@ -14,12 +14,11 @@
     <libele>
         Drapeau
         <select name="flag">
-            {% for flag in constant('App\\Entity\\Persona::FLAGS') %}
+            {% for flag, label in constant('App\\Entity\\Persona::FLAGS') %}
                 <option
-                    value="flag"
-                    {{ persona.flag is same as(flag) ? 'selected' }}
-                >
-                    {{ flag }}
+                    value="{{ flag }}
+                    {{ persona.flag is same as(flag) ? 'selected' }}>
+                    {{ label }}
                 </option>
             {% endfor %}
         </select>
