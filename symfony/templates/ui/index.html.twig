@@ -797,10 +797,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</footer>
+				</footer>
 
-		<!-- TEMPLATE DATA -->
+				<!-- TEMPLATE DATA -->
+				<input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
+				<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
+				<input type="hidden" name="header_hidden" value="{{ data.stickyHeader }}">
+                <input type="hidden" name="session_id" value="{{ session.id }}">
 		<input type="hidden" name="flag" value="{{ persona.flag }}">
 		<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
 		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
@@ -809,7 +812,13 @@
 		<input
 		type="hidden" name="session_id" value="{{ (session_id??false) }}">
 
-		<!-- JAVASCRIPT FILES -->
+				<!-- JAVASCRIPT FILES -->
+                <script src="{{ asset('js/change-interface.js') }}"> </script>
+				<script src="{{ asset('js/jquery.min.js') }}"></script>
+				<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+				<script src="{{ asset('js/jquery.sticky.js') }}"></script>
+				<script src="{{ asset('js/click-scroll.js') }}"></script>
+				<script src="{{ asset('js/custom.js') }}"></script>
 		<script src="{{ asset('js/heatmap.min.js') }}"></script>
 		<script src="{{ asset('js/change-interface.js') }}"></script>
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -817,7 +826,8 @@
 		<script src="{{ asset('js/click-scroll.js') }}"></script>
         <script src="{{ asset('js/jquery.sticky.js') }}"></script>
 		<script src="{{ asset('js/custom.js') }}"></script>
-
+			</body>
+		</body>
 	</body>
 </html>
 
