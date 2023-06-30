@@ -35,8 +35,8 @@ class UiController extends AbstractController
             'session' => $session,
         ]);
     }
-          
-          
+
+
     #[Route('/{session}/heatmap', name: 'app_ui_heatmap')]
     public function heatmap(Session $session): Response
     {
@@ -48,10 +48,10 @@ class UiController extends AbstractController
             })[0]->getData();
 
         $heatMapData = [];
-        foreach ($tracking as $data) {
+        foreach ($tracking as $pos) {
             $heatMapData[] = [
-                'x' => $data['X'],
-                'y' => $data['Y'],
+                'x' => $pos['x'],
+                'y' => $pos['y'],
                 'value' => 1,
             ];
         }

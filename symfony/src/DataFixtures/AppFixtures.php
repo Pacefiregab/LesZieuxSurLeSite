@@ -111,12 +111,12 @@ class AppFixtures extends Fixture
     public function trackingFixtures(ObjectManager $manager): void
     {
         $sessions = $this->sessionRepository->getAll();
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $tracking1 = new Tracking();
             $tracking2 = new Tracking();
             $tracking3 = new Tracking();
 
-            $tracking1->setSession($this->faker->randomElement($sessions));
+            $tracking1->setSession($sessions[$i]);
             $tracking1->setType(Tracking::TYPE_EYE);
 
             $X1 = ($this->faker->numberBetween(0, 1920));
