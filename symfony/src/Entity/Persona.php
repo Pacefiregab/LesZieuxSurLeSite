@@ -11,9 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Persona
 {
     public const FLAGS = [
-        'oui',
-        'non',
-        'todo',
+        'jpYt',
     ];
 
     #[ORM\Id]
