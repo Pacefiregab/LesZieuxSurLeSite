@@ -14,10 +14,10 @@ class Session
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_start = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_end = null;
 
     #[ORM\Column(length: 255)]
@@ -26,7 +26,7 @@ class Session
     #[ORM\OneToMany(mappedBy: 'session', targetEntity: Tracking::class)]
     private $trackings;
 
-    #[ORM\ManyToOne(inversedBy: 'sessions')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Template $template = null;
 
