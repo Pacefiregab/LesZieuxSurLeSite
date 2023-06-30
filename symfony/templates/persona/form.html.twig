@@ -18,12 +18,12 @@
             <label for="flag"> Drapeau </label>
 
             <select name="flag" id="flag">
-                {% for flag in constant('App\\Entity\\Persona::FLAGS') %}
+                {% for flag, libelle in constant('App\\Entity\\Persona::FLAGS_LIBELLE') %}
                     <option
-                        value="flag"
+                        value="{{ flag }}"
                         {{ persona.flag is same as(flag) ? 'selected' }}
                     >
-                        {{ flag }}
+                        {{ libelle }}
                     </option>
                 {% endfor %}
             </select>
