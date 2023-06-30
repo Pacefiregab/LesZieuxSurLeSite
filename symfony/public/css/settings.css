@@ -44,6 +44,7 @@ margin : 15px 0 25px 0 ;}
 
 div.filtre{
     justify-content: normal;
+    justify-content: start;
     overflow: hidden;
     width: 20%;
     position: relative;

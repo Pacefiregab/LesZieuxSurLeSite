@@ -103,7 +103,7 @@ class PersonaController extends AbstractController
                 'diff'=> rand(-100, 100),
             ],
             'graph' => $graph,
-            'detail' => $this->generateUrl('personas_show', ['id' => $persona->getId()]),
+            'detail' => $this->generateUrl('personas_show_sessions', ['id' => $persona->getId()]),
         ];
         return new JsonResponse($data, Response::HTTP_OK);
     }
@@ -116,14 +116,13 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/{id}', name: 'personas_show', methods: 'GET')]
+    #[Route('/{id}/sessions', name: 'personas_show_sessions', methods: 'GET')]
     public function show(Persona $persona): Response
     {
         $sessions = $persona->getSessions();
 
         return $this->render('persona/show.html.twig', [
             'persona' => $persona,
-            //todo : a supprimer
             'sessions' => $sessions
         ]);
     }
