@@ -20,6 +20,16 @@ class Persona
         self::FLAG_FREESYLE_ARTIST => 'Artiste Performant lors des Freestyles',
     ];
 
+    public const FLAGS = [
+        self::FLAG_YT_GILDOR,
+        self::FLAG_YT_JPFROMAGE,
+        self::FLAG_YT_JPLACOSTE,
+        self::FLAG_CONTACT,
+        self::FLAG_TWITTER,
+        self::FLAG_INSTAGRAM,
+        self::FLAG_FREESYLE_ARTIST
+    ];
+
     public const FLAG_YT_GILDOR = 'gdYt';
     public const FLAG_YT_JPFROMAGE = 'jpfYt';
     public const FLAG_YT_JPLACOSTE = 'jplYt';
