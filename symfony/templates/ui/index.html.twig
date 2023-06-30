@@ -156,13 +156,19 @@
 
 								<li class="social-icon-item">
 									<a href="#" class="social-icon-link">
-										<span class="bi-twitter"></span>
+										<span
+                                            class="bi-twitter"
+                                            data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
+                                        ></span>
 									</a>
 								</li>
 
 								<li class="social-icon-item">
 									<a href="#" class="social-icon-link">
-										<span class="bi-instagram"></span>
+										<span
+                                            class="bi-instagram"
+                                            data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
+                                        ></span>
 									</a>
 								</li>
 							</ul>
@@ -259,7 +265,7 @@
 
 								<p class="mb-0">
 									<strong>Youtube Channel:</strong>
-									<a href="#">Madona Official</a>
+									<a href="#" data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_JPFROMAGE') }}>Madona Official</a>
 								</p>
 							</div>
 						</div>
@@ -291,7 +297,7 @@
 
 								<p class="mb-0">
 									<strong>Chaine Youtube:</strong>
-									<a href="#" data-flag="jpYt">Gildor Official</a>
+									<a href="#" data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_GILDOR') }}">Gildor Official</a>
 								</p>
 							</div>
 						</div>
@@ -319,7 +325,11 @@
 
 								<p class="mb-0">
 									<strong>Chaine Youtube :</strong>
-									<a href="#">JPlacoste Official</a>
+									<a
+                                        href="#"
+                                        data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_JPLACOSTE') }}">
+                                        JPlacoste Official
+                                    </a>
 								</p>
 							</div>
 						</div>
@@ -415,7 +425,9 @@
 
 											<p class="mb-2">18:00 - 2:00</p>
 
-											<p>Par Alkapote</p>
+											<p
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_FREESYLE_ARTIST') }}"
+                                            >Par Alkapote</p>
 										</td>
 									</tr>
 								</tbody>
@@ -552,7 +564,12 @@
 										<textarea name="contact-message" rows="3" class="form-control" id="contact-message" placeholder="Message"></textarea>
 
 										<div class="col-lg-4 col-md-10 col-8 mx-auto">
-											<button type="submit" class="form-control">Envoyer</button>
+											<button
+                                                type="submit"
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_CONTACT') }}"
+                                                class="form-control">
+                                                Envoyer
+                                            </button>
 										</div>
 									</div>
 								</form>
@@ -647,7 +664,10 @@
 								<ul class="social-icon d-flex justify-content-lg-end">
 									<li class="social-icon-item">
 										<a href="#" class="social-icon-link">
-											<span class="bi-twitter"></span>
+											<span
+                                                class="bi-twitter"
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
+                                            ></span>
 										</a>
 									</li>
 
@@ -659,7 +679,10 @@
 
 									<li class="social-icon-item">
 										<a href="#" class="social-icon-link">
-											<span class="bi-instagram"></span>
+											<span
+                                                class="bi-instagram"
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
+                                            ></span>
 										</a>
 									</li>
 
@@ -774,10 +797,13 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</footer>
+				</footer>
 
-		<!-- TEMPLATE DATA -->
+				<!-- TEMPLATE DATA -->
+				<input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
+				<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
+				<input type="hidden" name="header_hidden" value="{{ data.stickyHeader }}">
+                <input type="hidden" name="session_id" value="{{ session.id }}">
 		<input type="hidden" name="flag" value="{{ persona.flag }}">
 		<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
 		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
@@ -786,7 +812,13 @@
 		<input
 		type="hidden" name="session_id" value="{{ (session_id??false) }}">
 
-		<!-- JAVASCRIPT FILES -->
+				<!-- JAVASCRIPT FILES -->
+                <script src="{{ asset('js/change-interface.js') }}"> </script>
+				<script src="{{ asset('js/jquery.min.js') }}"></script>
+				<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+				<script src="{{ asset('js/jquery.sticky.js') }}"></script>
+				<script src="{{ asset('js/click-scroll.js') }}"></script>
+				<script src="{{ asset('js/custom.js') }}"></script>
 		<script src="{{ asset('js/heatmap.min.js') }}"></script>
 		<script src="{{ asset('js/change-interface.js') }}"></script>
 		<script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -794,7 +826,8 @@
 		<script src="{{ asset('js/click-scroll.js') }}"></script>
         <script src="{{ asset('js/jquery.sticky.js') }}"></script>
 		<script src="{{ asset('js/custom.js') }}"></script>
-
+			</body>
+		</body>
 	</body>
 </html>
 
