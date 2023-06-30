@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     if (document.querySelector("[name=heatmap]").value == false) {
         $("#startModal").modal("show");
-
         $("#startModal").on("hidden.bs.modal", function (e) {
-            console.log("click");
             document.querySelector("body").classList.remove("modal_open");
         });
     }
