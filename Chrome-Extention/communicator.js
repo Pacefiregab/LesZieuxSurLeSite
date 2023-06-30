@@ -70,7 +70,7 @@ function treatMessage(message) {
 
     if(eyeX || eyeY) {
         eyeRecord.push({
-            X: eyeX, Y: eyeY, value: 1
+            x: eyeX, y: eyeY, value: 1
         })
     }
 }
@@ -104,7 +104,6 @@ function processEyePosition(eyeX, eyeY) {
 }
 
 function processRecord() {
-    ws.close();
     console.log("process record");
     console.log(eyeRecord);
 
@@ -121,6 +120,8 @@ function processRecord() {
         data: eyeRecord,
     };
 
+    eyeRecord = [];
+    
     heatmapInstance.setData(heatmapData);
 }
 
