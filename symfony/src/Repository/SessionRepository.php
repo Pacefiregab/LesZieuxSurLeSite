@@ -39,6 +39,14 @@ class SessionRepository extends ServiceEntityRepository
         }
     }
 
+    public function getAll(){
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 //    /**
 //     * @return Session[] Returns an array of Session objects
 //     */

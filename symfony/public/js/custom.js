@@ -116,7 +116,7 @@ function sendRecord(ws) {
       scrollRecord: JSON.stringify(scrollRecord),
       windowHeight,
       windowWidth,
-      session_id: 1 //valeur a modifier
+      session_id:  document.querySelector("[name=session_id]").value
     }
   })
     .then((data) => {
