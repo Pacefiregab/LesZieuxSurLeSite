@@ -49,8 +49,8 @@ class UiController extends AbstractController
         $heatMapData = [];
         foreach ($tracking as $pos) {
             $heatMapData[] = [
-                'x' => $pos['x'],
-                'y' => $pos['y'],
+                'x' => $pos['x'] ?? $pos['X'],
+                'y' => $pos['y'] ?? $pos['Y'],
                 'value' => 1,
             ];
         }

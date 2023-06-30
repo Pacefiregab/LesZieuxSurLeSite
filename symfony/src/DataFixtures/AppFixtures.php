@@ -60,6 +60,7 @@ class AppFixtures extends Fixture
             $persona = new Persona();
             $persona->setName($this->faker->name());
             $persona->setFlag($this->faker->randomElement(Persona::FLAGS));
+            $persona->setLibelle(Persona::FLAGS_LIBELLE[$persona->getFlag()]);
             $this->personaRepository->save($persona, true);
         }
     }
