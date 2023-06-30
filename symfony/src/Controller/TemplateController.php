@@ -25,7 +25,7 @@ class TemplateController extends AbstractController
     {
         $templates = $this->templateRepository->findAll();
 
-        return $this->render('templates/index.html.twig', [
+        return $this->render('template/index.html.twig', [
             'templates' => $templates,
         ]);
     }
