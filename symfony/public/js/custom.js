@@ -40,6 +40,8 @@
 let startDate;
 let endDate;
 
+let isSuccess = false;
+
 let eyeRecord = []
 let clickRecord = []
 let scrollRecord = []
@@ -59,6 +61,7 @@ function initEventCapture() {
     const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
     ws.onopen = () => {
         ws.send('startGazePoint');
+        startDate = Date.now();
         setTimeout(() => sendRecord(ws), 120000)
     }
 
@@ -70,6 +73,7 @@ function initEventCapture() {
         eyeRecord = []
         clickRecord = []
         scrollRecord = []
+        isSuccess = false
     }
 
     console.log(flag)
@@ -82,6 +86,7 @@ function initEventCapture() {
         const $target = $(event.target);
 
         if ($target.data('flag') === flag) {
+            isSuccess = true;
             sendRecord(ws);
         }
     });
@@ -95,7 +100,6 @@ function initEventCapture() {
 }
 
 function treatMessage(message) {
-    startDate = Date.now();
     const msg = JSON.parse(message.data);
     const { eyeX, eyeY } = processEyePosition(msg.data.X, msg.data.Y);
 
@@ -121,9 +125,10 @@ function sendRecord(ws) {
             scrollRecord: JSON.stringify(scrollRecord),
             windowHeight,
             windowWidth,
-            session_id: $('input[name="session_id"]').val(),
             startDate,
             endDate,
+            isSuccess,
+            session_id: $('input[name="session_id"]').val(),
         }
     })
         .then((data) => {

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Session;
 use App\Entity\Tracking;
 use App\Form\TrackingType;
@@ -48,9 +49,9 @@ class TrackingController extends AbstractController
         $session = $entityManager->getRepository(Session::class)->find($data['session_id']);
 
         //ajout de date de début + fin
-        dd($data);
-        $session->setDateStart($data['startDate']);
-        $session->setDateEnd($data['endDate']);
+        $session->setDateStart(new DateTime(date("Y-m-d H:i:s", $data['startDate'])));
+        $session->setDateEnd(new DateTime(date("Y-m-d H:i:s", $data['endDate'])));
+        $session->setIsSuccess($data['isSuccess']);
         $this->sessionRepository->save($session, true);
 
         //traitement des données eye tracker
