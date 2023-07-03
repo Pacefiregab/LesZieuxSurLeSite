@@ -16,18 +16,21 @@
         {% endif %}
         {% for item in items %}
             {# le premier élément prend en classe active #}
-            <div class="persona element_filtre {% if loop.first %}active{% endif %}">
-                <p class="nom_persona nom_element" data-bs-target="{{ item.id }}">{{ item.name }}</p>
-                {% if item.primary is defined %}
-                <div style="background-color: {{ item.primary }}; width: 15px; height: 15px"></div>
-            {% endif %}
-            {% if item.secondary is defined %}
-                <div style="background-color: {{ item.secondary }}; width: 15px; height: 15px"></div>
-            {% endif %}
+            <div class="persona element_filtre" data-bs-target="{{ item.id }}" {% if loop.first %}active{% endif %}">
+                <p class="nom_persona nom_element">{{ item.name }}</p>
+
+                <div class="d-inline-flex">
+                    {% if item.primary is defined %}
+                        <div class="icon_color" style="background-color: {{ item.primary }};"></div>
+                    {% endif %}
+                    {% if item.secondary is defined %}
+                        <div class="icon_color" style="background-color: {{ item.secondary }};"></div>
+                    {% endif %}
+                </div>
         </div>
         {% endfor %}
     </div>
-    {% if noPlus is defined and not noPlus %}
+    {% if noPlus is not defined %}
         <a data-bs-target="0" class="gotoPersonas gotoElement" id="sidebar-add">+</a>
     {% endif %}
 </div>

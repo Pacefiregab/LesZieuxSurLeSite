@@ -5,6 +5,8 @@
         'items' : templates|map(template => {
             'name' : template.name,
             'id' : template.id,
+            'primary': template.data.primaryColor,
+            'secondary': template.data.secondaryColor,
         })
     } %}
 {% endblock %}

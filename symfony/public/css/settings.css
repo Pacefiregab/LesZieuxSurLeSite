@@ -55,9 +55,11 @@ div.element_filtre {
     border-radius: var(--border_radius);
     width: 100%;
     text-align: center;
-    justify-content: center;
+    justify-content: space-between;
     height : 50px;
     display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
 }
 
 div .nom_element{
@@ -173,4 +175,10 @@ a, a:hover, a:active, a:visited {
     text-decoration: none;
     color: black;
     cursor: pointer;
+}
+
+.icon_color {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
 }
