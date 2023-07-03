@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 element.msRequestFullscreen();
             }
             document.querySelector("body").classList.remove("modal_open");
+            setTimeout(initEventCapture, 1000);
         });
     }
 });
