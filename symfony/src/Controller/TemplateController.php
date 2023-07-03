@@ -95,8 +95,17 @@ class TemplateController extends AbstractController
     #[Route('/show/{id}', name:'templates_show', methods:'GET')]
     public function show(Template $template): Response
     {
-        return $this->render('templates/show.html.twig', [
+        return $this->render('template/show.html.twig', [
             'template' => $template,
+        ]);
+    }
+    #[Route('/details', name:'templates_details', methods:'GET')]
+    public function details(EntityManagerInterface $entityManager): Response
+    {
+        $templates = $entityManager->getRepository(Template::class)->findAll();
+
+        return $this->render('template/details.html.twig', [
+            'templates' => $templates,
         ]);
     }
 

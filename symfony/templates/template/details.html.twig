@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block sidebar %}
+    {% include 'sideBar.html.twig' with {
+        'items': templates|map(template => {
+            'name': template.name,
+            'id': template.id,
+            'primary': template.data.primaryColor,
+            'secondary': template.data.secondaryColor,
+        })
+    } %}
+{% endblock %}
+
+{% block body %}
+    oui
+{% endblock %}
+
+{% block javascript %}
+<script type="module" src="/js/template/details.js"></script>
+{% endblock %}
