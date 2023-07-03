@@ -1,0 +1,27 @@
+<form action="{{ template.id
+? path('templates_edit', {id: template.id})
+: path('templates_create') }}"
+      method="post">
+
+    <div id="fields">
+        <div class="card">
+            <label for="name">Nom du persona</label>
+            <input type="text" id="name" name="name" value="{oooooooooo">
+        </div>
+
+        <div class="card">
+            <label for="libelle"> Libelle du persona</label>
+            <input type="text" id="libelle" name="libelle" value="ààààààààààààà">
+        </div>
+
+        <div class="card">
+            <label for="flag"> Drapeau </label>
+
+        </div>
+    </div>
+
+    <button type="submit">
+        Valider
+    </button>
+</form>
+

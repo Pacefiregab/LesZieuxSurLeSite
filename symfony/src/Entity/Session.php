@@ -23,7 +23,7 @@ class Session
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Tracking::class)]
+    #[ORM\OneToMany(mappedBy: 'Session', targetEntity: Tracking::class)]
     private $trackings;
 
     #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'sessions')]
