@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.side-bar .active')?.classList.remove('active');
             this.parentNode.classList.add('active');
             rest.call(
-                '/personas/form/' + id || '',
+                id?'/personas/form/' + id :'/personas/form/0',
                 'GET',
                 null,
                 (data) => {
