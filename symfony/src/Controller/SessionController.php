@@ -107,8 +107,13 @@ class SessionController extends AbstractController
         }
 
         $data = [
+            'graph' => [
+                'avgTime' => [23,34,45],
+                'avgThis' => [13,44,55],
+            ],
             'sessionDate' => $session->getDateStart()->format('d/m/Y'),
             'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
+            'sessionName' => $session->getTitle(),
             'isSuccess' => $session->getIsSuccess(),
             'template' => [
                 'name' => $session->getTemplate()->getName(),

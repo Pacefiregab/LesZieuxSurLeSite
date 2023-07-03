@@ -12,27 +12,28 @@
 {% block body %}
 
 <div class="card persona_statistique">
-    <div class="card-header">
-        <h2 id="name_session">Session 1</h2>
-        <p class="date_session" id="date_session">12/08/2023</p>
-    </div>
     <div class="container_detail">
+
         <div class="container_stat_persona">
-            <div class="stat_persona">
-                <p id="name_persona">Persona :</p>
+            <div class="card-header">
+                <h2 id="name_session">Session 1</h2>
+                <p class="date_session" id="date_session">12/08/2023</p>
             </div>
             <div class="stat_persona">
-                <p id="duree_session">durée de la sessions :</p>
+                <p id="name_persona">Persona : </p>
             </div>
             <div class="stat_persona">
-                <p id="nom_template">Template :</p>
+                <p id="duree_session">durée de la sessions : </p>
             </div>
             <div class="stat_persona">
-                <p id="nombre_clique" >nombre de clique :</p>
+                <p id="nom_template">Template : </p>
+            </div>
+            <div class="stat_persona">
+                <p id="nombre_clique" >nombre de clique : </p>
             </div>
         </div>
-        <div class="chart">
-
+        <div id="chart" class="card">
+            <canvas id="myChart"></canvas>
         </div>
     </div>
     <div class="button_hitmap">

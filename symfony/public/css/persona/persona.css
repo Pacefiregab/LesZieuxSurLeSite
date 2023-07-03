@@ -3,6 +3,13 @@
     width: 75% !important;
     position: relative;
 }
+.card-header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-evenly;
+}
 .persona_statistique h2{
     font-size: 1.5em;
     font-weight: bold;
@@ -23,13 +30,13 @@
 }
 
 .container_stat_persona p{
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     color: #9b9b9b;
     margin-bottom: 10px;
 }
 .container_stat_persona{
-    margin-right: 20px;
+    margin: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -44,14 +51,13 @@
     margin-top: 20px;
     align-items: center;
 }
-.chart{
-    width: 200px;
-    height: 200px;
+#chart{
+    padding: 0px;
 }
 .button_hitmap{
     position: absolute;
-    bottom: 15px;
-    right: -91px;
+    bottom: 2%;
+    left: -14%;L
     display: flex;
     margin: 0 15%;
     /* width: 100%; */
