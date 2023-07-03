@@ -96,7 +96,7 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/{id}/sessions', name: 'personas_sessions_info', methods: ['GET'])]
+    #[Route('/api/{id}', name: 'personas_sessions_info', methods: ['GET'])]
     public function sessionsInfo(Persona $persona): JsonResponse
     {
         $successRate = 0;
