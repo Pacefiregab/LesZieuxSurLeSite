@@ -1,58 +1,60 @@
-<form action="{{ template.id
-? path('templates_edit', {id: template.id})
-: path('templates_create') }}"
-      method="post">
+<form action="{{ template.id ? path('templates_edit', {id: template.id}) : path('templates_create') }}" method="post">
 
-    <div id="fields">
-        <div class="card">
-            <label for="stickyHeader">Garder visible le menu au scroll</label>
-            <input type="checkbox" id="stickyHeader" name="stickyHeader" value="true">
-        </div>
+	<div id="fields">
+		<div class="card">
+			<label for="name">Nom du template</label>
+			<input type="checkbox" id="name" name="name">
+		</div>
 
-        <div class="card">
-            <label for="reverseRow">Inverser les colonne d'informations</label>
-            <input type="checkbox" id="reverseRow" name="reverseRow" value="false">
-        </div>
+		<div class="card">
+			<label for="stickyHeader">Garder visible le menu au scroll</label>
+			<input type="checkbox" id="stickyHeader" name="stickyHeader" value="true">
+		</div>
 
-        <div class="card">
-            <label for="specialButtonForTicket">Inverser les types de contact</label>
-            <input type="checkbox" id="specialButtonForTicket" name="specialButtonForTicket" value="true">
-        </div>
-        
-        <div class="card">
-            <label for="contactMapFirst">Inverser les colonnes d'informations</label>
-            <input type="checkbox" id="contactMapFirst" name="contactMapFirst" value="false">
-        </div>
+		<div class="card">
+			<label for="reverseRow">Inverser les colonne d'informations</label>
+			<input type="checkbox" id="reverseRow" name="reverseRow" value="false">
+		</div>
 
-        <div class="card">
-            <label for="changeCheckBoxSelect">Changer les coches par des listes</label>
-            <input type="checkbox" id="changeCheckBoxSelect" name="changeCheckBoxSelect" value="false">
-        </div>
+		<div class="card">
+			<label for="specialButtonForTicket">Inverser les types de contact</label>
+			<input type="checkbox" id="specialButtonForTicket" name="specialButtonForTicket" value="true">
+		</div>
 
-        <div class="card">
-            <label for="whiteColor">Couleur blanche</label>
-            <input type="color" id="whiteColor" name="whiteColor">
-        </div>
+		<div class="card">
+			<label for="contactMapFirst">Inverser les colonnes d'informations</label>
+			<input type="checkbox" id="contactMapFirst" name="contactMapFirst" value="false">
+		</div>
 
-        <div class="card">
-            <label for="darkColor">Couleur noir</label>
-            <input type="color" id="darkColor" name="darkColor">
-        </div>
+		<div class="card">
+			<label for="changeCheckBoxSelect">Changer les coches par des listes</label>
+			<input type="checkbox" id="changeCheckBoxSelect" name="changeCheckBoxSelect" value="false">
+		</div>
 
-                <div class="card">
-            <label for="primaryColor">Couleur primaire</label>
-            <input type="color" id="primaryColor" name="primaryColor">
-        </div>
+		<div class="card">
+			<label for="whiteColor">Couleur blanche</label>
+			<input type="color" id="whiteColor" name="whiteColor">
+		</div>
 
-        <div class="card">
-            <label for="secondaryColor">Couleur secondaire</label>
-            <input type="color" id="secondaryColor" name="secondaryColor">
-        </div>
+		<div class="card">
+			<label for="darkColor">Couleur noir</label>
+			<input type="color" id="darkColor" name="darkColor">
+		</div>
 
-    </div>
+		<div class="card">
+			<label for="primaryColor">Couleur primaire</label>
+			<input type="color" id="primaryColor" name="primaryColor">
+		</div>
 
-    <button type="submit">
-        Valider
-    </button>
+		<div class="card">
+			<label for="secondaryColor">Couleur secondaire</label>
+			<input type="color" id="secondaryColor" name="secondaryColor">
+		</div>
+
+	</div>
+
+	<button type="submit">
+		Valider
+	</button>
 </form>
 
