@@ -1,9 +1,16 @@
 <style>
-    .gotoElement { color: black; text-decoration: none; }
-    .gotoElement:hover { filter: brightness(85%); }
+    .gotoElement {
+        color: black;
+        text-decoration: none;
+    }
+
+    .gotoElement:hover {
+        filter: brightness(85%);
+    }
 </style>
 
-<div class="filtre_persona filtre card side-bar">
+<div id="sidebar" class="filtre_persona filtre card side-bar">
+    <div id="listElement">
     {% if items is empty %}
         <p class="no_result">Aucun résultat</p>
     {% endif %}
@@ -12,10 +19,10 @@
         <div class="persona element_filtre {% if loop.first %}active{% endif %}">
             <p class="nom_persona nom_element" data-bs-target="{{ item.id }}">{{ item.name }}</p>
         </div>
-    {% endfor %}
+    {% endfor %}</div>
     <a data-bs-target="0" class="gotoPersonas gotoElement" id="sidebar-add">+</a>
 </div>
 
 {% block javascript %}
-    <script type="module" src="/js/sideBar.js"></script>
+<script type="module" src="/js/sideBar.js"></script>
 {% endblock %}
