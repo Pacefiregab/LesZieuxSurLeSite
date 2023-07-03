@@ -45,15 +45,18 @@ export class dashboard{
      * Methode qui va afficher les résultats de la requete
      */
     afficherResultat() {
-
+        console.log(this.data)
         //parcourir this.data qui est un retour api e, json { cle : valeur }
         Object.keys(this.data).forEach(key => {
 
             let card = document.querySelector('#' + key);
             let data = this.data[key];
 
+            if(key == 'successRate'){
+                data = data + '%';
+            }
 
-            let diff = data.diff;
+            let diff = 0;
 
             if (key == 'graph') {
 
@@ -64,7 +67,7 @@ export class dashboard{
                 this.bouton_detail.setAttribute('onclick', 'window.location.href = "' + data + '"');
 
             } else {
-                card.querySelector('span').innerHTML = data.donnee;
+                card.querySelector('span').innerHTML = data;
                 let cardEvolution = card.querySelector('.evolution');
 
                 if (diff > 0) {
