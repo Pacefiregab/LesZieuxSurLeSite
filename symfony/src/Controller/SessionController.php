@@ -90,11 +90,42 @@ class SessionController extends AbstractController
     #[Route('/api/{id}', name: 'api_index_session', methods: 'GET')]
     public function api(Session $session): JsonResponse
     {
+        $sessionsTemplate = $this->sessionRepository->findBy(['template' => $session->getTemplate()]);
+        $sessionTemplateTimes = [];
+        $sessionTemplateSuccess = 0;
+        foreach ($sessionsTemplate as $session) {
+            $sessionTemplateTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionTemplateSuccess += $session->getIsSuccess();
+        }
+
+        $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
+        $sessionPersonaTimes = [];
+        $sessionPersonaSuccess = 0;
+        foreach ($sessionsPersona as $session) {
+            $sessionPersonaTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionPersonaSuccess += $session->getIsSuccess();
+        }
+
         $data = [
-            'date_session' => $session->getDateStart()->format('d/m/Y'),
-            'name_persona' => $session->getPersona()->getName(),
-            'duree_session' => '1:30',
-            'nom_template' => $session->getTemplate()->getName(),
+            'sessionDate' => $session->getDateStart()->format('d/m/Y'),
+            'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
+            'isSuccess' => $session->getIsSuccess(),
+            'template' => [
+                'name' => $session->getTemplate()->getName(),
+                'avgTime' => array_sum($sessionTemplateTimes) / count($sessionTemplateTimes),
+                'maxTime' => max($sessionTemplateTimes),
+                'minTime' => min($sessionTemplateTimes),
+                'successRate' => $sessionTemplateSuccess / count($sessionsTemplate),
+                'count' => count($sessionsTemplate),
+            ],
+            'persona' => [
+                'name' => $session->getPersona()->getName(),
+                'avgTime' => array_sum($sessionPersonaTimes) / count($sessionPersonaTimes),
+                'maxTime' => max($sessionPersonaTimes),
+                'minTime' => min($sessionPersonaTimes),
+                'successRate' => $sessionPersonaSuccess / count($sessionsPersona),
+                'count' => count($sessionsPersona),
+            ]
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
