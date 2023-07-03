@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Session;
 use App\Entity\Tracking;
 use App\Form\TrackingType;
+use App\Repository\SessionRepository;
 use App\Repository\TrackingRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,12 +20,14 @@ class TrackingController extends AbstractController
 {
     private TrackingRepository $trackingRepository;
 
+    private SessionRepository $sessionRepository;
     private FormFactoryInterface $formFactory;
 
-    public function __construct(TrackingRepository $trackingRepository, FormFactoryInterface $formFactory)
+    public function __construct(TrackingRepository $trackingRepository, FormFactoryInterface $formFactory, SessionRepository $sessionRepository)
     {
         $this->trackingRepository = $trackingRepository;
         $this->formFactory = $formFactory;
+        $this->sessionRepository = $sessionRepository;
     }
 
     #[Route('/', name: 'trackings', methods: 'GET')]
@@ -44,6 +47,13 @@ class TrackingController extends AbstractController
 
         $session = $entityManager->getRepository(Session::class)->find($data['session_id']);
 
+        //ajout de date de début + fin
+        dd($data);
+        $session->setDateStart($data['startDate']);
+        $session->setDateEnd($data['endDate']);
+        $this->sessionRepository->save($session, true);
+
+        //traitement des données eye tracker
         $eyeTracking = new Tracking();
         $eyeTracking->setSession($session)
             ->setType(Tracking::TYPE_EYE)

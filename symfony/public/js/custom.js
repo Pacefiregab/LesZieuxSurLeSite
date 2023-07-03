@@ -37,6 +37,9 @@
     });
 })(window.jQuery);
 
+let startDate;
+let endDate;
+
 let eyeRecord = []
 let clickRecord = []
 let scrollRecord = []
@@ -92,6 +95,7 @@ function initEventCapture() {
 }
 
 function treatMessage(message) {
+    startDate = Date.now();
     const msg = JSON.parse(message.data);
     const { eyeX, eyeY } = processEyePosition(msg.data.X, msg.data.Y);
 
@@ -106,6 +110,7 @@ function treatMessage(message) {
 
 function sendRecord(ws) {
     ws.close();
+    endDate = Date.now();
     $.ajax({
         url: "https://localhost/trackings/create",
         type: "POST",
@@ -117,6 +122,8 @@ function sendRecord(ws) {
             windowHeight,
             windowWidth,
             session_id: $('input[name="session_id"]').val(),
+            startDate,
+            endDate,
         }
     })
         .then((data) => {
