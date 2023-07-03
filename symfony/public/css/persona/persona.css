@@ -1,6 +1,7 @@
 .persona_statistique{
     margin: 10px;
     width: 75% !important;
+    position: relative;
 }
 .persona_statistique h2{
     font-size: 1.5em;
@@ -10,13 +11,12 @@
 }
 
 .persona_statistique p.date_session{
-font-size: 1.2em;
+    font-size: 1.2em;
     font-weight: bold;
     color: #000;
     margin-bottom: 10px;
 }
 .persona_statistique .button_hitmap{
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -28,14 +28,36 @@ font-size: 1.2em;
     color: #9b9b9b;
     margin-bottom: 10px;
 }
-.container_stat_persona .stat_persona{
-
+.container_stat_persona{
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .container_detail{
     display: flex;
+    flex-direction: row;
     width: 100%;
-    justify-content: flex-start;
+    justify-content: center;
     margin-top: 20px;
     align-items: center;
+}
+.chart{
+    width: 200px;
+    height: 200px;
+}
+.button_hitmap{
+    position: absolute;
+    bottom: 37px;
+    right: -91px;
+    display: flex;
+    margin: 0 15%;
+    /* width: 100%; */
+    align-items: center;
+    justify-content: center;
+}
+#button_hitmap{
+    padding: 10px;
 }

@@ -17,10 +17,19 @@ export class personaShow{
         this.data = data;
         console.log(this.data);
         console.log(this.stat_persona);
-        this.stat_persona.forEach((stat) => {
-            let element = stat.childNodes[1];
+        let date_sessions = document.querySelector('#date_sessions');
+        if (date_sessions != null) {
+            date_sessions
+        }
+        if (this.data != null) {
+            this.stat_persona.forEach((stat) => {
+                let element = stat.childNodes[1];
+                console.log(element);
+                console.log(this.data)
+                element.innerHTML = element.innerHTML + this.data[element.id];
+            });
+        }
 
-        });
     }
 
 
