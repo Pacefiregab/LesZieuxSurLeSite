@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SessionRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,8 +24,8 @@ class Session
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\OneToMany(mappedBy: 'Session', targetEntity: Tracking::class)]
-    private $trackings;
+    #[ORM\OneToMany(mappedBy: 'session', targetEntity: Tracking::class)]
+    private Collection $trackings;
 
     #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'sessions')]
     #[ORM\JoinColumn(nullable: false)]
