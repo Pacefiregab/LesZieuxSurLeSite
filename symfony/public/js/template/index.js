@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 'GET',
                 null,
                 (data) => {
-                    document.querySelector('.form-persona').innerHTML = data.html;
+                    document.querySelector('.form-template').innerHTML = data.html;
                 }
             );
         });
