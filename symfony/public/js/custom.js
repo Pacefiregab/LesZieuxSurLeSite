@@ -121,7 +121,7 @@ function sendRecord(ws) {
   })
     .then((data) => {
       ws.close();
-      windows.location.href = window.location.href + '/heatmap';
+      window.location.href = data.redirect;
     })
 }
 
