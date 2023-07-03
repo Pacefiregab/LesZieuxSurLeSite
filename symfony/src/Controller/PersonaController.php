@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Persona;
 use App\Form\PersonaType;
 use App\Repository\PersonaRepository;
+use App\Repository\SessionRepository;
 use mysql_xdevapi\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -19,14 +20,18 @@ class PersonaController extends AbstractController
 {
     private PersonaRepository $personaRepository;
 
+        private SessionRepository $sessionRepository;
+
     protected FormFactoryInterface $formFactory;
 
     public function __construct(
         PersonaRepository $personaRepository,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        SessionRepository $sessionRepository
     ) {
         $this->personaRepository = $personaRepository;
         $this->formFactory = $formFactory;
+        $this->sessionRepository = $sessionRepository;
     }
 
     #[Route('/index', name: 'personas_index', methods: 'GET')]
@@ -91,32 +96,40 @@ class PersonaController extends AbstractController
         return $this->redirectToRoute('personas_index');
     }
 
-    #[Route('/api/{id}', name: 'api_index_persona', methods: ['GET'])]
-    public function apiIndex(Persona $persona): JsonResponse
+    #[Route('/{id}/sessions', name: 'personas_sessions_info', methods: ['GET'])]
+    public function sessionsInfo(Persona $persona): JsonResponse
     {
-        $graph = [
-            'interface1' => 30,
-            'interface2' => 20,
-            'interface3' => 50,
-        ];
-        //detail dois avoir la route personas_show
+        $successRate = 0;
+        $templates = [];
+        $sessionsTimes = [];
+
+        $sessions = $persona->getSessions();
+        foreach ($sessions as $session) {
+            $this->sessionRepository->isSuccess($session) ? $successRate++ : null;
+
+            $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+
+            //maps to the template name the session time
+            $templates['#' . $session->getId() . ' - ' . $session->getTemplate()->getName()] = $sessionTime;
+
+            $sessionsTimes[] = $sessionTime;
+        }
+
+        $templatesNb = count($templates);
+        if ($sessions->count() > 0) {
+            $successRate = $successRate / $sessions->count() * 100;
+        }
         $data = [
-            'nombreSessions' => [
-                'donnee' => rand(0, 100),
-                'diff'=> rand(-100, 100),
-            ],
-            'tauxReussite' => [
-                'donnee' => rand(0, 100),
-                'diff'=> rand(-100, 100),
-            ],
-            'nombreInterfaces' => [
-                'donnee' => rand(0, 100),
-                'diff'=> rand(-100, 100),
-            ],
-            'graph' => $graph,
-            'detail' => $this->generateUrl('personas_show_sessions', ['id' => $persona->getId()]),
+            'successRate' => $successRate ?? 0,
+            'nbSessions' => $sessions->count(),
+            'nbtemplates' => $templatesNb,
+            'avgSessions' => $sessionsTimes ? array_sum($sessionsTimes) / count($sessionsTimes) : 0,
+            'minSessions' => $sessionsTimes ? min($sessionsTimes) : 0,
+            'maxSessions' => $sessionsTimes ? max($sessionsTimes) : 0,
+            'graph' => $templates,
         ];
-        return new JsonResponse($data, Response::HTTP_OK);
+
+        return new JsonResponse($data);
     }
 
     #[Route('/{id}', name: 'personas_delete', methods: 'DELETE')]
