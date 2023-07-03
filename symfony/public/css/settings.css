@@ -46,7 +46,7 @@ div.card {
 div.filtre {
     justify-content: normal;
     justify-content: start;
-    overflow: hidden;
+    overflow-y: scroll;
     width: 20%;
     position: relative;
 }
@@ -56,11 +56,13 @@ div.element_filtre {
     width: 100%;
     text-align: center;
     justify-content: center;
-    height: 50px;
+    height : 50px;
+    display: flex;
 }
 
-div .nom_element {
-    margin-top: 12px;
+div .nom_element{
+    margin-top:12px;
+    margin-bottom:12px;
 }
 
 div.element_filtre:hover {
@@ -83,7 +85,44 @@ a.gotoElement {
     position: absolute;
     bottom: 10px;
     z-index: 99;
+    margin: var(--margin);
 }
+
+#sidebar {
+    display: flex;
+    height: 100%;
+}
+
+#listElement {
+    overflow-y: scroll;
+    width: 100%;
+}
+div.filtre::-webkit-scrollbar { width: 0 !important }
+
+
+/* width */
+
+#listElement::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+
+#listElement::-webkit-scrollbar-track {
+    background: var(--color_background);
+    border: var(--border_radius);
+}
+
+/* Handle */
+
+#listElement::-webkit-scrollbar-thumb {
+    background: var(--color_secondary);
+}
+
+#notHideContent{
+    height: auto;
+}
+
 
 button {
     border: none;
