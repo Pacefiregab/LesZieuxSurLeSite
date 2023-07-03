@@ -94,6 +94,11 @@ button {
     font-size: 1.2em;
     font-weight: lighter;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+button :hover {
+    cursor: pointer;
 }
 
 input[type="checkbox"] {
@@ -101,8 +106,6 @@ input[type="checkbox"] {
     height: 20px;
     transition: all 0.3s ease-in-out;
 }
-
-
 
 input[type="checkbox"]:not(:checked) {
     transform: scale(1);
@@ -128,4 +131,10 @@ input[type="checkbox"]:checked {
     border: none;
     border-radius: var(--border_radius);
     padding: 4px 0px 4px 15px;
+}
+
+a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
 }

@@ -92,8 +92,8 @@ class AppFixtures extends Fixture
     {
         //$faker->dateTimeBetween(new DateTime(), '+2 minutes');
 
-        $templates = $this->templateRepository->getAll();
-        $personas = $this->personaRepository->getAll();
+        $templates = $this->templateRepository->findAll();
+        $personas = $this->personaRepository->findAll();
 
 
         for ($i = 0; $i < 10; $i++) {
@@ -111,7 +111,7 @@ class AppFixtures extends Fixture
     //tracking
     public function trackingFixtures(ObjectManager $manager): void
     {
-        $sessions = $this->sessionRepository->getAll();
+        $sessions = $this->sessionRepository->findAll();
         for ($i = 0; $i < 10; $i++) {
             $tracking1 = new Tracking();
             $tracking2 = new Tracking();

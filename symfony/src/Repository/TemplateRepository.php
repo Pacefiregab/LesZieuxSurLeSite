@@ -39,14 +39,6 @@ class TemplateRepository extends ServiceEntityRepository
         }
     }
 
-    public function getAll(){
-        return $this->createQueryBuilder('t')
-            ->orderBy('t.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
 //    /**
 //     * @return Template[] Returns an array of Template objects
 //     */

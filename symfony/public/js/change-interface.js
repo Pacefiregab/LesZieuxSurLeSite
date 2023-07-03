@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
         $("#startModal").on("hidden.bs.modal", function (e) {
             setFullScreen();
             document.querySelector("body").classList.remove("modal_open");
+            setTimeout(initEventCapture, 1000);
         });
     }
 });
