@@ -105,7 +105,7 @@ class PersonaController extends AbstractController
 
         $sessions = $persona->getSessions();
         foreach ($sessions as $session) {
-            $this->sessionRepository->isSuccess($session) ? $successRate++ : null;
+            $successRate+= $session->getIsSuccess();
 
             $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
 
