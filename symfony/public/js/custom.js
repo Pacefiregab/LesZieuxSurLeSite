@@ -37,6 +37,11 @@
     });
 })(window.jQuery);
 
+let startDate;
+let endDate;
+
+let isSuccess = false;
+
 let eyeRecord = []
 let clickRecord = []
 let scrollRecord = []
@@ -56,6 +61,7 @@ function initEventCapture() {
     const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
     ws.onopen = () => {
         ws.send('startGazePoint');
+        startDate = Date.now()/1000;
         setTimeout(() => sendRecord(ws), 120000)
     }
 
@@ -67,6 +73,7 @@ function initEventCapture() {
         eyeRecord = []
         clickRecord = []
         scrollRecord = []
+        isSuccess = false
     }
 
     console.log(flag)
@@ -79,6 +86,7 @@ function initEventCapture() {
         const $target = $(event.target);
 
         if ($target.data('flag') === flag) {
+            isSuccess = true;
             sendRecord(ws);
         }
     });
@@ -106,6 +114,7 @@ function treatMessage(message) {
 
 function sendRecord(ws) {
     ws.close();
+    endDate = Date.now()/1000;
     $.ajax({
         url: "https://localhost/trackings/create",
         type: "POST",
@@ -116,6 +125,9 @@ function sendRecord(ws) {
             scrollRecord: JSON.stringify(scrollRecord),
             windowHeight,
             windowWidth,
+            startDate,
+            endDate,
+            isSuccess,
             session_id: $('input[name="session_id"]').val(),
         }
     })
