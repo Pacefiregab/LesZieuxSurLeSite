@@ -61,7 +61,7 @@ function initEventCapture() {
     const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
     ws.onopen = () => {
         ws.send('startGazePoint');
-        startDate = Date.now();
+        startDate = Date.now()/1000;
         setTimeout(() => sendRecord(ws), 120000)
     }
 
@@ -114,7 +114,7 @@ function treatMessage(message) {
 
 function sendRecord(ws) {
     ws.close();
-    endDate = Date.now();
+    endDate = Date.now()/1000;
     $.ajax({
         url: "https://localhost/trackings/create",
         type: "POST",
