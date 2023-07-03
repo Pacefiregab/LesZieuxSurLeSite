@@ -31,18 +31,25 @@ export class filtre {
         this.callback = callback;
         this.url = url;
 
-
         let id = this.elements[0].childNodes[1].getAttribute('data-bs-target');
         console.log(id)
         this.apiCall(this.url+id , 'GET');
+        console.log(this.url+id)
+
         this.elements.forEach(element => {
+
             element.addEventListener('click', () => {
+
                 id = element.childNodes[1].getAttribute('data-bs-target');
 
                 if (!element.classList.contains('active')) {
+
                     this.elements.forEach(element => {
+
                         element.classList.remove('active');
+
                     });
+
                     element.classList.add('active');
                 }
 

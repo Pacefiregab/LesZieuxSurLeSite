@@ -96,7 +96,7 @@ class SessionController extends AbstractController
             'duree_session' => '1:30',
             'nom_template' => $session->getTemplate()->getName(),
             'urlHeatMap' => '/ui/'.$session->getId().'/heatmap',
-            'nombreClique' => rand(0, 100),
+            'nombre_clique' => rand(0, 100),
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
