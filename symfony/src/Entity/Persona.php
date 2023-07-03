@@ -54,7 +54,7 @@ class Persona
     #[ORM\Column(length: 255)]
     private ?string $flag = null;
 
-    #[ORM\OneToMany(mappedBy: 'Persona', targetEntity: Session::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'persona', targetEntity: Session::class, orphanRemoval: true)]
     private Collection $sessions;
 
     public function __construct()

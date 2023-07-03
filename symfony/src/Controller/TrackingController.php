@@ -22,10 +22,14 @@ class TrackingController extends AbstractController
     private TrackingRepository $trackingRepository;
 
     private SessionRepository $sessionRepository;
+
     private FormFactoryInterface $formFactory;
 
-    public function __construct(TrackingRepository $trackingRepository, FormFactoryInterface $formFactory, SessionRepository $sessionRepository)
-    {
+    public function __construct(
+        TrackingRepository $trackingRepository,
+        FormFactoryInterface $formFactory,
+        SessionRepository $sessionRepository
+    ) {
         $this->trackingRepository = $trackingRepository;
         $this->formFactory = $formFactory;
         $this->sessionRepository = $sessionRepository;
