@@ -105,7 +105,7 @@ class PersonaController extends AbstractController
 
         $sessions = $persona->getSessions();
         foreach ($sessions as $session) {
-            $this->sessionRepository->isSuccess($session) ? $successRate++ : null;
+            $successRate+= $session->getIsSuccess();
 
             $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
 
@@ -127,6 +127,7 @@ class PersonaController extends AbstractController
             'minSessions' => $sessionsTimes ? min($sessionsTimes) : 0,
             'maxSessions' => $sessionsTimes ? max($sessionsTimes) : 0,
             'graph' => $templates,
+            'detail' => $this->generateUrl('personas_show_sessions', ['id' => $persona->getId()]),
         ];
 
         return new JsonResponse($data);

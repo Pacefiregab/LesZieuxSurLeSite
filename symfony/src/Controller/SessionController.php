@@ -91,18 +91,18 @@ class SessionController extends AbstractController
     public function api(Session $session): JsonResponse
     {
         $sessionsTemplate = $this->sessionRepository->findBy(['template' => $session->getTemplate()]);
-        $sessionTemplateTimes = [];
+        $sessionTemplateTimes = 0;
         $sessionTemplateSuccess = 0;
         foreach ($sessionsTemplate as $session) {
-            $sessionTemplateTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionTemplateTimes += $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
             $sessionTemplateSuccess += $session->getIsSuccess();
         }
 
         $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
-        $sessionPersonaTimes = [];
+        $sessionPersonaTimes = 0;
         $sessionPersonaSuccess = 0;
         foreach ($sessionsPersona as $session) {
-            $sessionPersonaTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionPersonaTimes += $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
             $sessionPersonaSuccess += $session->getIsSuccess();
         }
 
@@ -112,18 +112,18 @@ class SessionController extends AbstractController
             'isSuccess' => $session->getIsSuccess(),
             'template' => [
                 'name' => $session->getTemplate()->getName(),
-                'avgTime' => array_sum($sessionTemplateTimes) / count($sessionTemplateTimes),
+                'avgTime' => count($sessionsTemplate) > 0 ? $sessionTemplateTimes / count($sessionsTemplate) * 100 : 0,
                 'maxTime' => max($sessionTemplateTimes),
                 'minTime' => min($sessionTemplateTimes),
-                'successRate' => $sessionTemplateSuccess / count($sessionsTemplate),
+                'successRate' => count($sessionsTemplate) > 0 ? $sessionTemplateSuccess / count($sessionsTemplate) * 100 : 0,
                 'count' => count($sessionsTemplate),
             ],
             'persona' => [
                 'name' => $session->getPersona()->getName(),
-                'avgTime' => array_sum($sessionPersonaTimes) / count($sessionPersonaTimes),
+                'avgTime' => count($sessionsPersona)  > 0 ? $sessionPersonaTimes / count($sessionsPersona) * 100 : 0,
                 'maxTime' => max($sessionPersonaTimes),
                 'minTime' => min($sessionPersonaTimes),
-                'successRate' => $sessionPersonaSuccess / count($sessionsPersona),
+                'successRate' => count($sessionsPersona) > 0 ? $sessionPersonaSuccess / count($sessionsPersona) * 100 : 0,
                 'count' => count($sessionsPersona),
             ]
         ];
