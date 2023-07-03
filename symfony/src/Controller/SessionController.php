@@ -110,6 +110,7 @@ class SessionController extends AbstractController
             'sessionDate' => $session->getDateStart()->format('d/m/Y'),
             'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
             'isSuccess' => $session->getIsSuccess(),
+            'sessionName' => $session->getTitle(),
             'template' => [
                 'name' => $session->getTemplate()->getName(),
                 'avgTime' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) * 100 : 0,

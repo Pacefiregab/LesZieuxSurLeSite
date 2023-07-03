@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Session;
 use App\Entity\Template;
 use App\Form\TemplateType;
 use App\Repository\SessionRepository;
@@ -11,8 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Json;
+use Symfony\Component\Routing\Annotation\Route;#
 
 #[Route('/templates')]
 class TemplateController extends AbstractController
@@ -100,28 +98,40 @@ class TemplateController extends AbstractController
         $sessions = $this->sessionRepository->findBy(['template' => $template]);
         $personas = [];
         $statistics = [];
-/*
-        foreach ($sessions as $session) {
-            $persona = $session->getPersona();
 
-            if (!in_array($persona, $personas)) {
-                $personas[] = $persona;
-                $statistics[$persona] = [
-                    'maxTime' => $session->getTime(),
-                    'minTime' => $session->getTime(),
-                    'totalTime' => $session->getTime(),
-                    'sessionCount' => 1,
-                    'successCount' => $session->getIsSuccess() ? 1 : 0,
-                ];
-            } else {
-                $statistics[$persona]['maxTime'] = max($statistics[$persona]['maxTime'], $session->getTime());
-                $statistics[$persona]['minTime'] = min($statistics[$persona]['minTime'], $session->getTime());
-                $statistics[$persona]['totalTime'] += $session->getTime();
-                $statistics[$persona]['sessionCount']++;
-                $statistics[$persona]['successCount'] += $session->getIsSuccess() ? 1 : 0;
-            }
+        foreach ($sessions as $session) {
+            $personas[$session->getPersona()->getId()][] = $session;
         }
- */
+
+        foreach ($personas as $persona) {
+            $statistics[$persona->getPersona()->getId()] = [
+                'id' => $persona->getPersona()->getId(),
+                'name' => $persona->getPersona()->getName(),
+                'sessions' => [
+                    'total' => $personas[$persona->getPersona()->getId()]/*
+                    'isSuccess' => $personas[$persona->getPersona()->getId()]->filter(function ($session) {
+                        return $session->getIsSucces();
+                    }),
+                    'averageTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
+                        return $session->getDuration();
+                    })->average(),
+                    'minTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
+                        return $session->getDuration();
+                    })->min(),
+                    'maxTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
+                        return $session->getDuration();
+                    })->max(), */
+                ],
+            ];
+        }
+
+        dd($personas, $statistics);
+        $templateStatistics = [
+            'id' => $template->getId(),
+            'name' => $template->getName(),
+            'data' => $template->getData(),
+            'personas' => [],
+        ];
 
 
         $template = [
@@ -129,7 +139,9 @@ class TemplateController extends AbstractController
             'name' => $template->getName(),
             'data' => $template->getData(),
             'personas' => $personas,
+            'statistics' => $templateStatistics,
         ];
+
         return new JsonResponse($template);
     }
 }
