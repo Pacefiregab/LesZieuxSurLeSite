@@ -3,7 +3,7 @@
 	<div id="fields">
 		<div class="card">
 			<label for="name">Nom du template</label>
-			<input type="text" id="name" name="name">
+			<input type="text" id="name" name="name" value="{{ template.name ?? null }}">
 		</div>
 
         {% set data = template.data %}
@@ -35,22 +35,22 @@
 
 		<div class="card">
 			<label for="whiteColor">Couleur blanche</label>
-			<input type="color" id="whiteColor" name="whiteColor" value="{{ data.changeCheckBoxSelect  ?? "#FFFFFF" }}">
+			<input type="color" id="whiteColor" name="whiteColor" value="{{ data.whiteColor  ?? "#FFFFFF" }}">
 		</div>
 
 		<div class="card">
 			<label for="darkColor">Couleur noir</label>
-			<input type="color" id="darkColor" name="darkColor" value="{{ data.changeCheckBoxSelect  ?? "#040404" }}">
+			<input type="color" id="darkColor" name="darkColor" value="{{ data.darkColor  ?? "#040404" }}">
 		</div>
 
 		<div class="card">
 			<label for="primaryColor">Couleur primaire</label>
-			<input type="color" id="primaryColor" name="primaryColor" value="{{ data.changeCheckBoxSelect  ?? "#F8CB2E" }}">
+			<input type="color" id="primaryColor" name="primaryColor" value="{{ data.primaryColor  ?? "#F8CB2E" }}">
 		</div>
 
 		<div class="card">
 			<label for="secondaryColor">Couleur secondaire</label>
-			<input type="color" id="secondaryColor" name="secondaryColor" value="{{ data.changeCheckBoxSelect  ?? "#EE5007" }}">
+			<input type="color" id="secondaryColor" name="secondaryColor" value="{{ data.secondaryColor  ?? "#EE5007" }}">
 		</div>
 
 	</div>
