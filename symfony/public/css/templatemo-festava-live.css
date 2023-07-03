@@ -724,6 +724,9 @@ strong {
     margin-top: 51px;
 }
 
+.heatmap-canvas {
+  pointer-events: none;
+}
 
 .schedule-table thead th:last-child {
   border-right-color: transparent;
