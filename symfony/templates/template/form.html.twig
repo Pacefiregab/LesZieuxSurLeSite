@@ -3,7 +3,7 @@
 	<div id="fields">
 		<div class="card">
 			<label for="name">Nom du template</label>
-			<input type="text" id="name" name="name" value="{{ template.name ?? null }}">
+			<input type="text" id="name" name="name" required value="{{ template.name ?? null }}">
 		</div>
 
         {% set data = template.data %}
