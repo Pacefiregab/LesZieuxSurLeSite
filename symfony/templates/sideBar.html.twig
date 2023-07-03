@@ -19,9 +19,7 @@
             {% endif %}
         </div>
     {% endfor %}
-    <a data-bs-target class="gotoPersonas gotoElement" id="sidebar-add">+</a>
+    {% if noPlus is defined and not noPlus %}
+        <a data-bs-target class="gotoPersonas gotoElement" id="sidebar-add">+</a>
+    {% endif %}
 </div>
-
-{% block javascript %}
-    <script type="module" src="/js/sideBar.js"></script>
-{% endblock %}

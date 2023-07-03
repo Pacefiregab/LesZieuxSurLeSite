@@ -9,11 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.side-bar .active')?.classList.remove('active');
             this.parentNode.classList.add('active');
             rest.call(
-                '/templates/form/' + id || '',
+                '/templates/show/' + id || '', // TODO
                 'GET',
                 null,
                 (data) => {
-                    document.querySelector('.form-template').innerHTML = data.html;
+                    console.log(data);
+                    // TODO
                 }
             );
         });
