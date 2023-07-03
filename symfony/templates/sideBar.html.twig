@@ -1,3 +1,8 @@
+<style>
+    .gotoElement { color: black; text-decoration: none; }
+    .gotoElement:hover { filter: brightness(85%); }
+</style>
+
 <div class="filtre_persona filtre card side-bar">
     {% if items is empty %}
         <p class="no_result">Aucun résultat</p>
@@ -8,5 +13,9 @@
             <p class="nom_persona nom_element" data-bs-target="{{ item.id }}">{{ item.name }}</p>
         </div>
     {% endfor %}
-    <a data-bs-target="0" class="gotoPersonas gotoElement">+</a>
+    <a data-bs-target="0" class="gotoPersonas gotoElement" id="sidebar-add">+</a>
 </div>
+
+{% block javascript %}
+    <script type="module" src="/js/sideBar.js"></script>
+{% endblock %}
