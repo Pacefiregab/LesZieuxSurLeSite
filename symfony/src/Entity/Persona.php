@@ -57,6 +57,9 @@ class Persona
     #[ORM\OneToMany(mappedBy: 'persona', targetEntity: Session::class, orphanRemoval: true)]
     private Collection $sessions;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $duration = null;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -129,6 +132,18 @@ class Persona
                 $session->setPersona(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(?int $duration): static
+    {
+        $this->duration = $duration;
 
         return $this;
     }

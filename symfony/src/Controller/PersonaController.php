@@ -59,6 +59,7 @@ class PersonaController extends AbstractController
         }
 
         $persona = $form->getData();
+        $persona->setDuration($persona->getDuration() == null ? 120 : $persona->getDuration());
         $this->personaRepository->save($persona, true);
 
         return $this->redirectToRoute('personas_index');
