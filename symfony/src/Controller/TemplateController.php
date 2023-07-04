@@ -164,9 +164,9 @@ class TemplateController extends AbstractController
             'nbSuccess' => count(array_filter($sessions, function ($session) {
                 return $session->getIsSuccess();
             })),
-            'averageTime' => array_sum(array_map(function ($session) {
+            'averageTime' => count($sessions) > 0 ? array_sum(array_map(function ($session) {
                 return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-            }, $sessions)) / count($sessions),
+            }, $sessions)) / count($sessions) : 0,
             'minTime' => min(array_map(function ($session) {
                 return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
             }, $sessions)),
