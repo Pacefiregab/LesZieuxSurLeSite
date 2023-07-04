@@ -226,3 +226,9 @@ button#backButton{
     position: absolute;
     left: 30px;
 }
+
+button#launchButton {
+    width: 250px;
+    position: absolute;
+    left: 30px;
+}
