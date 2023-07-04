@@ -3,18 +3,18 @@
     width: 100%;
 }
 
-#formPersona form, #formTemplate form {
+#formPersona form {
     display: flex;
     flex-direction: column;
     height:100%;
     justify-content: space-between;
 }
 
-#formPersona form label, #formTemplate form label {
+#formPersona form label {
     font-size: 1.2em
 }
 
-#formPersona div.card, #formTemplate div.card {
+#formPersona div.card {
     height: 30px;
     padding: 15px;
     display: flex;
@@ -41,7 +41,7 @@
     width: 125px ;
 }
 
-#formPersona button, #formTemplate button {
+#formPersona button {
     padding: 15px;
     width:40%;
     margin: 0 auto;

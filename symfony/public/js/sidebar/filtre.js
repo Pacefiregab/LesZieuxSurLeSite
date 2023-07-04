@@ -31,7 +31,7 @@ export class filtre {
         this.callback = callback;
         this.url = url;
 
-        let id = this.elements[0].childNodes[1].getAttribute('data-bs-target');
+        let id = this.elements[0].getAttribute('data-bs-target');
         console.log(id)
         this.apiCall(this.url+id , 'GET');
         console.log(this.url+id)
@@ -40,7 +40,7 @@ export class filtre {
 
             element.addEventListener('click', () => {
 
-                id = element.childNodes[1].getAttribute('data-bs-target');
+                id = element.getAttribute('data-bs-target');
 
                 if (!element.classList.contains('active')) {
 

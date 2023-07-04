@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         element.addEventListener('click', function (event) {
             let id = this.getAttribute('data-bs-target');
             document.querySelector('.side-bar .active')?.classList.remove('active');
-            this.parentNode.classList.add('active');
+            this.classList.add('active');
             rest.call(
                 id?'/personas/form/' + id :'/personas/form/0',
                 'GET',

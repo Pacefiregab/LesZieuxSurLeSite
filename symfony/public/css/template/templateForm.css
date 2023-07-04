@@ -1,0 +1,193 @@
+#formTemplate {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.templateFields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.templateFields #fields {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+#containerCheckbox,
+#containerColor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#containerCheckbox .checkboxColumn {
+    width: 50%;
+}
+
+#containerColor .colorColumn {
+    width: 50%;
+}
+
+#formTemplate .card {
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+}
+
+#formTemplate input[type="text"] {
+    width: 70%;
+}
+
+/*######### CSS DETAILS TEMPLATES #########*/
+
+.cardTemplate {
+    background-color: var(--color_card);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 90%;
+    height: 20%;
+    min-height: 150px;
+    margin: var(--margin);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.presentationCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.allColors {
+    height: 100px;
+    width: 100px;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    overflow: hidden;
+}
+
+.showColors {
+    height: 50px;
+    width: 50px;
+}
+
+.allColors:nth-child(1) {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.allColors:nth-child(2) {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+.allColors:nth-child(3) {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+.allColors:nth-child(4) {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+.infos {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 5px;
+}
+
+.infos p {
+    margin-left: 5px;
+    width: 50%;
+}
+
+.informationCard {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: calc(95% - 100px);
+}
+
+.infosColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+}
+
+.gg-check-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 100px;
+    color: green;
+}
+
+.gg-check-o::after {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 3px;
+    top: -1px;
+    width: 6px;
+    height: 10px;
+    border-color: currentColor;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+    color: green;
+}
+
+.gg-close-o {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    border-radius: 40px;
+    color: red;
+}
+
+.gg-close-o::after,
+.gg-close-o::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 12px;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(45deg);
+    border-radius: 5px;
+    top: 8px;
+    left: 3px;
+    color:red;
+}
+
+.gg-close-o::after {
+    transform: rotate(-45deg);
+    color:red;
+}

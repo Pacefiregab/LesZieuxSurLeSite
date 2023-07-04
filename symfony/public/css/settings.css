@@ -55,9 +55,12 @@ div.element_filtre {
     border-radius: var(--border_radius);
     width: 100%;
     text-align: center;
-    justify-content: center;
-    height: 50px;
+    justify-content: space-between;
+    height : 50px;
     display: flex;
+    align-items: center;
+    padding: 0 10px 0 10px;
+    overflow: hidden;
 }
 
 div .nom_element {
@@ -131,6 +134,12 @@ div.filtre::-webkit-scrollbar {
     width: 0 !important
 }
 
+#listElement.noPlus {
+    height: 100%;
+}
+
+div.filtre::-webkit-scrollbar { width: 0 !important }
+
 
 #listElement::-webkit-scrollbar {
     width: 5px;
@@ -157,6 +166,7 @@ button {
     border-radius: var(--border_radius);
     background-color: var(--color_secondary);
     width: 100%;
+    max-width: 200px;
     height: 50px;
     font-size: 1.2em;
     font-weight: lighter;
@@ -206,8 +216,13 @@ a, a:hover, a:active, a:visited {
     cursor: pointer;
 }
 
-button#backButton {
-    width: 100px;
+.icon_color {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+button#backButton{
+    width:100px;
     position: absolute;
     left: 30px;
 }

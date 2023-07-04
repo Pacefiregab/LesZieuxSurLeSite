@@ -71,11 +71,11 @@ class TemplateController extends AbstractController
     {
         $formData = $request->request;
         $data = [
-            "stickyHeader" => $formData->get('stickyHeader'),
-            "reverseRows" => $formData->get('reverseRows'),
-            "specialButtonForTicket" => $formData->get('specialButtonForTicket'),
-            "contactMapFirst" => $formData->get('contactMapFirst'),
-            "changeCheckBoxSelect" => $formData->get('changeCheckBoxSelect'),
+            "stickyHeader" => $formData->getBoolean('stickyHeader'),
+            "reverseRows" => $formData->getBoolean('reverseRows'),
+            "specialButtonForTicket" => $formData->getBoolean('specialButtonForTicket'),
+            "contactMapFirst" => $formData->getBoolean('contactMapFirst'),
+            "changeCheckBoxSelect" => $formData->getBoolean('changeCheckBoxSelect'),
             "whiteColor" => $formData->get('whiteColor'),
             "darkColor" => $formData->get('darkColor'),
             "primaryColor" => $formData->get('primaryColor'),
@@ -99,11 +99,13 @@ class TemplateController extends AbstractController
         return $this->redirectToRoute('templates_index');
     }
 
-    #[Route('/{id}', name: 'templates_show', methods: 'GET')]
-    public function show(Template $template): Response
+    #[Route('/details', name: 'templates_details', methods: 'GET')]
+    public function details(EntityManagerInterface $entityManager): Response
     {
-        return $this->render('templates/show.html.twig', [
-            'template' => $template,
+        $templates = $entityManager->getRepository(Template::class)->findAll();
+
+        return $this->render('template/details.html.twig', [
+            'templates' => $templates,
         ]);
     }
 
@@ -122,8 +124,8 @@ class TemplateController extends AbstractController
     }
 
 
-    #[Route('/{id}/details', name: 'templates_details', methods: 'GET')]
-    public function details(Template $template): JsonResponse
+    #[Route('/api/{id}', name: 'templates_api', methods: 'GET')]
+    public function api(Template $template): JsonResponse
     {
         $sessions = $this->sessionRepository->findBy(['template' => $template]);
         $personas = [];
