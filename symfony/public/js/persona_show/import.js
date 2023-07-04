@@ -1,3 +1,10 @@
-import {index} from "/js/persona_form/index.js";
+import {personaShow} from '/js/persona_show/personaShow.js';
+import {filtre} from "/js/sidebar/filtre.js";
 
-let index = new index();
+let perso = new personaShow(null);
+
+new filtre('/sessions/api/', (data) => {
+    console.log(data)
+    new personaShow(data);
+});
+

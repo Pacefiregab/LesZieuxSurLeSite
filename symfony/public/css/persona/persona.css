@@ -1,41 +1,58 @@
-.persona_statistique{
-    margin: 10px;
-    width: 75% !important;
-}
-.persona_statistique h2{
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 10px;
+.card.persona_statistique{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    justify-content: space-between;
+    padding-left:200px;
+    padding-right:100px;
 }
 
-.persona_statistique p.date_session{
-font-size: 1.2em;
-    font-weight: bold;
-    color: #000;
-    margin-bottom: 10px;
-}
-.persona_statistique .button_hitmap{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+.container_canvas{
+    width:50%;
+    flex-grow: unset !important;
 }
 
 .container_stat_persona p{
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: bold;
     color: #9b9b9b;
     margin-bottom: 10px;
 }
-.container_stat_persona .stat_persona{
+.container_stat_persona{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+    flex-grow: 1;
+}
 
+.persona_statistique{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .container_detail{
+    height:80%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.card-header{
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    flex-direction: column;
+    width: 100%;
+    height: 33%;
     align-items: center;
+    justify-content: flex-start;
+}
+
+.persona_statistique p.date_session{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
 }

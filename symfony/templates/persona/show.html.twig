@@ -1,46 +1,53 @@
 {% extends 'base.html.twig' %}
-
+{% block backButton %}
+    {% include 'backButton.html.twig' %}
+{% endblock %}
 {% block sidebar %}
-   {%include 'sideBar.html.twig' with {
-       'items' : sessions|map(session => {
-           id : session.id,
-           name : session.title
-       })
-   } %}
+    {% include 'sideBar.html.twig' with {
+        'items' : sessions|map(session => {
+            id : session.id,
+            name : session.title
+        })
+    } %}
 {% endblock %}
 
 {% block body %}
 
-<div class="card persona_statistique">
-    <h2>Session 1</h2>
-    <p class="date_session">12/08/2023</p>
-    <div class="container_detail">
-        <div class="button_hitmap">
-            <button class="button" id="button_hitmap">Hitmap</button>
+    <div class="card persona_statistique">
+        <div class="container_detail">
+            <div id="data">
+                <div class="container_stat_persona">
+                    <div class="card-header">
+                        <h2><span id="name_session"></span></h2>
+                        <p class="date_session" ><span id="date_session" ></span></p>
+                    </div>
+                    <div class="stat_persona">
+                        <p >Persona : <span id="name_persona" ></span></p>
+                    </div>
+                    <div class="stat_persona">
+                        <p>Durée de la sessions : <span  id="duree_session" ></span> </p>
+                    </div>
+                    <div class="stat_persona">
+                        <p >Template : <span id="nom_template"></span></p>
+                    </div>
+                    <div class="stat_persona">
+                        <p >Nombre de clique : <span id="nombre_clique" ></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="button_hitmap">
+                <button class="button" id="button_hitmap">Heatmap</button>
+            </div>
         </div>
-        <div class="container_stat_persona">
-            <div class="stat_persona">
-                <p>Persona :</p>
-            </div>
-            <div class="stat_persona">
-                <p>durée de la sessions :</p>
-            </div>
-            <div class="stat_persona">
-                <p>Template :</p>
-            </div>
-            <div class="stat_persona">
-                <p>durée de la session :</p>
-            </div>
-            <div class="stat_persona">
-                <p>nombre de clique :</p>
-            </div>
+        <div class="container_canvas" id="chart">
+            <canvas id="myChart"></canvas>
         </div>
     </div>
 
-</div>
+    </div>
 
 {% endblock %}
 
 {% block javascript %}
-   <script type="module" src="/js/persona_show/import.js"></script>
+<script type="module" src="/js/persona_show/import.js"></script>
 {% endblock %}

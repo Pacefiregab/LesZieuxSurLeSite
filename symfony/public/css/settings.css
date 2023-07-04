@@ -56,13 +56,18 @@ div.element_filtre {
     width: 100%;
     text-align: center;
     justify-content: center;
-    height : 50px;
+    height: 50px;
     display: flex;
 }
 
-div .nom_element{
-    margin-top:12px;
-    margin-bottom:12px;
+div .nom_element {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+div .nom_element {
+    margin-top: 12px;
+    margin-bottom: 12px;
 }
 
 div.element_filtre:hover {
@@ -90,15 +95,41 @@ a.gotoElement {
 
 #sidebar {
     display: flex;
-    height: 100%;
 }
 
 #listElement {
     overflow-y: scroll;
     width: 100%;
-    height:90%;
 }
-div.filtre::-webkit-scrollbar { width: 0 !important }
+
+div.filtre::-webkit-scrollbar {
+    width: 0 !important
+}
+
+
+/* width */
+
+#listElement::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+
+#listElement::-webkit-scrollbar-track {
+    background: var(--color_background);
+    border: var(--border_radius);
+    margin: var(--margin);
+}
+
+#listElement {
+    overflow-y: scroll;
+    width: 100%;
+    height: 90%;
+}
+
+div.filtre::-webkit-scrollbar {
+    width: 0 !important
+}
 
 
 #listElement::-webkit-scrollbar {
@@ -116,7 +147,7 @@ div.filtre::-webkit-scrollbar { width: 0 !important }
     background: var(--color_secondary);
 }
 
-#notHideContent{
+#notHideContent {
     height: auto;
 }
 
@@ -175,8 +206,8 @@ a, a:hover, a:active, a:visited {
     cursor: pointer;
 }
 
-button#backButton{
-    width:100px;
+button#backButton {
+    width: 100px;
     position: absolute;
-    left:30px;
+    left: 30px;
 }

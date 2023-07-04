@@ -15,12 +15,12 @@
 
     <div id="rightColDashboard">
         <div id="dashboardStatsArea">
-            {% include 'dashboard/card.html.twig' with {'id' : 'nombreSessions', 'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'id' : 'nombreInterfaces', 'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'id' : 'tauxReussite', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMin', 'title': "Temps minimum", 'data':'0:39', 'evolution':'-4s', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMoyen', 'title': "Temps moyen", 'data':'1:35', 'evolution':'+6s', 'info': 'sur les 30 derniers jours '} %}
-            {% include 'dashboard/card.html.twig' with {'id' : 'tempsMax', 'title': "Temps maximum", 'data':'1:59', 'evolution':'-8s', 'info': 'pour le personna réussi, sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'nbSessions', 'title': 'Nombre de sessions', 'data':'15', 'evolution':'-3', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'nbtemplates', 'title': "Nombre d'interfaces", 'data':'3', 'evolution':'+1', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'successRate', 'title': "Taux de réussite", 'data':'79%', 'evolution':'-8%', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'minSessions', 'title': "Temps minimum", 'data':'0:39', 'evolution':'-4s', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'avgSessions', 'title': "Temps moyen", 'data':'1:35', 'evolution':'+6s', 'info': 'sur les 30 derniers jours '} %}
+            {% include 'dashboard/card.html.twig' with {'id' : 'maxSessions', 'title': "Temps maximum", 'data':'1:59', 'evolution':'-8s', 'info': 'pour le personna réussi, sur les 30 derniers jours '} %}
         </div>
 
         <button id="details">Details</button>
