@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    
-    if (document.querySelector("[name=heatmap]").value == false) {
+
+    if (document.querySelector("[name=heatmapEye]").value == false) {
         $("#startModal").modal("show");
         $("#startModal").on("hidden.bs.modal", function (e) {
             setFullScreen();
@@ -28,25 +28,34 @@ if (Object.keys(data).length > 0) {
     //Change secondary color
     root.style.setProperty("--secondary-color", secondary_color);
 }
+
+
 //Charge heatmap
-if (document.querySelector("[name=heatmap]").value != false) {
-  setFullScreen();
-    // Obtenez une référence à la div contenant la heatmap
-    var heatmapContainer = document.body;
+const heatMapTypeSelector = document.querySelector("[name=heatMapType]:checked")
+const dataSelector = heatMapTypeSelector ? heatMapTypeSelector.value : "heatmapEye";
+const mapData = document.querySelector(`[name=${dataSelector}]`).value;
+if (mapData != false) {
+    // setFullScreen();
+    let heatmapContainer = document.body;
     heatmapData = {
-        max: 30,
-        data: JSON.parse(document.querySelector("[name=heatmap]").value),
+        max: 30, data: JSON.parse(mapData),
     };
 
-    // Créez une instance de Heatmap.js
-    var heatmapInstance = h337.create({
+    heatmapInstance = h337.create({
         container: heatmapContainer,
     });
-
-    // Configurez vos données de heatmap (vous devrez les fournir selon vos besoins)
-
-    // Ajoutez les données de la heatmap à l'instance de Heatmap.js
     heatmapInstance.setData(heatmapData);
+
+    document.querySelectorAll("[name=heatMapType]").forEach((element) => {
+        element.addEventListener("change", function (e) {
+            let dataSelector = e.target.value;
+            let mapData = document.querySelector(`[name=${dataSelector}]`).value;
+            console.log("Change!");
+            heatmapInstance.setData({
+                max: 30, data: JSON.parse(mapData),
+            });
+        });
+    });
 }
 
 function setFullScreen() {
