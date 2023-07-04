@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Persona;
+use App\Entity\Session;
 use App\Entity\Template;
 use App\Form\TemplateType;
+use App\Repository\SessionRepository;
 use App\Repository\TemplateRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,12 +20,17 @@ class TemplateController extends AbstractController
 {
     private TemplateRepository $templateRepository;
 
-    public function __construct(TemplateRepository $templateRepository)
-    {
+    private SessionRepository $sessionRepository;
+
+    public function __construct(
+        TemplateRepository $templateRepository,
+        SessionRepository $sessionRepository
+    ) {
+        $this->sessionRepository = $sessionRepository;
         $this->templateRepository = $templateRepository;
     }
 
-    #[Route('/', name:'templates_index', methods:'GET')]
+    #[Route('/', name: 'templates_index', methods: 'GET')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $templates = $entityManager->getRepository(Template::class)->findAll();
@@ -33,7 +40,7 @@ class TemplateController extends AbstractController
         ]);
     }
 
-    #[Route('/create', name:'templates_create', methods:['POST'])]
+    #[Route('/create', name: 'templates_create', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $template = new Template();
@@ -59,7 +66,7 @@ class TemplateController extends AbstractController
     }
 
 
-    #[Route('/{id}/edit', name:'templates_edit', methods:['POST'])]
+    #[Route('/{id}/edit', name: 'templates_edit', methods: ['POST'])]
     public function edit(Request $request, Template $template, EntityManagerInterface $entityManager): Response
     {
         $formData = $request->request;
@@ -82,7 +89,7 @@ class TemplateController extends AbstractController
         return $this->redirectToRoute('templates_index');
     }
 
-    #[Route('/', name:'templates_delete', methods:'DELETE')]
+    #[Route('/', name: 'templates_delete', methods: 'DELETE')]
     public function delete(Request $request, Template $template): Response
     {
         if ($this->isCsrfTokenValid('delete' . $template->getId(), $request->request->get('_token'))) {
@@ -92,7 +99,7 @@ class TemplateController extends AbstractController
         return $this->redirectToRoute('templates_index');
     }
 
-    #[Route('/show/{id}', name:'templates_show', methods:'GET')]
+    #[Route('/{id}', name: 'templates_show', methods: 'GET')]
     public function show(Template $template): Response
     {
         return $this->render('template/show.html.twig', [
@@ -111,7 +118,8 @@ class TemplateController extends AbstractController
 
     #[Route('/form')]
     #[Route('/form/{id}', name: 'template_form_get', methods: ['GET'])]
-    public function form(?Template $template): JsonResponse {
+    public function form(?Template $template): JsonResponse
+    {
         $template = $template ?? new Template();
         $html = $this->renderView('template/form.html.twig', [
             'template' => $template,
@@ -120,5 +128,71 @@ class TemplateController extends AbstractController
         return new JsonResponse([
             'html' => $html,
         ]);
+    }
+
+
+    #[Route('/{id}/details', name: 'templates_details', methods: 'GET')]
+    public function details(Template $template): JsonResponse
+    {
+        $sessions = $this->sessionRepository->findBy(['template' => $template]);
+        $personas = [];
+        $personasSessions = [];
+        $statistics = [];
+
+        foreach ($sessions as $session) {
+            $personasSessions[$session->getPersona()->getId()][] = $session;
+            $personas[] = $session->getPersona();
+        }
+
+        foreach ($personas as $persona) {
+            $personaSessions = $personasSessions[$persona->getId()];
+
+            $personaStats = [
+                'name' => $persona->getName(),
+                'sessions' => [
+                    'total' => count($personaSessions),
+                    'isSuccess' => count(array_filter($personaSessions, function ($session) {
+                        return $session->getIsSuccess();
+                    })),
+                    'averageTime' => array_sum(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)) / count($personaSessions),
+                    'minTime' => min(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)),
+                    'maxTime' => max(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)),
+                ],
+            ];
+            $statistics[$persona->getId()] = $personaStats;
+        }
+
+        $templateStatistics = [
+            'nbSessions' => count($sessions),
+            'nbSuccess' => count(array_filter($sessions, function ($session) {
+                return $session->getIsSuccess();
+            })),
+            'averageTime' => array_sum(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)) / count($sessions),
+            'minTime' => min(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)),
+            'maxTime' => max(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)),
+        ];
+
+
+        $template = [
+            'id' => $template->getId(),
+            'name' => $template->getName(),
+            'data' => $template->getData(),
+            'templateStatistics' => $templateStatistics,
+            'personasStatistics' => $statistics,
+        ];
+
+        return new JsonResponse($template);
     }
 }

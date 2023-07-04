@@ -91,41 +91,72 @@ class SessionController extends AbstractController
     public function api(Session $session): JsonResponse
     {
         $sessionsTemplate = $this->sessionRepository->findBy(['template' => $session->getTemplate()]);
-        $sessionTemplateTimes = 0;
-        $sessionTemplateSuccess = 0;
+        $sessionTemplateTimes = [];
+        $sessionTemplateSuccess = [];
+        $clicks = 0;
+        foreach ($session->getTrackings() as $tracking) {
+            if ($tracking->getType() === 'click') {
+                $clicks += count($tracking->getData());
+                continue;
+            }
+        }
+        $templateClicks = 0;
         foreach ($sessionsTemplate as $session) {
-            $sessionTemplateTimes += $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-            $sessionTemplateSuccess += $session->getIsSuccess();
+            $sessionTemplateTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionTemplateSuccess[] = $session->getIsSuccess();
+            foreach ($session->getTrackings() as $tracking) {
+                if ($tracking->getType() === 'click') {
+                    $templateClicks += count($tracking->getData());
+                    continue;
+                }
+            }
         }
 
         $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
-        $sessionPersonaTimes = 0;
-        $sessionPersonaSuccess = 0;
+        $sessionPersonaTimes = [];
+        $sessionPersonaSuccess = [];
+        $personaClicks = 0;
         foreach ($sessionsPersona as $session) {
-            $sessionPersonaTimes += $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-            $sessionPersonaSuccess += $session->getIsSuccess();
+            $sessionPersonaTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $sessionPersonaSuccess[] = $session->getIsSuccess();
+            foreach ($session->getTrackings() as $tracking) {
+                if ($tracking->getType() === 'click') {
+                    $personaClicks += count($tracking->getData());
+                    continue;
+                }
+            }
         }
 
         $data = [
+            'graph' => [
+                'avgTime' => [23,34,45],
+                'avgThis' => [13,44,55],
+            ],
             'sessionDate' => $session->getDateStart()->format('d/m/Y'),
             'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
+            'sessionName' => $session->getTitle(),
             'isSuccess' => $session->getIsSuccess(),
+            'sessionName' => $session->getTitle(),
+            'graph'  => [$clicks, $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(), 0],
             'template' => [
                 'name' => $session->getTemplate()->getName(),
-                'avgTime' => count($sessionsTemplate) > 0 ? $sessionTemplateTimes / count($sessionsTemplate) * 100 : 0,
+                'avgTime' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) * 100 : 0,
                 'maxTime' => max($sessionTemplateTimes),
                 'minTime' => min($sessionTemplateTimes),
-                'successRate' => count($sessionsTemplate) > 0 ? $sessionTemplateSuccess / count($sessionsTemplate) * 100 : 0,
+                'successRate' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateSuccess) / count($sessionsTemplate) * 100 : 0,
                 'count' => count($sessionsTemplate),
+                'graph' => [$templateClicks, count($sessionsTemplate)  > 0 ? array_sum($sessionsTemplate) / count($sessionsTemplate) * 100 : 0, 0],
+                'clicks' => $templateClicks,
             ],
             'persona' => [
                 'name' => $session->getPersona()->getName(),
-                'avgTime' => count($sessionsPersona)  > 0 ? $sessionPersonaTimes / count($sessionsPersona) * 100 : 0,
+                'avgTime' => count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) * 100 : 0,
                 'maxTime' => max($sessionPersonaTimes),
                 'minTime' => min($sessionPersonaTimes),
-                'successRate' => count($sessionsPersona) > 0 ? $sessionPersonaSuccess / count($sessionsPersona) * 100 : 0,
+                'successRate' => count($sessionsPersona) > 0 ? array_sum($sessionPersonaSuccess) / count($sessionsPersona) * 100 : 0,
                 'count' => count($sessionsPersona),
-            ]
+                'graph' => [$personaClicks, count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) * 100 : 0, 0],
+            ],
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
