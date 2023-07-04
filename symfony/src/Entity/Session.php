@@ -38,6 +38,9 @@ class Session
     #[ORM\Column(nullable: true)]
     private ?bool $isSuccess = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $pageHeight = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +126,18 @@ class Session
     public function setIsSuccess($isSuccess)
     {
         $this->isSuccess = $isSuccess;
+
+        return $this;
+    }
+
+    public function getPageHeight(): ?int
+    {
+        return $this->pageHeight;
+    }
+
+    public function setPageHeight(?int $pageHeight): static
+    {
+        $this->pageHeight = $pageHeight;
 
         return $this;
     }
