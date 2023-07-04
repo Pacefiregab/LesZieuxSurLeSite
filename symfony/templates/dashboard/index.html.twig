@@ -3,6 +3,10 @@
 
 {% block title %}My cool blog posts{% endblock %}
 
+{% block backButton %}
+    {% include 'launchButton.html.twig' %}
+{% endblock %}
+
 {% block sidebar %}
     {% include 'sideBar.html.twig' with {'items' : personas} %}
 {% endblock %}
