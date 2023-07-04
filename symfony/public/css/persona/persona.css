@@ -62,8 +62,8 @@
 }
 .button_hitmap{
     position: absolute;
-    bottom: 2%;
-    left: -14%;
+    bottom: 4%;
+    left: 9%;
     display: flex;
     margin: 0 15%;
     /* width: 100%; */
