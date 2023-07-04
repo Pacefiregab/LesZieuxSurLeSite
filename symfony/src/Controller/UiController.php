@@ -41,6 +41,7 @@ class UiController extends AbstractController
     {
         $data = $session->getTemplate()->getData();
         $data ["stickyHeader"] = false;
+
         $tracking = $session->getTrackings()
             ->filter(function ($tracking) {
                 return $tracking->getType() === Tracking::TYPE_EYE;

@@ -38,12 +38,4 @@ class PersonaRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    public function getAll(){
-        return $this->createQueryBuilder('p')
-            ->orderBy('p.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 }

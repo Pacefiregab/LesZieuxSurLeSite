@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelector('.side-bar .active')?.classList.remove('active');
             this.parentNode.classList.add('active');
             rest.call(
-                id?'/personas/form/' + id :'/personas/form/0',
+                '/templates/form/' + id || '',
                 'GET',
                 null,
                 (data) => {
-                    document.querySelector('.form-persona').innerHTML = data.html;
+                    document.querySelector('.form-template').innerHTML = data.html;
                 }
             );
         });

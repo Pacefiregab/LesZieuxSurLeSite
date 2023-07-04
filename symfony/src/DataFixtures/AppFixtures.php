@@ -61,6 +61,7 @@ class AppFixtures extends Fixture
             $persona->setName($this->faker->name());
             $persona->setFlag($this->faker->randomElement(Persona::FLAGS));
             $persona->setLibelle(Persona::FLAGS_LIBELLE[$persona->getFlag()]);
+            $persona->setDuration($this->faker->numberBetween(0, 120));
             $this->personaRepository->save($persona, true);
         }
     }
@@ -78,10 +79,10 @@ class AppFixtures extends Fixture
                 "specialButtonForTicket" => $this->faker->boolean(),
                 "contactMapFirst" => $this->faker->boolean(),
                 "changeCheckBoxSelect" => $this->faker->boolean(),
-                "whiteColor" => $this->faker->colorName(),
-                "darkColor" => $this->faker->colorName(),
-                "primaryColor" => $this->faker->colorName(),
-                "secondaryColor" => $this->faker->colorName()
+                "whiteColor" => $this->faker->hexColor(),
+                "darkColor" => $this->faker->hexColor(),
+                "primaryColor" => $this->faker->hexColor(),
+                "secondaryColor" => $this->faker->hexColor()
             ));
             $this->templateRepository->save($template, true);
         }
@@ -92,8 +93,8 @@ class AppFixtures extends Fixture
     {
         //$faker->dateTimeBetween(new DateTime(), '+2 minutes');
 
-        $templates = $this->templateRepository->getAll();
-        $personas = $this->personaRepository->getAll();
+        $templates = $this->templateRepository->findAll();
+        $personas = $this->personaRepository->findAll();
 
 
         for ($i = 0; $i < 10; $i++) {
@@ -111,11 +112,12 @@ class AppFixtures extends Fixture
     //tracking
     public function trackingFixtures(ObjectManager $manager): void
     {
-        $sessions = $this->sessionRepository->getAll();
+        $sessions = $this->sessionRepository->findAll();
         for ($i = 0; $i < 10; $i++) {
             $tracking1 = new Tracking();
             $tracking2 = new Tracking();
             $tracking3 = new Tracking();
+            $tracking4 = new Tracking();
 
             $tracking1->setSession($sessions[$i]);
             $tracking1->setType(Tracking::TYPE_EYE);
@@ -183,9 +185,30 @@ class AppFixtures extends Fixture
             }
             $tracking3->setData($data3);
 
+            $tracking4->setSession($tracking1->getSession());
+            $tracking4->setType(Tracking::TYPE_MOUSE);
+            $Y3 = ($this->faker->numberBetween(0, 1080));
+            $data4 = [];
+            for ($x = 0; $x < 50; $x++) {
+                $data4[] = array(
+                    "x" => 0,
+                    "y" => $this->faker->numberBetween($Y3 - 10, $Y3 + 10),
+                    "time" => $this->faker->numberBetween(0, 100000)
+                );
+            }
+            for ($x = 0; $x < 450; $x++) {
+                $data4[] = array(
+                    "x" => 0,
+                    "y" => $this->faker->numberBetween(0, 1080),
+                    "time" => $this->faker->numberBetween(0, 100000)
+                );
+            }
+            $tracking4->setData($data4);
+
             $this->trackingRepository->save($tracking1, true);
             $this->trackingRepository->save($tracking2, true);
             $this->trackingRepository->save($tracking3, true);
+            $this->trackingRepository->save($tracking4, true);
         }
     }
 }

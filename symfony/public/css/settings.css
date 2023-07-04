@@ -39,47 +39,87 @@ div.card {
     height: max(150px, auto);
 }
 
-#content h1{
-margin : 15px 0 25px 0 ;}
+#content h1 {
+    margin: 15px 0 25px 0;
+}
 
-div.filtre{
+div.filtre {
     justify-content: normal;
     justify-content: start;
-    overflow: hidden;
+    overflow-y: scroll;
     width: 20%;
     position: relative;
 }
+
 div.element_filtre {
     border-radius: var(--border_radius);
     width: 100%;
     text-align: center;
     justify-content: center;
     height : 50px;
+    display: flex;
 }
 
 div .nom_element{
     margin-top:12px;
+    margin-bottom:12px;
 }
-div.element_filtre:hover{
+
+div.element_filtre:hover {
     cursor: pointer;
 }
-div.element_filtre.active{
+
+div.element_filtre.active {
     background-color: var(--color_primary);
 }
 
-a.gotoElement{
+a.gotoElement {
     border-radius: var(--border_radius);
     background-color: var(--color_background);
-    width:40px;
-    height:40px;
+    width: 40px;
+    height: 40px;
     padding-top: 6px;
     text-align: center;
     font-size: 20px;
     font-weight: bold;
     position: absolute;
-    bottom:10px;
+    bottom: 10px;
     z-index: 99;
+    margin: var(--margin);
 }
+
+#sidebar {
+    display: flex;
+    height: 100%;
+}
+
+#listElement {
+    overflow-y: scroll;
+    width: 100%;
+    height:90%;
+}
+div.filtre::-webkit-scrollbar { width: 0 !important }
+
+
+#listElement::-webkit-scrollbar {
+    width: 5px;
+}
+
+#listElement::-webkit-scrollbar-track {
+    background: var(--color_background);
+    border: var(--border_radius);
+}
+
+/* Handle */
+
+#listElement::-webkit-scrollbar-thumb {
+    background: var(--color_secondary);
+}
+
+#notHideContent{
+    height: auto;
+}
+
 
 button {
     border: none;
@@ -90,5 +130,53 @@ button {
     font-size: 1.2em;
     font-weight: lighter;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
 
+button :hover {
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+input[type="checkbox"]:not(:checked) {
+    transform: scale(1);
+}
+
+input[type="checkbox"]:checked {
+    transform: scale(1.2);
+}
+
+#formTemplate input[type="color"] {
+    width: 60px;
+    height: 40px;
+    transition: background-color 0.3s ease;
+    background-color: #ffffff;
+    border: none;
+}
+
+#formTemplate input[type="text"] {
+    width: 100%;
+    height: 40px;
+    transition: background-color 0.3s ease;
+    background-color: #dadada;
+    border: none;
+    border-radius: var(--border_radius);
+    padding: 4px 0px 4px 15px;
+}
+
+a, a:hover, a:active, a:visited {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+button#backButton{
+    width:100px;
+    position: absolute;
+    left:30px;
+}

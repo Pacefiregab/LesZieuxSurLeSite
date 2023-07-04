@@ -21,7 +21,7 @@ class Template
     #[ORM\Column(type: 'json', nullable: false)]
     private array $data = [];
 
-    #[ORM\OneToMany(mappedBy: 'template', targetEntity: session::class)]
+    #[ORM\OneToMany(mappedBy: 'template', targetEntity: Session::class)]
     private Collection $sessions;
 
     public function __construct()
