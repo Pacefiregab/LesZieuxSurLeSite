@@ -15,6 +15,12 @@ class Tracking
     public const TYPE_EYE = 'eye';
     public const TYPE_MOUSE = 'mouse';
 
+    public const TYPES = [
+        self::TYPE_CLICK => "heatmapDataClick",
+        self::TYPE_SCROLL => "heatmapDataScroll",
+        self::TYPE_EYE => "heatmapDataEye",
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

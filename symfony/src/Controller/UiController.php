@@ -42,18 +42,16 @@ class UiController extends AbstractController
         $data = $session->getTemplate()->getData();
         $data ["stickyHeader"] = false;
 
-        $tracking = $session->getTrackings()
-            ->filter(function ($tracking) {
-                return $tracking->getType() === Tracking::TYPE_EYE;
-            })[0]->getData();
-
-        $heatMapData = [];
-        foreach ($tracking as $pos) {
-            $heatMapData[] = [
-                'x' => $pos['x'] ?? $pos['X'],
-                'y' => $pos['y'] ?? $pos['Y'],
-                'value' => 1,
-            ];
+        foreach ($session->getTrackings() as $tracking) {
+            $varType = Tracking::TYPES[$tracking->getType()];
+            $$varType = $$varType ?? [];
+            foreach ($tracking->getData() as $pos) {
+                $$varType[] = [
+                    'x' => $pos['x'] ?? $pos['X'],
+                    'y' => $pos['y'] ?? $pos['Y'],
+                    'value' => 1,
+                ];
+            }
         }
 
         return $this->render('ui/index.html.twig', [
@@ -61,7 +59,9 @@ class UiController extends AbstractController
             'persona' => $session->getPersona(),
             'session' => $session,
             'heatmap' => true,
-            'heatmapData' => $heatMapData
+            'heatmapDataEye' => $heatmapDataEye ?? [],
+            'heatmapDataClick' => $heatmapDataClick ?? [],
+            'heatmapDataScroll' => $heatmapDataScroll ?? [],
         ]);
     }
 }

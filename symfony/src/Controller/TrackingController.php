@@ -56,6 +56,7 @@ class TrackingController extends AbstractController
         $session->setDateStart(new DateTime(date("Y-m-d H:i:s", $data['startDate'])));
         $session->setDateEnd(new DateTime(date("Y-m-d H:i:s", $data['endDate'])));
         $session->setIsSuccess($data['isSuccess']);
+        $session->setPageHeight($data['windowHeight']);
         $this->sessionRepository->save($session, true);
 
         //traitement des données eye tracker
@@ -82,7 +83,8 @@ class TrackingController extends AbstractController
 
         return new JsonResponse([
             'status' => 'ok',
-            'message' => 'tracking created'
+            'message' => 'tracking created',
+            'redirect' => $this->generateUrl('app_ui_heatmap', ['session' => $session->getId()]),
         ]);
     }
 
