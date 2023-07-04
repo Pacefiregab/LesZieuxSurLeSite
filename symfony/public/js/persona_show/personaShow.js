@@ -38,7 +38,7 @@ export class personaShow{
                 ],
                 datasets: [{
                     label: 'moyenne des sessions',
-                    data: this.data.graph.avgTime,
+                    data: this.data.persona.graph,
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
@@ -48,7 +48,7 @@ export class personaShow{
                     pointHoverBorderColor: 'rgb(255, 99, 132)'
                 }, {
                     label: 'la session sélectionnée',
-                    data: this.data.graph.avgThis,
+                    data: this.data.graph,
                     fill: true,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgb(54, 162, 235)',
@@ -66,7 +66,7 @@ export class personaShow{
             document.querySelector('#name_session').innerHTML  = this.data.sessionName;
             document.querySelector('#duree_session').innerHTML = this.data.sessionTime;
             document.querySelector('#nom_template').innerHTML  = this.data.template.name;
-            document.querySelector('#nombre_clique').innerHTML = this.data.template.count;
+            document.querySelector('#nombre_clique').innerHTML = this.data.graph[0];
             document.querySelector('#button_hitmap').addEventListener('click', () => {
                 window.location.href = `/ui/${id_session}/heatmap`
             });
