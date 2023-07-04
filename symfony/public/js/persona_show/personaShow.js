@@ -30,14 +30,14 @@ export class personaShow{
 
         console.log(this.stat_persona);
         if (this.data != null) {
-            const donnee= {
+            const donnee = {
                 labels: [
                     'Nombre de clique',
                     'Durée',
                     'Taux de scroll',
                 ],
                 datasets: [{
-                    label: 'temps moyen de toutes les sessions (s)',
+                    label: 'moyenne des sessions',
                     data: this.data.graph.avgTime,
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -47,7 +47,7 @@ export class personaShow{
                     pointHoverBackgroundColor: '#fff',
                     pointHoverBorderColor: 'rgb(255, 99, 132)'
                 }, {
-                    label: 'temps de la session (s)',
+                    label: 'la session sélectionnée',
                     data: this.data.graph.avgThis,
                     fill: true,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
@@ -58,7 +58,8 @@ export class personaShow{
                     pointHoverBorderColor: 'rgb(54, 162, 235)'
                 }]
             };
-
+            let id_session = document.querySelector('.persona.element_filtre.active').childNodes[1].getAttribute('data-bs-target');
+            console.log(id_session);
             this.chartRadar.buildChart(donnee);
             document.querySelector('#date_session').innerHTML = this.data.sessionDate
             document.querySelector('#name_persona').innerHTML = document.querySelector('#name_persona').innerHTML + this.data.persona.name;
@@ -66,6 +67,9 @@ export class personaShow{
             document.querySelector('#duree_session').innerHTML = document.querySelector('#duree_session').innerHTML + this.data.sessionTime;
             document.querySelector('#nom_template').innerHTML = document.querySelector('#nom_template').innerHTML + this.data.template.name;
             document.querySelector('#nombre_clique').innerHTML = document.querySelector('#nombre_clique').innerHTML + this.data.template.count;
+            document.querySelector('#button_hitmap').addEventListener('click', () => {
+                window.location.href = `/ui/${id_session}/heatmap`
+            });
         }
 
     }
