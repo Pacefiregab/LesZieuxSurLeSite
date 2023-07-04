@@ -1,0 +1,48 @@
+#formTemplate {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.templateFields {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.templateFields #fields {
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+#containerCheckbox , #containerColor {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#containerCheckbox .checkboxColumn {
+    width: 50%;
+}
+
+#containerColor .colorColumn {
+    width: 50%;
+}
+
+#formTemplate .card {
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 35px;
+}
+
+#formTemplate input[type="text"] {
+    width: 70%;
+}
