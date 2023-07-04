@@ -38,8 +38,6 @@ class Persona
     public const FLAG_INSTAGRAM = 'instagram';
     public const FLAG_FREESYLE_ARTIST = 'freestyle_artist';
 
-
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
