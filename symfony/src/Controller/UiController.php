@@ -49,7 +49,7 @@ class UiController extends AbstractController
                 $$varType[] = [
                     'x' => $pos['x'] ?? $pos['X'],
                     'y' => $pos['y'] ?? $pos['Y'],
-                    'value' => 1,
+                    'value' => $tracking->getType() === Tracking::TYPE_CLICK ? 20 : ($tracking->getType() === Tracking::TYPE_MOUSE ? 3 : 1),
                 ];
             }
         }
@@ -62,6 +62,7 @@ class UiController extends AbstractController
             'heatmapDataEye' => $heatmapDataEye ?? [],
             'heatmapDataClick' => $heatmapDataClick ?? [],
             'heatmapDataScroll' => $heatmapDataScroll ?? [],
+            'heatmapDataMouse' => $heatmapDataMouse ?? [],
         ]);
     }
 }

@@ -80,6 +80,13 @@ class TrackingController extends AbstractController
             ->setData(json_decode($data['clickRecord']));
         $this->trackingRepository->save($clickTracking, true);
 
+        //traitement des données de la souris
+        $mouseTracking = new Tracking();
+        $mouseTracking->setSession($session)
+            ->setType(Tracking::TYPE_MOUSE)
+            ->setData(json_decode($data['mouseRecord']));
+        $this->trackingRepository->save($mouseTracking, true);
+
 
         return new JsonResponse([
             'status' => 'ok',

@@ -106,7 +106,7 @@ function initEventCapture() {
 function startMouseRecord(){
     window.addEventListener('mousemove', (event) => {
         mouseRecord.push({
-            x: event.clientX, y: event.clientY, time: Date.now()
+            x: event.clientX, y: event.clientY + scrollPosition, time: Date.now()
         })
     });
 }
