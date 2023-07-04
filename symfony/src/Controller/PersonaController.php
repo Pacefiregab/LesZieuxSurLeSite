@@ -6,7 +6,6 @@ use App\Entity\Persona;
 use App\Form\PersonaType;
 use App\Repository\PersonaRepository;
 use App\Repository\SessionRepository;
-use mysql_xdevapi\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -101,13 +100,14 @@ class PersonaController extends AbstractController
     {
         $successRate = 0;
         $templates = [];
+        $uniqTemplates = [];
         $sessionsTimes = [];
 
         $sessions = $persona->getSessions();
         foreach ($sessions as $session) {
             $successRate+= $session->getIsSuccess();
-
             $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $uniqTemplates[$session->getTemplate()->getId()] = $session->getTemplate()->getName();
 
             //maps to the template name the session time
             $templates['#' . $session->getId() . ' - ' . $session->getTemplate()->getName()] = $sessionTime;
@@ -115,7 +115,7 @@ class PersonaController extends AbstractController
             $sessionsTimes[] = $sessionTime;
         }
 
-        $templatesNb = count($templates);
+        $templatesNb = count($uniqTemplates);
         if ($sessions->count() > 0) {
             $successRate = $successRate / $sessions->count() * 100;
         }
