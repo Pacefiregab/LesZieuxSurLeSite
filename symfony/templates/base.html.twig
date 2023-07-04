@@ -9,7 +9,10 @@
     <body>
         <header>
             {% block backButton %}{% endblock %}
-            <h1>Les zyeux sur le site</h1>
+            <a href="{{ path('dashboard') }}">
+                <h1>Les zyeux sur le site</h1>
+            </a>
+
         </header>
         <div id="dashboardContent">
             {% block sidebar %}{% endblock %}
