@@ -49,7 +49,7 @@ class UiController extends AbstractController
                 $$varType[] = [
                     'x' => $pos['x'] ?? $pos['X'],
                     'y' => $pos['y'] ?? $pos['Y'],
-                    'value' => $tracking->getType() === Tracking::TYPE_CLICK ? 30 : 1,
+                    'value' => $tracking->getType() === Tracking::TYPE_CLICK ? 20 : ($tracking->getType() === Tracking::TYPE_MOUSE ? 3 : 1),
                 ];
             }
         }
