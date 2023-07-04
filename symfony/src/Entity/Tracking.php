@@ -15,9 +15,9 @@ class Tracking
     public const TYPE_EYE = 'eye';
 
     public const TYPES = [
-        "heatmapDataClick" => self::TYPE_CLICK,
-        "heatmapDataScroll" => self::TYPE_SCROLL,
-        "heatmapDataEye" => self::TYPE_EYE,
+        self::TYPE_CLICK => "heatmapDataClick",
+        self::TYPE_SCROLL => "heatmapDataScroll",
+        self::TYPE_EYE => "heatmapDataEye",
     ];
 
     #[ORM\Id]

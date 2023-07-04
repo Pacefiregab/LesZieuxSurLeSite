@@ -42,18 +42,11 @@ class UiController extends AbstractController
         $data = $session->getTemplate()->getData();
         $data ["stickyHeader"] = false;
 
-        foreach (Tracking::TYPES as $var => $type) {
-            $tracking = $session
-                ->getTrackings()
-                ->filter(function ($tracking) use ($type) {
-                    return $tracking->getType() === $type;
-                })
-                ->first()
-                ->getData();
-
-            $$var = [];
-            foreach ($tracking as $pos) {
-                $$var [] = [
+        foreach ($session->getTrackings() as $tracking) {
+            $varType = Tracking::TYPES[$tracking->getType()];
+            $$varType = $$varType ?? [];
+            foreach ($tracking->getData() as $pos) {
+                $$varType[] = [
                     'x' => $pos['x'] ?? $pos['X'],
                     'y' => $pos['y'] ?? $pos['Y'],
                     'value' => 1,

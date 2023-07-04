@@ -50,7 +50,7 @@ if (mapData != false) {
         element.addEventListener("change", function (e) {
             let dataSelector = e.target.value;
             let mapData = document.querySelector(`[name=${dataSelector}]`).value;
-            console.log("Change!");
+            console.log(mapData);
             heatmapInstance.setData({
                 max: 30, data: JSON.parse(mapData),
             });
