@@ -798,17 +798,22 @@
 
             {% set heatmapDataEyeData = heatmapDataEye is defined ? (heatmapDataEye|json_encode()) : false %}
             {% set heatmapDataClickData = heatmapDataClick is defined ? (heatmapDataClick|json_encode()) : false %}
+            {% set heatmapDataMouseData = heatmapDataMouse is defined ? (heatmapDataMouse|json_encode()) : false %}
 
-            {%  if heatmapDataClickData and heatmapDataEyeData %}
+            {%  if heatmapDataClickData and heatmapDataEyeData and heatmapDataMouseData%}
                 <div class="fixed-top">
-                    <div>
-                        <label for="type">Click</label>
-                        <input type="radio" value="heatmapEye" name="heatMapType" checked>
-                    </div>
-                    <div>
-                        <label for="type">Vision</label>
-                        <input type="radio" value="heatmapClick" name="heatMapType">
-                    </div>
+                        <div>
+                            <label for="type">Click</label>
+                            <input type="radio" value="heatmapEye" name="heatMapType" checked>
+                        </div>
+                        <div>
+                            <label for="type">Vision</label>
+                            <input type="radio" value="heatmapClick" name="heatMapType">
+                        </div>
+                        <div>
+                            <label for="type">Souris</label>
+                            <input type="radio" value="heatmapMouse" name="heatMapType">
+                        </div>
                 </div>
             {% endif %}
 		</main>
@@ -821,6 +826,7 @@
 		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
 		<input type="hidden" name="heatmapEye" value="{{ heatmapDataEyeData }}">
 		<input type="hidden" name="heatmapClick" value="{{ heatmapDataClickData }}">
+        <input type="hidden" name="heatmapMouse" value="{{ heatmapDataMouseData }}">
 		<input type="hidden" name="session_id" value="{{ (session_id??false) }}">
 
 		<!-- JAVASCRIPT FILES -->

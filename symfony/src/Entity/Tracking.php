@@ -19,6 +19,7 @@ class Tracking
         self::TYPE_CLICK => "heatmapDataClick",
         self::TYPE_SCROLL => "heatmapDataScroll",
         self::TYPE_EYE => "heatmapDataEye",
+        self::TYPE_MOUSE => "heatmapDataMouse",
     ];
 
     #[ORM\Id]
