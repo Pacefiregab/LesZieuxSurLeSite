@@ -121,11 +121,6 @@ div.filtre::-webkit-scrollbar {
     margin: var(--margin);
 }
 
-#sidebar {
-    display: flex;
-    height: 100%;
-}
-
 #listElement {
     overflow-y: scroll;
     width: 100%;
