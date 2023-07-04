@@ -78,10 +78,10 @@ class AppFixtures extends Fixture
                 "specialButtonForTicket" => $this->faker->boolean(),
                 "contactMapFirst" => $this->faker->boolean(),
                 "changeCheckBoxSelect" => $this->faker->boolean(),
-                "whiteColor" => $this->faker->colorName(),
-                "darkColor" => $this->faker->colorName(),
-                "primaryColor" => $this->faker->colorName(),
-                "secondaryColor" => $this->faker->colorName()
+                "whiteColor" => $this->faker->hexColor(),
+                "darkColor" => $this->faker->hexColor(),
+                "primaryColor" => $this->faker->hexColor(),
+                "secondaryColor" => $this->faker->hexColor()
             ));
             $this->templateRepository->save($template, true);
         }
