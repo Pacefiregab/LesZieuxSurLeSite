@@ -93,17 +93,38 @@ class SessionController extends AbstractController
         $sessionsTemplate = $this->sessionRepository->findBy(['template' => $session->getTemplate()]);
         $sessionTemplateTimes = [];
         $sessionTemplateSuccess = [];
+        $clicks = 0;
+        foreach ($session->getTrackings() as $tracking) {
+            if ($tracking->getType() === 'click') {
+                $clicks += count($tracking->getData());
+                continue;
+            }
+        }
+        $templateClicks = 0;
         foreach ($sessionsTemplate as $session) {
             $sessionTemplateTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
             $sessionTemplateSuccess[] = $session->getIsSuccess();
+            foreach ($session->getTrackings() as $tracking) {
+                if ($tracking->getType() === 'click') {
+                    $templateClicks += count($tracking->getData());
+                    continue;
+                }
+            }
         }
 
         $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
         $sessionPersonaTimes = [];
         $sessionPersonaSuccess = [];
+        $personaClicks = 0;
         foreach ($sessionsPersona as $session) {
             $sessionPersonaTimes[] = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
             $sessionPersonaSuccess[] = $session->getIsSuccess();
+            foreach ($session->getTrackings() as $tracking) {
+                if ($tracking->getType() === 'click') {
+                    $personaClicks += count($tracking->getData());
+                    continue;
+                }
+            }
         }
 
         $data = [
@@ -115,6 +136,8 @@ class SessionController extends AbstractController
             'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
             'sessionName' => $session->getTitle(),
             'isSuccess' => $session->getIsSuccess(),
+            'sessionName' => $session->getTitle(),
+            'graph'  => [$clicks, $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(), 0],
             'template' => [
                 'name' => $session->getTemplate()->getName(),
                 'avgTime' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) * 100 : 0,
@@ -122,6 +145,8 @@ class SessionController extends AbstractController
                 'minTime' => min($sessionTemplateTimes),
                 'successRate' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateSuccess) / count($sessionsTemplate) * 100 : 0,
                 'count' => count($sessionsTemplate),
+                'graph' => [$templateClicks, count($sessionsTemplate)  > 0 ? array_sum($sessionsTemplate) / count($sessionsTemplate) * 100 : 0, 0],
+                'clicks' => $templateClicks,
             ],
             'persona' => [
                 'name' => $session->getPersona()->getName(),
@@ -130,7 +155,8 @@ class SessionController extends AbstractController
                 'minTime' => min($sessionPersonaTimes),
                 'successRate' => count($sessionsPersona) > 0 ? array_sum($sessionPersonaSuccess) / count($sessionsPersona) * 100 : 0,
                 'count' => count($sessionsPersona),
-            ]
+                'graph' => [$personaClicks, count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) * 100 : 0, 0],
+            ],
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
