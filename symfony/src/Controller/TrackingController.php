@@ -46,7 +46,7 @@ class TrackingController extends AbstractController
     }
 
     #[Route('/create', name: 'trackings_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $data = $request->request->all();
 
@@ -88,11 +88,7 @@ class TrackingController extends AbstractController
         $this->trackingRepository->save($mouseTracking, true);
 
 
-        return new JsonResponse([
-            'status' => 'ok',
-            'message' => 'tracking created',
-            'redirect' => $this->generateUrl('personas_show_sessions', ['id' => $session->getId()]),
-        ]);
+        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getId()]);
     }
 
     #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]
