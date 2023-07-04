@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
+{% block sidebar %}
+    {% include 'sideBar.html.twig' with {
+        'items' : templates|map(template => {
+            'name' : template.name,
+            'id' : template.id,
+        })
+    } %}
+{% endblock %}
 
 {% block body %}
-    test
+    <div id="formTemplate" class="form-template">
+        {% include 'template/form.html.twig' with {
+            template : templates|first
+        } %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="module" src="/js/template/index.js"></script>
 {% endblock %}
