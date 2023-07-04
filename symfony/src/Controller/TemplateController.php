@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;#
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/templates')]
 class TemplateController extends AbstractController
@@ -97,40 +97,52 @@ class TemplateController extends AbstractController
     {
         $sessions = $this->sessionRepository->findBy(['template' => $template]);
         $personas = [];
+        $personasSessions = [];
         $statistics = [];
 
         foreach ($sessions as $session) {
-            $personas[$session->getPersona()->getId()][] = $session;
+            $personasSessions[$session->getPersona()->getId()][] = $session;
+            $personas[] = $session->getPersona();
         }
 
         foreach ($personas as $persona) {
-            $statistics[$persona->getPersona()->getId()] = [
-                'id' => $persona->getPersona()->getId(),
-                'name' => $persona->getPersona()->getName(),
+            $personaSessions = $personasSessions[$persona->getId()];
+
+            $personaStats = [
+                'name' => $persona->getName(),
                 'sessions' => [
-                    'total' => $personas[$persona->getPersona()->getId()]/*
-                    'isSuccess' => $personas[$persona->getPersona()->getId()]->filter(function ($session) {
-                        return $session->getIsSucces();
-                    }),
-                    'averageTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
-                        return $session->getDuration();
-                    })->average(),
-                    'minTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
-                        return $session->getDuration();
-                    })->min(),
-                    'maxTime' => $personas[$persona->getPersona()->getId()]->map(function ($session) {
-                        return $session->getDuration();
-                    })->max(), */
+                    'total' => count($personaSessions),
+                    'isSuccess' => count(array_filter($personaSessions, function ($session) {
+                        return $session->getIsSuccess();
+                    })),
+                    'averageTime' => array_sum(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)) / count($personaSessions),
+                    'minTime' => min(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)),
+                    'maxTime' => max(array_map(function ($session) {
+                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                    }, $personaSessions)),
                 ],
             ];
+            $statistics[$persona->getId()] = $personaStats;
         }
 
-        dd($personas, $statistics);
         $templateStatistics = [
-            'id' => $template->getId(),
-            'name' => $template->getName(),
-            'data' => $template->getData(),
-            'personas' => [],
+            'nbSessions' => count($sessions),
+            'nbSuccess' => count(array_filter($sessions, function ($session) {
+                return $session->getIsSuccess();
+            })),
+            'averageTime' => array_sum(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)) / count($sessions),
+            'minTime' => min(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)),
+            'maxTime' => max(array_map(function ($session) {
+                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }, $sessions)),
         ];
 
 
@@ -138,8 +150,8 @@ class TemplateController extends AbstractController
             'id' => $template->getId(),
             'name' => $template->getName(),
             'data' => $template->getData(),
-            'personas' => $personas,
-            'statistics' => $templateStatistics,
+            'templateStatistics' => $templateStatistics,
+            'personasStatistics' => $statistics,
         ];
 
         return new JsonResponse($template);
