@@ -53,6 +53,7 @@ class Persona
     private ?string $flag = null;
 
     #[ORM\OneToMany(mappedBy: 'persona', targetEntity: Session::class, orphanRemoval: true)]
+    #[ORM\OrderBy(['id' => 'DESC'])]
     private Collection $sessions;
 
     #[ORM\Column(nullable: true)]

@@ -84,7 +84,7 @@ class TrackingController extends AbstractController
         return new JsonResponse([
             'status' => 'ok',
             'message' => 'tracking created',
-            'redirect' => $this->generateUrl('app_ui_heatmap', ['session' => $session->getId()]),
+            'redirect' => $this->generateUrl('personas_show_sessions', ['id' => $session->getId()]),
         ]);
     }
 

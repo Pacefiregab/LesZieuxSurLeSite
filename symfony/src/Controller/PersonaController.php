@@ -152,6 +152,4 @@ class PersonaController extends AbstractController
             'sessions' => $sessions
         ]);
     }
-
-
 }
