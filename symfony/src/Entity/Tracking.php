@@ -13,6 +13,7 @@ class Tracking
     public const TYPE_CLICK = 'click';
     public const TYPE_SCROLL = 'scroll';
     public const TYPE_EYE = 'eye';
+    public const TYPE_MOUSE = 'mouse';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
