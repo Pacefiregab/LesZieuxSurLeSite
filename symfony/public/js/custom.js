@@ -45,6 +45,7 @@ let isSuccess = false;
 let eyeRecord = []
 let clickRecord = []
 let scrollRecord = []
+let mouseRecord = []
 
 let sreenWidth = 1920
 let screenHeight = 1080
@@ -62,7 +63,8 @@ function initEventCapture() {
     ws.onopen = () => {
         ws.send('startGazePoint');
         startDate = Date.now()/1000;
-        setTimeout(() => sendRecord(ws), 120000)
+        startMouseRecord();
+        setTimeout(() => sendRecord(ws), 120000);
     }
 
     ws.onmessage = (m) => treatMessage(m);
@@ -73,6 +75,7 @@ function initEventCapture() {
         eyeRecord = []
         clickRecord = []
         scrollRecord = []
+        mouseRecord = []
         isSuccess = false
     }
 
@@ -95,6 +98,14 @@ function initEventCapture() {
         scrollPosition = window.scrollY
         scrollRecord.push({
             Y: scrollPosition, X: 0, time: event.timeStamp,
+        })
+    });
+}
+
+function startMouseRecord(){
+    window.addEventListener('mousemove', (event) => {
+        mouseRecord.push({
+            x: event.clientX, y: event.clientY, time: Date.now()
         })
     });
 }
@@ -123,6 +134,7 @@ function sendRecord(ws) {
             eyeRecord: JSON.stringify(eyeRecord),
             clickRecord: JSON.stringify(clickRecord),
             scrollRecord: JSON.stringify(scrollRecord),
+            mouseRecord: JSON.stringify(mouseRecord),
             windowHeight,
             windowWidth,
             startDate,
@@ -154,9 +166,6 @@ function processEyePosition(eyeX, eyeY) {
     if (eyeY < 0) {
         //si la position de l'oeil est négative en hauteur, alors on est en dehors de l'écran
         iY = 0;
-    } else if (eyeY < headerHeight) {
-        //si Y est inférieur à une certaine valeur , alors l'utilisateur regarde le header
-        iY = Math.floor(eyeY);
     } else {
         //sinon, on ajoute la valeur du eye tracker avec la valeur de scroll
         iY = Math.floor(eyeY) + scrollPosition;
