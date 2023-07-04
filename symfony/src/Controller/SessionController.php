@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Template;
+use App\Entity\Tracking;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -94,15 +96,18 @@ class SessionController extends AbstractController
         $scroll = 0;
         $clicks = 0;
         foreach ($session->getTrackings() as $tracking) {
-            if ($tracking->getType() === 'click') {
+            if ($tracking->getType() === Tracking::TYPE_CLICK) {
                 $clicks += count($tracking->getData());
                 continue;
             }
         }
         foreach ($session->getTrackings() as $tracking) {
-            if ($tracking->getType() === 'scroll') {
-                $scroll += count($tracking->getData());
-                continue;
+            if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                $scroling = [];
+                foreach ($tracking->getData() as $scrollData) {
+                    $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                }
+                $scroll = max($scroling);
             }
         }
 
@@ -116,15 +121,18 @@ class SessionController extends AbstractController
             $sessionTemplateTimes[] = $templateSession->getDateEnd()->getTimestamp() - $templateSession->getDateStart()->getTimestamp();
             $sessionTemplateSuccess[] = $templateSession->getIsSuccess();
             foreach ($templateSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'click') {
+                if ($tracking->getType() === Tracking::TYPE_CLICK) {
                     $templateClicks += count($tracking->getData());
                     continue;
                 }
             }
             foreach ($templateSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'scroll') {
-                    $templateScroll += count($tracking->getData());
-                    continue;
+                if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                    $scroling = [];
+                    foreach ($tracking->getData() as $scrollData) {
+                        $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                    }
+                    $templateScroll = max($scroling);
                 }
             }
         }
@@ -140,19 +148,22 @@ class SessionController extends AbstractController
             $sessionPersonaTimes[] = $personaSession->getDateEnd()->getTimestamp() - $personaSession->getDateStart()->getTimestamp();
             $sessionPersonaSuccess[] = $personaSession->getIsSuccess();
             foreach ($personaSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'click') {
+                if ($tracking->getType() === Tracking::TYPE_CLICK) {
                     $personaClicks += count($tracking->getData());
                     continue;
                 }
             }
             foreach ($personaSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'scroll') {
-                    $personaScroll += count($tracking->getData());
+                if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                    $scroling = [];
+                    foreach ($tracking->getData() as $scrollData) {
+                        $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                    }
+                    $personaScroll = max($scroling);
                     continue;
                 }
             }
         }
-
         //Global data array
         $data = [
             'sessionDate' => $session->getDateStart()->format('d/m/Y'),
@@ -163,7 +174,7 @@ class SessionController extends AbstractController
             'graph'  => [
                 $clicks,
                 $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
-                0
+                $scroll/($session->getPageHeight()??5080) * 100
             ],
             'template' => [
                 'name' => $session->getTemplate()->getName(),
@@ -175,7 +186,7 @@ class SessionController extends AbstractController
                 'graph' => [
                     count($sessionsTemplate) > 0 ? $templateClicks / count($sessionsTemplate) : 0,
                     count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) : 0,
-                    0
+                    $templateScroll/($session->getPageHeight()??5080) * 100
                 ],
                 'clicks' => $templateClicks,
             ],
@@ -189,7 +200,7 @@ class SessionController extends AbstractController
                 'graph' => [
                     count($sessionsPersona)  > 0 ? $personaClicks / count($sessionsPersona) : 0,
                     count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) : 0,
-                    0
+                    $personaScroll/($session->getPageHeight()??5080) * 100
                 ],
             ],
         ];
