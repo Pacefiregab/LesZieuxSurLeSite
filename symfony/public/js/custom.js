@@ -37,7 +37,7 @@
     });
 })(window.jQuery);
 
-let startDate;
+let startDate = Date.now()/1000; //default data
 let endDate;
 
 let isSuccess = false;
