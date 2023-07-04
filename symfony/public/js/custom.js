@@ -55,6 +55,7 @@ let windowWidth = document.body.clientWidth;
 let windowHeight = document.body.clientHeight;
 
 const flag = $('input[name="flag"]').val();
+const duration = $('input[name="duration"]').val();
 
 function initEventCapture() {
     // wait to connect
@@ -62,7 +63,7 @@ function initEventCapture() {
     ws.onopen = () => {
         ws.send('startGazePoint');
         startDate = Date.now()/1000;
-        setTimeout(() => sendRecord(ws), 120000)
+        setTimeout(() => sendRecord(ws), duration == '' ? 120000 : duration*1000)
     }
 
     ws.onmessage = (m) => treatMessage(m);
