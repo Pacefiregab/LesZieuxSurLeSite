@@ -76,10 +76,10 @@ class TemplateController extends AbstractController
             "specialButtonForTicket" => $formData->getBoolean('specialButtonForTicket'),
             "contactMapFirst" => $formData->getBoolean('contactMapFirst'),
             "changeCheckBoxSelect" => $formData->getBoolean('changeCheckBoxSelect'),
-            "whiteColor" => $formData->getBoolean('whiteColor'),
-            "darkColor" => $formData->getBoolean('darkColor'),
-            "primaryColor" => $formData->getBoolean('primaryColor'),
-            "secondaryColor" => $formData->getBoolean('secondaryColor'),
+            "whiteColor" => $formData->get('whiteColor'),
+            "darkColor" => $formData->get('darkColor'),
+            "primaryColor" => $formData->get('primaryColor'),
+            "secondaryColor" => $formData->get('secondaryColor'),
         ];
         $template
             ->setData($data)
@@ -99,14 +99,7 @@ class TemplateController extends AbstractController
         return $this->redirectToRoute('templates_index');
     }
 
-    #[Route('/{id}', name: 'templates_show', methods: 'GET')]
-    public function show(Template $template): Response
-    {
-        return $this->render('template/show.html.twig', [
-            'template' => $template,
-        ]);
-    }
-    #[Route('/details', name:'templates_details', methods:'GET')]
+    #[Route('/details', name: 'templates_details', methods: 'GET')]
     public function details(EntityManagerInterface $entityManager): Response
     {
         $templates = $entityManager->getRepository(Template::class)->findAll();
@@ -131,8 +124,8 @@ class TemplateController extends AbstractController
     }
 
 
-    #[Route('/{id}/details', name: 'templates_details', methods: 'GET')]
-    public function details(Template $template): JsonResponse
+    #[Route('/api/{id}', name: 'templates_api', methods: 'GET')]
+    public function api(Template $template): JsonResponse
     {
         $sessions = $this->sessionRepository->findBy(['template' => $template]);
         $personas = [];
