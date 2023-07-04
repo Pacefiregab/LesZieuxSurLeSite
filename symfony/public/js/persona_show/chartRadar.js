@@ -13,9 +13,12 @@ export class chartRadar {
 
     buildChart(data) {
         console.log(data)
-        if (this.myChart){
+        if (this.myChart != undefined){
             this.myChart.destroy()
         }
+
+        document.querySelector("#chart").innerHTML = '<canvas id="myChart"></canvas>';
+        this.ctx = document.getElementById('myChart');
 
         this.myChart = new Chart(this.ctx,{
             type: 'radar',

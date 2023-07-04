@@ -7,8 +7,9 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 33%;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: flex-start;
 }
 .persona_statistique h2{
     font-size: 1.5em;
@@ -40,7 +41,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    height: 100%;
 }
 
 .container_detail{
@@ -52,12 +54,16 @@
     align-items: center;
 }
 #chart{
-    padding: 0px;
+    height: 81vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
 }
 .button_hitmap{
     position: absolute;
     bottom: 2%;
-    left: -14%;L
+    left: -14%;
     display: flex;
     margin: 0 15%;
     /* width: 100%; */
