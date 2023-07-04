@@ -16,7 +16,7 @@
         {% endif %}
         {% for item in items %}
             {# le premier élément prend en classe active #}
-            <div class="persona element_filtre" data-bs-target="{{ item.id }}" {% if loop.first %}active{% endif %}">
+            <div class="persona element_filtre {% if loop.first %}active{% endif %}" data-bs-target="{{ item.id }}" >
                 <p class="nom_persona nom_element">{{ item.name }}</p>
 
                 <div class="d-inline-flex">
