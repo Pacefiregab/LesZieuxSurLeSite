@@ -58,7 +58,7 @@ export class personaShow{
                     pointHoverBorderColor: 'rgb(54, 162, 235)'
                 }]
             };
-            let id_session = document.querySelector('.persona.element_filtre.active').childNodes[1].getAttribute('data-bs-target');
+            let id_session = document.querySelector('.persona.element_filtre.active').getAttribute('data-bs-target');
             console.log(id_session);
             this.chartRadar.buildChart(donnee);
             document.querySelector('#date_session').innerHTML  = this.data.sessionDate
