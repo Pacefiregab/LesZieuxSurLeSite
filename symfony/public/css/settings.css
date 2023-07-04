@@ -60,6 +60,7 @@ div.element_filtre {
     display: flex;
     align-items: center;
     padding: 0 10px 0 10px;
+    overflow: hidden;
 }
 
 div .nom_element{
@@ -100,6 +101,11 @@ a.gotoElement {
     width: 100%;
     height:90%;
 }
+
+#listElement.noPlus {
+    height: 100%;
+}
+
 div.filtre::-webkit-scrollbar { width: 0 !important }
 
 

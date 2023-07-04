@@ -64,15 +64,15 @@ class TemplateController extends AbstractController
     {
         $formData = $request->request;
         $data = [
-            "stickyHeader" => $formData->get('stickyHeader'),
-            "reverseRows" => $formData->get('reverseRows'),
-            "specialButtonForTicket" => $formData->get('specialButtonForTicket'),
-            "contactMapFirst" => $formData->get('contactMapFirst'),
-            "changeCheckBoxSelect" => $formData->get('changeCheckBoxSelect'),
-            "whiteColor" => $formData->get('whiteColor'),
-            "darkColor" => $formData->get('darkColor'),
-            "primaryColor" => $formData->get('primaryColor'),
-            "secondaryColor" => $formData->get('secondaryColor'),
+            "stickyHeader" => $formData->getBoolean('stickyHeader'),
+            "reverseRows" => $formData->getBoolean('reverseRows'),
+            "specialButtonForTicket" => $formData->getBoolean('specialButtonForTicket'),
+            "contactMapFirst" => $formData->getBoolean('contactMapFirst'),
+            "changeCheckBoxSelect" => $formData->getBoolean('changeCheckBoxSelect'),
+            "whiteColor" => $formData->getBoolean('whiteColor'),
+            "darkColor" => $formData->getBoolean('darkColor'),
+            "primaryColor" => $formData->getBoolean('primaryColor'),
+            "secondaryColor" => $formData->getBoolean('secondaryColor'),
         ];
         $template
             ->setData($data)

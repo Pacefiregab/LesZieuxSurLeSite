@@ -10,7 +10,7 @@
 </style>
 
 <div id="sidebar" class="filtre_persona filtre card side-bar">
-    <div id="listElement">
+    <div id="listElement" {% if noPlus is defined %} class="noPlus" {% endif %}>
         {% if items is empty %}
             <p class="no_result">Aucun résultat</p>
         {% endif %}
