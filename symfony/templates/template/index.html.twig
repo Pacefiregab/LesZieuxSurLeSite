@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block backButton %}
+    {% include 'backButton.html.twig' %}
+{% endblock %}
+
 {% block sidebar %}
     {% include 'sideBar.html.twig' with {
         'items' : templates|map(template => {
