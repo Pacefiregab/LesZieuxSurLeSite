@@ -147,15 +147,15 @@ class TemplateController extends AbstractController
                     'isSuccess' => count(array_filter($personaSessions, function ($session) {
                         return $session->getIsSuccess();
                     })),
-                    'averageTime' => array_sum(array_map(function ($session) {
-                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-                    }, $personaSessions)) / count($personaSessions),
-                    'minTime' => min(array_map(function ($session) {
-                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-                    }, $personaSessions)),
-                    'maxTime' => max(array_map(function ($session) {
-                        return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-                    }, $personaSessions)),
+                    'averageTime' => count($personaSessions) > 0 ? array_sum(array_map(function ($session) {
+                        return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
+                    }, $personaSessions)) / count($personaSessions) : 0,
+                    'minTime' => count($personaSessions) > 0 ? min(array_map(function ($session) {
+                        return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
+                    }, $personaSessions)) : 0,
+                    'maxTime' => count($personaSessions) > 0 ? max(array_map(function ($session) {
+                        return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
+                    }, $personaSessions)) : 0,
                 ],
             ];
             $statistics[$persona->getId()] = $personaStats;
@@ -167,14 +167,14 @@ class TemplateController extends AbstractController
                 return $session->getIsSuccess();
             })),
             'averageTime' => count($sessions) > 0 ? array_sum(array_map(function ($session) {
-                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+                return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
             }, $sessions)) / count($sessions) : 0,
-            'minTime' => min(array_map(function ($session) {
-                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-            }, $sessions)),
-            'maxTime' => max(array_map(function ($session) {
-                return $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
-            }, $sessions)),
+            'minTime' => count($personaSessions) > 0 ? min(array_map(function ($session) {
+                return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
+            }, $sessions)) : 0,
+            'maxTime' => count($personaSessions) > 0 ? max(array_map(function ($session) {
+                return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
+            }, $sessions)) : 0,
         ];
 
 
