@@ -13,40 +13,54 @@
 {% endblock %}
 
 {% block body %}
-	<div class="cardTemplate">
-		<div class="presentationCard">
-			<h3 id="titleTemplate">titre</h3>
-			<div class="allColors">
-				<div class="primaryColor showColor"></div>
-				<div class="secondaryColor showColor" ></div>
-				<div class="blackColor showColor"></div>
-				<div class="witheColor showColor"></div>
+	<div id="templateDetails">
+		<div class="cardTemplate">
+			<div class="presentationCard">
+				<h3 id="titleTemplate">titre</h3>
+				<div class="allColors">
+					<div class="primaryColor showColor"></div>
+					<div class="secondaryColor showColor"></div>
+					<div class="blackColor showColor"></div>
+					<div class="witheColor showColor"></div>
+				</div>
+			</div>
+			<div class="informationCard">
+				<div class="infosColumn">
+					<div class="infos stickyHeader">
+						<p>Navigation collé</p>
+
+					</div>
+					<div class="infos reverseRow">
+						<p>Inversion des colonnes</p>
+
+					</div>
+					<div class="infos specialButton">
+						<p>Bouton spécial achat</p>
+
+					</div>
+				</div>
+				<div class="infosColumn">
+					<div class="infos mapFirst">
+						<p>Contact carte</p>
+
+					</div>
+					<div class="infos selecttoCheckBox">
+						<p>Liste déroulante</p>
+
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="informationCard">
-			<div class="infosColumn">
-				<div class="infos stickyHeader">
-					<p>Navigation collé</p>
-
-				</div>
-				<div class="infos reverseRow">
-					<p>Inversion des colonnes</p>
-
-				</div>
-				<div class="infos specialButton">
-					<p>Bouton spécial achat</p>
-
+		<div id="templateStat">
+			<div class="templateSession">
+				<h3>Temps moyen</h3>
+				<div class="container_canvas" id="chart">
+					<canvas id="sessionsChart" height="400" width="400"></canvas>
 				</div>
 			</div>
-			<div class="infosColumn">
-				<div class="infos mapFirst">
-					<p>Contact carte</p>
 
-				</div>
-				<div class="infos selecttoCheckBox">
-					<p>Liste déroulante</p>
-
-				</div>
+			<div class="averageTime">
+				<h3>Temps moyen</h3>
 			</div>
 		</div>
 	</div>
