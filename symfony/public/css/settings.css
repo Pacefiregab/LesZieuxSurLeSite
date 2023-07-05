@@ -261,7 +261,10 @@ button#launchButton {
 }
 
 .navbar a:hover {
-
+/*    transition de la border bottom de gauche a droite*/
+    border-bottom: 2px solid var(--color_primary);
+    transition: border-bottom 0.3s ease-in-out;
+    
 }
 button.button_hitmap {
     margin: 0 auto;
