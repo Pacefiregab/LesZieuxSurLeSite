@@ -40,6 +40,17 @@
 				</div>
 			</div>
 		</div>
+
+        <div id="endModal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Vous avez fini la simulation :</h5>
+                    </div>
+                    <div class="modal-body" id="modalResultBody"></div>
+                </div>
+            </div>
+        </div>
         {% endif %}
 		<main>
 			{% if not (heatmap??false)%}
