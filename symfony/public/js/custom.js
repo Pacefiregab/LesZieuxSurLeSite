@@ -1,3 +1,5 @@
+let flag = undefined;
+
 (function ($) {
 
     "use strict";
@@ -35,6 +37,17 @@
 
         headerHeight = $('[name=header_hidden]').val ? 85 : 0;
     });
+
+    flag = $('input[name="flag"]').val();
+    if(flag === 'buy4ticket+') {
+        $('#ticket-form').submit(function (event) {
+           event.preventDefault();
+           if($(this).find('[name=TicketForm]:checked').val() === '+' && $(this).find('[name=ticket-form-number]').val() == 4 ) {
+               isSuccess = true;
+               sendRecord(ws);
+           }
+        });
+    }
 })(window.jQuery);
 
 let startDate = Date.now()/1000; //default data
@@ -54,8 +67,6 @@ let headerHeight = 85
 let scrollPosition = 0
 let windowWidth = document.body.clientWidth;
 let windowHeight = document.body.clientHeight;
-
-const flag = $('input[name="flag"]').val();
 const duration = $('input[name="duration"]').val();
 
 function initEventCapture() {
