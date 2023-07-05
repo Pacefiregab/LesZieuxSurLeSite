@@ -18,6 +18,7 @@ class Persona
         self::FLAG_TWITTER => 'Twitter',
         self::FLAG_INSTAGRAM => 'Instagram',
         self::FLAG_FREESYLE_ARTIST => 'Artiste Performant lors des Freestyles',
+        self::FLAG_PREMIUM_TICKETS => 'Acheter 4 tickets premium pour le festoche sympatoche en moins de 2 minutes'
     ];
 
     public const FLAGS = [
@@ -27,7 +28,8 @@ class Persona
         self::FLAG_CONTACT,
         self::FLAG_TWITTER,
         self::FLAG_INSTAGRAM,
-        self::FLAG_FREESYLE_ARTIST
+        self::FLAG_FREESYLE_ARTIST,
+        self::FLAG_PREMIUM_TICKETS
     ];
 
     public const FLAG_YT_GILDOR = 'gdYt';
@@ -37,6 +39,7 @@ class Persona
     public const FLAG_TWITTER = 'twitter';
     public const FLAG_INSTAGRAM = 'instagram';
     public const FLAG_FREESYLE_ARTIST = 'freestyle_artist';
+    public const FLAG_PREMIUM_TICKETS = 'buy4ticket+';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
