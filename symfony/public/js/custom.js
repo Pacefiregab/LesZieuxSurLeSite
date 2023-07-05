@@ -80,8 +80,6 @@ function initEventCapture() {
         isSuccess = false
     }
 
-    console.log(flag)
-
     $(document).on('click', function (event) {
         clickRecord.push({
             X: event.pageX, Y: event.pageY, time: event.timeStamp,
@@ -114,8 +112,6 @@ function startMouseRecord(){
 function treatMessage(message) {
     const msg = JSON.parse(message.data);
     const { eyeX, eyeY } = processEyePosition(msg.data.X, msg.data.Y);
-
-    $('.navbar-brand').html(eyeX + ' : ' + eyeY);
 
     if (eyeX || eyeY) {
         eyeRecord.push({
