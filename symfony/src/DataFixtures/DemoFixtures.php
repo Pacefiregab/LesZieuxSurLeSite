@@ -81,6 +81,76 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
 
     public function templateFixtures(ObjectManager $manager): void
     {
+        //first template -> high contrast
+        $template = new Template();
+        $template->setName("Template haut contraste");
+        $template->setData(array(
+            "reverseRow" => false,
+            "hideHeader" => true,
+            "stickyHeader" => false,
+            "specialButtonForTicket" => false,
+            "contactMapFirst" => true,
+            "changeCheckBoxSelect" => true,
+            "whiteColor" => "#F33BEE",
+            "darkColor" => "#000000",
+            "primaryColor" => "#DEFF00",
+            "secondaryColor" => "#AAAAAA"
+        ));
+        $this->templateRepository->save($template, true);
+
+
+        //second template -> low contrast (gray scale)
+        $template = new Template();
+        $template->setName("Template bas contraste");
+        $template->setData(array(
+            "reverseRow" => true,
+            "hideHeader" => true,
+            "stickyHeader" => false,
+            "specialButtonForTicket" => true,
+            "contactMapFirst" => true,
+            "changeCheckBoxSelect" => false,
+            "whiteColor" => "#999999",
+            "darkColor" => "#333333",
+            "primaryColor" => "#777777",
+            "secondaryColor" => "#555555"
+        ));
+        $this->templateRepository->save($template, true);
+
+
+        //third template -> medium contrast
+        $template = new Template();
+        $template->setName("Template contraste modéré");
+        $template->setData(array(
+            "reverseRow" => false,
+            "hideHeader" => true,
+            "stickyHeader" => false,
+            "specialButtonForTicket" => false,
+            "contactMapFirst" => false,
+            "changeCheckBoxSelect" => false,
+            "whiteColor" => "#990F0F",
+            "darkColor" => "#3B591E",
+            "primaryColor" => "#E27606",
+            "secondaryColor" => "#527B1D"
+        ));
+        $this->templateRepository->save($template, true);
+
+
+        //fourth template -> pink hue
+        $template = new Template();
+        $template->setName("Template de rose");
+        $template->setData(array(
+            "reverseRow" => true,
+            "hideHeader" => false,
+            "stickyHeader" => false,
+            "specialButtonForTicket" => true,
+            "contactMapFirst" => true,
+            "changeCheckBoxSelect" => true,
+            "whiteColor" => "#8757DF",
+            "darkColor" => "#1A28BF",
+            "primaryColor" => "#F385FE",
+            "secondaryColor" => "#BE6FEE"
+        ));
+        $this->templateRepository->save($template, true);
     }
 
     public function trackingFixtures(ObjectManager $manager): void
