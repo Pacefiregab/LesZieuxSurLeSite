@@ -20,8 +20,10 @@ class UiController extends AbstractController
     #[Route(['/{session}','/'] ,name: 'app_ui')]
     public function index(?Session $session, EntityManagerInterface $entityManager): Response {
         if (!$session->getId()) {
-            $persona = $entityManager->getRepository(Persona::class)->findOneBy([]);
-            $template = $entityManager->getRepository(Template::class)->findOneBy([]);
+            $personas = $entityManager->getRepository(Persona::class)->findAll();
+            $persona = $personas[array_rand($personas)];
+            $templates = $entityManager->getRepository(Template::class)->findAll();
+            $template = $templates[array_rand($templates)];
             $session->setTemplate($template);
             $session->setPersona($persona);
         }
