@@ -1,6 +1,6 @@
 
 function goBack() {
-    window.history.back();
+        window.location.replace("http://localhost/");
 }
 
 function launchSession() {
