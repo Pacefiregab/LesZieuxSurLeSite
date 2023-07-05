@@ -96,13 +96,13 @@ class SessionController extends AbstractController
         foreach ($session->getTrackings() as $tracking) {
             if ($tracking->getType() === 'click') {
                 $clicks += count($tracking->getData());
-                continue;
+                break;
             }
         }
         foreach ($session->getTrackings() as $tracking) {
             if ($tracking->getType() === 'scroll') {
                 $scroll += count($tracking->getData());
-                continue;
+                break;
             }
         }
 
@@ -118,13 +118,13 @@ class SessionController extends AbstractController
             foreach ($templateSession->getTrackings() as $tracking) {
                 if ($tracking->getType() === 'click') {
                     $templateClicks += count($tracking->getData());
-                    continue;
+                    break;
                 }
             }
             foreach ($templateSession->getTrackings() as $tracking) {
                 if ($tracking->getType() === 'scroll') {
                     $templateScroll += count($tracking->getData());
-                    continue;
+                    break;
                 }
             }
         }
@@ -142,13 +142,13 @@ class SessionController extends AbstractController
             foreach ($personaSession->getTrackings() as $tracking) {
                 if ($tracking->getType() === 'click') {
                     $personaClicks += count($tracking->getData());
-                    continue;
+                    break;
                 }
             }
             foreach ($personaSession->getTrackings() as $tracking) {
                 if ($tracking->getType() === 'scroll') {
                     $personaScroll += count($tracking->getData());
-                    continue;
+                    break;
                 }
             }
         }
