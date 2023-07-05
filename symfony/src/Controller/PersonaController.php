@@ -19,7 +19,7 @@ class PersonaController extends AbstractController
 {
     private PersonaRepository $personaRepository;
 
-        private SessionRepository $sessionRepository;
+    private SessionRepository $sessionRepository;
 
     protected FormFactoryInterface $formFactory;
 
@@ -65,7 +65,8 @@ class PersonaController extends AbstractController
     }
 
     #[Route('/form/{id}', name: 'personas_form_get', methods: ['GET'])]
-    public function form(?Persona $persona ): JsonResponse {
+    public function form(?Persona $persona): JsonResponse
+    {
         $persona = $persona ?? new Persona();
         $html = $this->renderView('persona/form.html.twig', [
             'persona' => $persona,
@@ -106,8 +107,10 @@ class PersonaController extends AbstractController
 
         $sessions = $persona->getSessions();
         foreach ($sessions as $session) {
-            $successRate+= $session->getIsSuccess();
-            $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            $successRate += $session->getIsSuccess();
+            if ($session->getDateEnd() != null || $session->getDateStart() != null) {
+                $sessionTime = $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp();
+            }
             $uniqTemplates[$session->getTemplate()->getId()] = $session->getTemplate()->getName();
 
             //maps to the template name the session time
@@ -124,9 +127,9 @@ class PersonaController extends AbstractController
             'successRate' => $successRate ?? 0,
             'nbSessions' => $sessions->count(),
             'nbtemplates' => $templatesNb,
-            'avgSessions' => $sessionsTimes ? array_sum($sessionsTimes) / count($sessionsTimes) : 0,
-            'minSessions' => $sessionsTimes ? min($sessionsTimes) : 0,
-            'maxSessions' => $sessionsTimes ? max($sessionsTimes) : 0,
+            'avgSessions' => count($sessionsTimes) > 0 ? array_sum($sessionsTimes) / count($sessionsTimes) : 0,
+            'minSessions' => count($sessionsTimes) > 0 ? min($sessionsTimes) : 0,
+            'maxSessions' => count($sessionsTimes) > 0 ? max($sessionsTimes) : 0,
             'graph' => $templates,
             'detail' => $this->generateUrl('personas_show_sessions', ['id' => $persona->getId()]),
         ];
