@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Session;
+use App\Entity\Template;
+use App\Entity\Tracking;
 use App\Form\SessionType;
 use App\Repository\SessionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -94,15 +96,20 @@ class SessionController extends AbstractController
         $scroll = 0;
         $clicks = 0;
         foreach ($session->getTrackings() as $tracking) {
-            if ($tracking->getType() === 'click') {
+            if ($tracking->getType() === Tracking::TYPE_CLICK) {
                 $clicks += count($tracking->getData());
-                break;
+                continue;
             }
         }
         foreach ($session->getTrackings() as $tracking) {
-            if ($tracking->getType() === 'scroll') {
-                $scroll += count($tracking->getData());
-                break;
+            if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                $scroling = [];
+                foreach ($tracking->getData() as $scrollData) {
+                    $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                }
+                if (!empty($scroling)) {
+                    $scroll = max($scroling);
+                }
             }
         }
 
@@ -113,18 +120,29 @@ class SessionController extends AbstractController
         $templateScroll = 0;
         $templateClicks = 0;
         foreach ($sessionsTemplate as $templateSession) {
-            $sessionTemplateTimes[] = $templateSession->getDateEnd()->getTimestamp() - $templateSession->getDateStart()->getTimestamp();
-            $sessionTemplateSuccess[] = $templateSession->getIsSuccess();
-            foreach ($templateSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'click') {
-                    $templateClicks += count($tracking->getData());
-                    break;
+            if ($templateSession->getDateEnd() === null || $templateSession->getDateStart() === null) {
+                continue;
+            } else {
+
+                $sessionTemplateTimes[] = $templateSession->getDateEnd()->getTimestamp() - $templateSession->getDateStart()->getTimestamp();
+                $sessionTemplateSuccess[] = $templateSession->getIsSuccess();
+                foreach ($templateSession->getTrackings() as $tracking) {
+                    if ($tracking->getType() === Tracking::TYPE_CLICK) {
+                        $templateClicks += count($tracking->getData());
+                        break;
+                    }
                 }
-            }
-            foreach ($templateSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'scroll') {
-                    $templateScroll += count($tracking->getData());
-                    break;
+                foreach ($templateSession->getTrackings() as $tracking) {
+                    if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                        $scroling = [];
+                        foreach ($tracking->getData() as $scrollData) {
+                            $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                        }
+                        if (!empty($scroling)) {
+                            $templateScroll = max($scroling);
+                        }
+                        break;
+                    }
                 }
             }
         }
@@ -137,61 +155,78 @@ class SessionController extends AbstractController
         $personaScroll = 0;
         $personaClicks = 0;
         foreach ($sessionsPersona as $personaSession) {
-            $sessionPersonaTimes[] = $personaSession->getDateEnd()->getTimestamp() - $personaSession->getDateStart()->getTimestamp();
-            $sessionPersonaSuccess[] = $personaSession->getIsSuccess();
-            foreach ($personaSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'click') {
-                    $personaClicks += count($tracking->getData());
-                    break;
+            if ($personaSession->getDateEnd() === null || $personaSession->getDateStart() === null) {
+                continue;
+            } else {
+
+                $sessionPersonaTimes[] = $personaSession->getDateEnd()->getTimestamp() - $personaSession->getDateStart()->getTimestamp();
+                $sessionPersonaSuccess[] = $personaSession->getIsSuccess();
+                foreach ($personaSession->getTrackings() as $tracking) {
+                    if ($tracking->getType() === Tracking::TYPE_CLICK) {
+                        $personaClicks += count($tracking->getData());
+                        break;
+                    }
                 }
-            }
-            foreach ($personaSession->getTrackings() as $tracking) {
-                if ($tracking->getType() === 'scroll') {
-                    $personaScroll += count($tracking->getData());
-                    break;
+                foreach ($personaSession->getTrackings() as $tracking) {
+                    if ($tracking->getType() === Tracking::TYPE_SCROLL) {
+                        $scroling = [];
+                        foreach ($tracking->getData() as $scrollData) {
+                            $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
+                        }
+                        $personaScroll = max($scroling);
+                        break;
+                    }
                 }
             }
         }
 
+        $sessionTime = ($session->getDateStart() !== null || $session->getDateEnd() !== null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 'N/A';
+        $sessionDate = ($session->getDateStart() !== null || $session->getDateEnd() !== null)  ? $session->getDateStart()->format('d/m/Y') : 'N/A';
+
+        $template = [
+            'name' => $session->getTemplate()->getName(),
+            'count' => count($sessionsTemplate),
+            'avgTime' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) : 0,
+            'maxTime' => count($sessionTemplateTimes) > 0 ? max($sessionTemplateTimes) : 0,
+            'minTime' => count($sessionTemplateTimes) > 0 ? min($sessionTemplateTimes) : 0,
+            'successRate' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateSuccess) / count($sessionsTemplate) : 0,
+            'clicks' => $templateClicks,
+            'graph' => [
+                count($sessionsTemplate) > 0 ? $templateClicks / count($sessionsTemplate) : 0,
+                count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) : 0,
+                $templateScroll / ($session->getPageHeight() ?? 5080) * 100
+            ],
+        ];
+
+        $persona = [
+            'name' => $session->getPersona()->getName(),
+            'avgTime' => count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) : 0,
+            'maxTime' => count($sessionPersonaTimes) > 0 ? max($sessionPersonaTimes) : 0,
+            'minTime' => count($sessionPersonaTimes) > 0 ? min($sessionPersonaTimes) : 0,
+            'successRate' => count($sessionsPersona) > 0 ? array_sum($sessionPersonaSuccess) / count($sessionsPersona) : 0,
+            'count' => count($sessionsPersona),
+            'graph' => [
+                count($sessionsPersona)  > 0 ? $personaClicks / count($sessionsPersona) : 0,
+                count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) : 0,
+                $personaScroll / ($session->getPageHeight() ?? 5080) * 100
+            ],
+        ];
+
+
         //Global data array
         $data = [
-            'sessionDate' => $session->getDateStart()->format('d/m/Y'),
-            'sessionTime' => $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
+            'sessionDate' => $sessionDate,
+            'sessionTime' => $sessionTime,
             'sessionName' => $session->getTitle(),
             'isSuccess' => $session->getIsSuccess(),
             'sessionName' => $session->getTitle(),
             'graph'  => [
                 $clicks,
-                $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp(),
-                0
+                $sessionTime,
+                $scroll / ($session->getPageHeight() ?? 5080) * 100
             ],
-            'template' => [
-                'name' => $session->getTemplate()->getName(),
-                'avgTime' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) : 0,
-                'maxTime' => max($sessionTemplateTimes),
-                'minTime' => min($sessionTemplateTimes),
-                'successRate' => count($sessionsTemplate) > 0 ? array_sum($sessionTemplateSuccess) / count($sessionsTemplate) : 0,
-                'count' => count($sessionsTemplate),
-                'graph' => [
-                    count($sessionsTemplate) > 0 ? $templateClicks / count($sessionsTemplate) : 0,
-                    count($sessionsTemplate) > 0 ? array_sum($sessionTemplateTimes) / count($sessionsTemplate) : 0,
-                    0
-                ],
-                'clicks' => $templateClicks,
-            ],
-            'persona' => [
-                'name' => $session->getPersona()->getName(),
-                'avgTime' => count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) : 0,
-                'maxTime' => max($sessionPersonaTimes),
-                'minTime' => min($sessionPersonaTimes),
-                'successRate' => count($sessionsPersona) > 0 ? array_sum($sessionPersonaSuccess) / count($sessionsPersona) : 0,
-                'count' => count($sessionsPersona),
-                'graph' => [
-                    count($sessionsPersona)  > 0 ? $personaClicks / count($sessionsPersona) : 0,
-                    count($sessionsPersona)  > 0 ? array_sum($sessionPersonaTimes) / count($sessionsPersona) : 0,
-                    0
-                ],
-            ],
+            'template' => $template,
+            'persona' => $persona,
         ];
 
         return new JsonResponse($data, Response::HTTP_OK);
