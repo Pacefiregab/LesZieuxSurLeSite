@@ -10,13 +10,13 @@ export class chartGenerateTemplate {
         //vider ctx
     }
 
-    buildChart(data) {
+    buildChart(data,) {
         console.log(data);
         if (this.myChart != undefined){
             this.myChart.destroy()
         }
 
-        document.querySelector("#chart").innerHTML = '<canvas id="sessionsChart"></canvas>';
+        document.querySelector("#templateChart").innerHTML = '<canvas id="sessionsChart"></canvas>';
         this.ctx = document.getElementById('sessionsChart');
 
 
@@ -25,16 +25,7 @@ export class chartGenerateTemplate {
             data: data,
             options: {
               responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
-                },
-                title: {
-                  display: true,
-                  text: 'Chart.js Doughnut Chart'
-                }
-              }
-            },
+           }
         });
     }
 }

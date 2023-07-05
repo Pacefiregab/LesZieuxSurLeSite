@@ -1,4 +1,16 @@
 import { chartGenerateTemplate } from "/js/template/chartGenerateTemplate.js";
+
+function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+    
+    // Ajouter un zéro devant les minutes et les secondes si nécessaire
+    var formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
+    var formattedSeconds = (remainingSeconds < 10) ? "0" + remainingSeconds : remainingSeconds;
+    
+    var formattedTime = formattedMinutes + ":" + formattedSeconds;
+    return formattedTime;
+  }
 export class details {
     /**
      * @var {Array} data - tableau des données en clé les cards et en valeur les données
@@ -64,21 +76,32 @@ export class details {
                     '<p>Liste déroulante</p><i class="gg-close-o"></i>';
             }
 
-        
-            const DATA_COUNT = 5;
-            const NUMBER_CFG = {count: DATA_COUNT, min: 0, max: 100};
-            
-            const test = {
-              labels: ['Red', 'Orange', 'Yellow', 'Green', 'Blue'],
-              datasets: [
-                {
-                  label: 'Dataset 1',
-                  data: [11, 16, 7, 3, 14],
-                  backgroundColor: 'Green',
-                }
-              ]
-            };
-            this.chartGenerateTemplate.buildChart(test);
+            if (this.data.templateStatistics.nbSessions > 0) {
+                // Données pour le diagramme
+                var chartData = {
+                    labels: ["Echec", "Succès"],
+                    datasets: [
+                        {
+                            data: [
+                                this.data.templateStatistics.nbSessions -
+                                    this.data.templateStatistics.nbSuccess,
+                                this.data.templateStatistics.nbSuccess,
+                            ],
+                            backgroundColor: ["#e30909", "#008a29"],
+                        },
+                    ],
+                };
+
+                this.chartGenerateTemplate.buildChart(chartData);
+                document.querySelector("#numberSessions").innerHTML = this.data.templateStatistics.nbSessions
+            } else {
+                document.querySelector("#templateChart").innerHTML =
+                    "<p>Aucune session pour ce template</p>";
+                    document.querySelector("#numberSessions").innerHTML = ""
+            }
+            document.querySelector(".minTime").innerHTML = "min : " + formatTime(this.data.templateStatistics.minTime)
+            document.querySelector(".maxTime").innerHTML = "max : " + formatTime(this.data.templateStatistics.maxTime)
+            document.querySelector(".averageTime h3").innerHTML = formatTime(this.data.templateStatistics.averageTime)
         }
     }
 }
