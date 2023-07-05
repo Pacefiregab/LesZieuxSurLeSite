@@ -6,7 +6,13 @@
 {% block backButton %}
     {% include 'launchButton.html.twig' %}
 {% endblock %}
-
+{% block navbar %}
+    {% include 'navBar.html.twig' with {
+        'focus' : 'personas',
+        'lienPersonas': path('dashboard'),
+        'lienTemplate': path('templates_details'),
+    } %}
+{% endblock %}
 {% block sidebar %}
     {% include 'sideBar.html.twig' with {'items' : personas} %}
 {% endblock %}
