@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Persona;
 use DateTime;
 use App\Entity\Session;
+use App\Entity\Template;
 use App\Entity\Tracking;
 use App\Form\TrackingType;
 use App\Repository\SessionRepository;
@@ -49,12 +51,14 @@ class TrackingController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $data = $request->request->all();
+        dump($data);
         $sessionId = $data['sessionId'] ?? null;
         $session = $sessionId ? $entityManager->getRepository(Session::class)->find($sessionId) : null;
-        if(! $session instanceof Session) {
+        if (!$session instanceof Session) {
             $session = (new Session())
                 ->setPersona($entityManager->getRepository(Persona::class)->find($data['personaId']))
-                ->setTemplate($entityManager->getRepository(Template::class)->find($data['templateId']));
+                ->setTemplate($entityManager->getRepository(Template::class)->find($data['templateId']))
+                ->setTitle('Session n°X1');
             $entityManager->persist($session);
         }
 
@@ -94,7 +98,7 @@ class TrackingController extends AbstractController
         $this->trackingRepository->save($mouseTracking, true);
 
         $entityManager->flush();
-        $session->setTitle('Session n°'.$session->getId());
+        $session->setTitle('Session n°' . $session->getId());
         $entityManager->flush();
         return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getId()]);
     }
