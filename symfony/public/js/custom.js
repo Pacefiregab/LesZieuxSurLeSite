@@ -37,7 +37,7 @@
     });
 })(window.jQuery);
 
-let startDate;
+let startDate = Date.now()/1000; //default data
 let endDate;
 
 let isSuccess = false;
@@ -141,13 +141,23 @@ function sendRecord(ws) {
             startDate,
             endDate,
             isSuccess,
-            session_id: $('input[name="session_id"]').val(),
+            sessionId: $('input[name="session_id"]').val(),
+            templateId: $('input[name="template_id"]').val(),
+            personaId: $('input[name="persona_id"]').val(),
         }
     })
         .then((data) => {
+            console.log(data['detail']);
             ws.close();
-            window.location.href = data.redirect;
+            window.location.href =data['detail'];
         })
+
+    //notify the user that the session is finished
+    if(isSuccess) {
+        alert("Vous avez réussi le scénario! Veuillez attendre la redirection automatique.")
+    } else {
+        alert("Vous avez échoué le scénario! Veuillez attendre la redirection automatique.")
+    }
 }
 
 function processEyePosition(eyeX, eyeY) {

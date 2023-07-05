@@ -148,6 +148,7 @@ class PersonaController extends AbstractController
         $sessions = $persona->getSessions();
 
         return $this->render('persona/show.html.twig', [
+
             'persona' => $persona,
             'sessions' => $sessions
         ]);

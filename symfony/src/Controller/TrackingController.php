@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Persona;
 use DateTime;
 use App\Entity\Session;
+use App\Entity\Template;
 use App\Entity\Tracking;
 use App\Form\TrackingType;
 use App\Repository\SessionRepository;
@@ -49,8 +51,16 @@ class TrackingController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = $request->request->all();
-
-        $session = $entityManager->getRepository(Session::class)->find($data['session_id']);
+        dump($data);
+        $sessionId = $data['sessionId'] ?? null;
+        $session = $sessionId ? $entityManager->getRepository(Session::class)->find($sessionId) : null;
+        if (!$session instanceof Session) {
+            $session = (new Session())
+                ->setPersona($entityManager->getRepository(Persona::class)->find($data['personaId']))
+                ->setTemplate($entityManager->getRepository(Template::class)->find($data['templateId']))
+                ->setTitle('Session n°X1');
+            $entityManager->persist($session);
+        }
 
         //ajout de date de début + fin
         $session->setDateStart(new DateTime(date("Y-m-d H:i:s", $data['startDate'])));
@@ -87,12 +97,10 @@ class TrackingController extends AbstractController
             ->setData(json_decode($data['mouseRecord']));
         $this->trackingRepository->save($mouseTracking, true);
 
-
-        return new JsonResponse([
-            'status' => 'ok',
-            'message' => 'tracking created',
-            'redirect' => $this->generateUrl('personas_show_sessions', ['id' => $session->getId()]),
-        ]);
+        $entityManager->flush();
+        $session->setTitle('Session n°' . $session->getId());
+        $entityManager->flush();
+        return new JsonResponse(['detail' => 'https://localhost/personas/' . $session->getPersona()->getId() . '/sessions/']);
     }
 
     #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]
