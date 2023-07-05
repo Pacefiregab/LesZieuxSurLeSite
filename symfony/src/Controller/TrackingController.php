@@ -48,7 +48,7 @@ class TrackingController extends AbstractController
     }
 
     #[Route('/create', name: 'trackings_create', methods: ['GET', 'POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
         $data = $request->request->all();
         dump($data);
@@ -100,7 +100,7 @@ class TrackingController extends AbstractController
         $entityManager->flush();
         $session->setTitle('Session n°' . $session->getId());
         $entityManager->flush();
-        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getPersona()->getId()]);
+        return new JsonResponse(['detail' => 'https://localhost/personas/' . $session->getPersona()->getId() . '/sessions/']);
     }
 
     #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]

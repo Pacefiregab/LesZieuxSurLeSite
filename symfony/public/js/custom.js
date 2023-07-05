@@ -147,8 +147,9 @@ function sendRecord(ws) {
         }
     })
         .then((data) => {
+            console.log(data['detail']);
             ws.close();
-            window.location.href = data.redirect;
+            window.location.href =data['detail'];
         })
 
     //notify the user that the session is finished

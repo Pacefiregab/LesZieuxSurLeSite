@@ -173,7 +173,9 @@ class SessionController extends AbstractController
                         foreach ($tracking->getData() as $scrollData) {
                             $scroling[] =  $scrollData['Y'] ?? $scrollData['y'];
                         }
-                        $personaScroll = max($scroling);
+                        if (!empty($scroling)) {
+                            $personaScroll = max($scroling);
+                        }
                         break;
                     }
                 }
