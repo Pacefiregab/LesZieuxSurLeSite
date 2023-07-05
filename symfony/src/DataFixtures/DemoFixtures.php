@@ -63,11 +63,36 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
 
     private function personaFixtures(ObjectManager $manager): void
     {
+        //first
         $persona = new Persona();
         $persona->setName('Acheter 4 tickets +');
-        $persona->setLibelle(Persona::FLAGS_LIBELLE[Persona::FLAG_PREMIUM_TICKETS]);
+        $persona->setLibelle("Achete 4 tickets premium");
         $persona->setDuration(120);
         $persona->setFlag(Persona::FLAG_PREMIUM_TICKETS);
+        $this->personaRepository->save($persona, true);
+
+        //second persona
+        $persona = new Persona();
+        $persona->setName(Persona::FLAGS_LIBELLE[Persona::FLAG_YT_GILDOR]);
+        $persona->setFlag(Persona::FLAG_YT_GILDOR);
+        $persona->setLibelle("Recherche de la chaîne youtube de l'artiste Gildor");
+        $persona->setDuration(60);
+        $this->personaRepository->save($persona, true);
+
+        //third persona
+        $persona = new Persona();
+        $persona->setName(Persona::FLAGS_LIBELLE[Persona::FLAG_FREESYLE_ARTIST]);
+        $persona->setFlag(Persona::FLAG_FREESYLE_ARTIST);
+        $persona->setLibelle("Recherche l'artiste performant le freestyle dans l'agenda");
+        $persona->setDuration(120);
+        $this->personaRepository->save($persona, true);
+
+        //fourth persona
+        $persona = new Persona();
+        $persona->setName(Persona::FLAGS_LIBELLE[Persona::FLAG_TWITTER]);
+        $persona->setFlag(Persona::FLAG_TWITTER);
+        $persona->setLibelle("Recherche le lien vers le compte twitter");
+        $persona->setDuration(30);
         $this->personaRepository->save($persona, true);
     }
 
