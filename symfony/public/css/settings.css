@@ -56,7 +56,7 @@ div.element_filtre {
     width: 100%;
     text-align: center;
     justify-content: space-between;
-    height : 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     padding: 0 10px 0 10px;
@@ -138,7 +138,9 @@ div.filtre::-webkit-scrollbar {
     height: 100%;
 }
 
-div.filtre::-webkit-scrollbar { width: 0 !important }
+div.filtre::-webkit-scrollbar {
+    width: 0 !important
+}
 
 
 #listElement::-webkit-scrollbar {
@@ -166,12 +168,13 @@ button {
     border-radius: var(--border_radius);
     background-color: var(--color_secondary);
     width: 100%;
-    max-width: 200px;
+    max-width: 300px;
     height: 50px;
     font-size: 1.2em;
     font-weight: lighter;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    transition: color, background-color 0.3s;
 }
 
 button :hover {
@@ -221,8 +224,9 @@ a, a:hover, a:active, a:visited {
     width: 20px;
     border-radius: 50%;
 }
-button#backButton{
-    width:100px;
+
+button#backButton {
+    width: 100px;
     position: absolute;
     left: 30px;
 }
@@ -231,4 +235,15 @@ button#launchButton {
     width: 250px;
     position: absolute;
     left: 30px;
+}
+
+button.button_hitmap {
+    margin: 0 auto;
+}
+
+button:hover{
+    color:white;
+    background-color: #257c77;
+    transition: 0.3s;
+    transition-timing-function: linear;
 }
