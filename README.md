@@ -12,6 +12,7 @@
 4. Ouvrez `https://localhost` dans votre navigateur Web préféré et [acceptez le certificat TLS généré automatiquement](https://stackoverflow.com/a/15076602/1352334)
 5. Entrez dans le container php : `docker exec -it lesZieuxSurLeSite-php bash`
 6. Exécutez Doctrine Shema Update : `php bin/console d:s:u`
+7. Peupler la base de données : `php bin/console doctrine:fixtures:load`
 
 Pour arrerter le docker éxécutez : `docker compose down --remove-orphans`
 
