@@ -7,6 +7,10 @@
     } %}
 {% endblock %}
 
+{% block backButton %}
+    {% include 'launchButton.html.twig' %}
+{% endblock %}
+
 {% block sidebar %}
     {% include 'sideBar.html.twig' with {
         'items': templates|map(template => {
@@ -14,8 +18,7 @@
             'id': template.id,
             'primary': template.data.primaryColor,
             'secondary': template.data.secondaryColor,
-        }),
-        'noPlus' : true,
+        })
     } %}
 {% endblock %}
 

@@ -1,6 +1,7 @@
 
 function goBack() {
-    if (url.includes("templates") && url.includes("sessions")) {
+    const url = window.location.href;
+    if (url.includes("templates")) {
         window.location.replace("http://localhost/templates/details");
     } else {
         window.location.replace("http://localhost/");
@@ -8,5 +9,5 @@ function goBack() {
 }
 
 function launchSession() {
-    window.location = 'ui';
+    window.location.replace("http://localhost/ui");
 }
