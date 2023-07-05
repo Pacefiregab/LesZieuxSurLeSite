@@ -51,7 +51,10 @@ export class dashboard{
 
             let card = document.querySelector('#' + key);
             let data = this.data[key];
-
+            //si data est un nombre decimal a plus de 2 chiffres apres la virgule
+            if (typeof data == 'number' && data % 1 != 0) {
+                data = data.toFixed(2);
+            }
             if(key == 'successRate'){
                 data = data + '%';
             }
