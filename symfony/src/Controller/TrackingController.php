@@ -96,7 +96,7 @@ class TrackingController extends AbstractController
         $entityManager->flush();
         $session->setTitle('Session n°'.$session->getId());
         $entityManager->flush();
-        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getId()]);
+        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getPersona()->getId()]);
     }
 
     #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]
