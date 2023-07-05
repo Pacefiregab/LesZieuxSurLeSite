@@ -3,11 +3,11 @@ import { chartGenerateTemplate } from "/js/template/chartGenerateTemplate.js";
 function formatTime(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
-    
+
     // Ajouter un zéro devant les minutes et les secondes si nécessaire
     var formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
     var formattedSeconds = (remainingSeconds < 10) ? "0" + remainingSeconds : remainingSeconds;
-    
+
     var formattedTime = formattedMinutes + ":" + formattedSeconds;
     return formattedTime;
   }
@@ -21,11 +21,18 @@ export class details {
      */
     chartGenerateTemplate;
 
+    /**
+     * @var {Node} bouton_detail - bouton pour afficher les détails
+     */
+    bouton_detail = document.querySelector('#details');
+
     constructor(data) {
         this.data = data;
         this.chartGenerateTemplate = new chartGenerateTemplate();
         console.log(this.data);
         if (this.data !== null) {
+            this.bouton_detail.setAttribute('onclick', 'window.location.href = "' + this.data.id + '/sessions"');
+
             document.querySelector("#titleTemplate").innerHTML = this.data.name;
             document.querySelector(".primaryColor").style.backgroundColor =
                 this.data.data.primaryColor;
