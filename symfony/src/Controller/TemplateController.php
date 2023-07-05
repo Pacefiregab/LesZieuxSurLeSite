@@ -169,10 +169,10 @@ class TemplateController extends AbstractController
             'averageTime' => count($sessions) > 0 ? array_sum(array_map(function ($session) {
                 return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
             }, $sessions)) / count($sessions) : 0,
-            'minTime' => count($personaSessions) > 0 ? min(array_map(function ($session) {
+            'minTime' => count($sessions) > 0 ? min(array_map(function ($session) {
                 return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
             }, $sessions)) : 0,
-            'maxTime' => count($personaSessions) > 0 ? max(array_map(function ($session) {
+            'maxTime' => count($sessions) > 0 ? max(array_map(function ($session) {
                 return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
             }, $sessions)) : 0,
         ];
