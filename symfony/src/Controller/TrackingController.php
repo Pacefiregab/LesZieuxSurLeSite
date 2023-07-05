@@ -88,7 +88,7 @@ class TrackingController extends AbstractController
         $this->trackingRepository->save($mouseTracking, true);
 
 
-        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getId()]);
+        return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getPersona()->getId()]);
     }
 
     #[Route('/{id}/edit', name: 'trackings_edit', methods: ['GET', 'POST'])]
