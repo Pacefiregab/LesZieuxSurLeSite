@@ -22,12 +22,8 @@ class UiController extends AbstractController
         if (!$session->getId()) {
             $persona = $entityManager->getRepository(Persona::class)->findOneBy([]);
             $template = $entityManager->getRepository(Template::class)->findOneBy([]);
-            $session->setTitle('New Session');
             $session->setTemplate($template);
             $session->setPersona($persona);
-
-            $entityManager->persist($session);
-            $entityManager->flush();
         }
         return $this->render('ui/index.html.twig', [
             'data' => $session->getTemplate()?->getData() ?? [],

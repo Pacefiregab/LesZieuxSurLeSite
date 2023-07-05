@@ -141,7 +141,9 @@ function sendRecord(ws) {
             startDate,
             endDate,
             isSuccess,
-            session_id: $('input[name="session_id"]').val(),
+            sessionId: $('input[name="session_id"]').val(),
+            templateId: $('input[name="template_id"]').val(),
+            personaId: $('input[name="persona_id"]').val(),
         }
     })
         .then((data) => {

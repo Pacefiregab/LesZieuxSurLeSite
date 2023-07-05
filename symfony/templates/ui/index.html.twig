@@ -775,7 +775,6 @@
 							<div class="col-lg-3 col-12 mt-5">
 								<p class="copyright-text">Copyright © 2036 Festoch Sympatoch Company</p>
 							</div>
-
 							<div class="col-lg-8 col-12 mt-lg-5">
 								<ul class="site-footer-links">
 									<li class="site-footer-link-item">
@@ -822,6 +821,8 @@
         <input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
         <input type="hidden" name="duration" value="{{ persona.duration ?? '' }}">
         <input type="hidden" name="template_data" value="{{ data|json_encode() }}">
+        <input type="hidden" name="template_id" value="{{ session.template.id }}">
+        <input type="hidden" name="persona_id" value="{{ session.persona.id }}">
         <input type="hidden" name="session_id" value="{{ session.id }}">
 		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
 		<input type="hidden" name="heatmapEye" value="{{ heatmapDataEyeData }}">

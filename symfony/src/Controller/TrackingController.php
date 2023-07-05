@@ -49,8 +49,14 @@ class TrackingController extends AbstractController
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $data = $request->request->all();
-
-        $session = $entityManager->getRepository(Session::class)->find($data['session_id']);
+        $sessionId = $data['sessionId'] ?? null;
+        $session = $sessionId ? $entityManager->getRepository(Session::class)->find($sessionId) : null;
+        if(! $session instanceof Session) {
+            $session = (new Session())
+                ->setPersona($entityManager->getRepository(Persona::class)->find($data['personaId']))
+                ->setTemplate($entityManager->getRepository(Template::class)->find($data['templateId']));
+            $entityManager->persist($session);
+        }
 
         //ajout de date de début + fin
         $session->setDateStart(new DateTime(date("Y-m-d H:i:s", $data['startDate'])));
@@ -87,7 +93,9 @@ class TrackingController extends AbstractController
             ->setData(json_decode($data['mouseRecord']));
         $this->trackingRepository->save($mouseTracking, true);
 
-
+        $entityManager->flush();
+        $session->setTitle('Session n°'.$session->getId());
+        $entityManager->flush();
         return $this->redirectToRoute('personas_show_sessions', ['id' => $session->getId()]);
     }
 
