@@ -13,11 +13,12 @@ use App\Repository\TrackingRepository;
 use DateInterval;
 use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements FixtureGroupInterface
 {
 
     private Generator $faker;
@@ -43,6 +44,12 @@ class AppFixtures extends Fixture
         $this->sessionRepository = $sessionRepository;
         $this->faker = Factory::create();
     }
+
+    public static function getGroups(): array
+    {
+        return ['dev'];
+    }
+
     public function load(ObjectManager $manager): void
     {
         $this->personaFixtures($manager);
