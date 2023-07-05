@@ -1,0 +1,11 @@
+<ul class="navbar card">
+    {% if focus == 'template' %}
+        <a href="{{ lienPersonas }}">Personas</a>
+        <a href="{{ lienTemplate }}" class="active">Template</a>
+    {% else%}
+        <a href="{{ lienPersonas }}" class="active">Personas</a>
+        <a href="{{ lienTemplate }}">Template</a>
+    {% endif %}
+
+</ul>
+

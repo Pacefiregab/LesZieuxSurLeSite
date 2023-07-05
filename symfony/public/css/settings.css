@@ -22,7 +22,7 @@
     box-sizing: border-box;
 }
 
-div.card {
+.card {
     background-color: var(--color_card);
     font-family: 'Roboto', sans-serif;
     border-radius: var(--border_radius);
@@ -232,3 +232,28 @@ button#launchButton {
     position: absolute;
     left: 30px;
 }
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px 0 20px;
+    list-style: none;
+    flex-direction: row;
+    position: absolute;
+    width: 20%;
+    top: 0%;
+    right: 2%;
+
+}
+.navbar a{
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    list-style: none;
+}
+.navbar a.active{
+    border-bottom: 2px solid var(--color_primary);
+}
+
+.navbar a:hover
