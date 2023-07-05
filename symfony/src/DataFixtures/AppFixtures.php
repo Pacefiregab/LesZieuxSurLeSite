@@ -296,5 +296,22 @@ class AppFixtures extends Fixture
             "secondaryColor" => "#527B1D"
         ));
         $this->templateRepository->save($template, true);
+
+        //fourth template -> pink hue
+        $template = new Template();
+        $template->setName("Template de rose");
+        $template->setData(array(
+            "reverseRow" => true,
+            "hideHeader" => false,
+            "stickyHeader" => false,
+            "specialButtonForTicket" => true,
+            "contactMapFirst" => true,
+            "changeCheckBoxSelect" => true,
+            "whiteColor" => "#8757DF",
+            "darkColor" => "#1A28BF",
+            "primaryColor" => "#F385FE",
+            "secondaryColor" => "#BE6FEE"
+        ));
+        $this->templateRepository->save($template, true);
     }
 }

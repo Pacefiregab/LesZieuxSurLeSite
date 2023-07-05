@@ -58,6 +58,8 @@ let windowHeight = document.body.clientHeight;
 const flag = $('input[name="flag"]').val();
 const duration = $('input[name="duration"]').val();
 
+const bonk = new Audio('/public/sound/bonk.mp3');
+
 function initEventCapture() {
     // wait to connect
     const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
@@ -91,6 +93,7 @@ function initEventCapture() {
 
         if ($target.data('flag') === flag) {
             isSuccess = true;
+            bonk.play();
             sendRecord(ws);
         }
     });
