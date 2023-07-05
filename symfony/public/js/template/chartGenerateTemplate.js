@@ -5,12 +5,11 @@ export class chartGenerateTemplate {
     ctx;
     myChart;
 
-    constructor() {
+    constructor(element) {
         this.ctx = document.getElementById("sessionsChart");
-        //vider ctx
     }
 
-    buildChart(data,) {
+    buildChart(data) {
         console.log(data);
         if (this.myChart != undefined){
             this.myChart.destroy()

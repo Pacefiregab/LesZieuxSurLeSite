@@ -11,6 +11,7 @@ function formatTime(seconds) {
     var formattedTime = formattedMinutes + ":" + formattedSeconds;
     return formattedTime;
   }
+  
 export class details {
     /**
      * @var {Array} data - tableau des données en clé les cards et en valeur les données
@@ -102,6 +103,54 @@ export class details {
             document.querySelector(".minTime").innerHTML = "min : " + formatTime(this.data.templateStatistics.minTime)
             document.querySelector(".maxTime").innerHTML = "max : " + formatTime(this.data.templateStatistics.maxTime)
             document.querySelector(".averageTime h3").innerHTML = formatTime(this.data.templateStatistics.averageTime)
+        
+        let statArea = document.querySelector("#statSessionTemplateArea");
+        statArea.innerHTML = "";
+        let personasStatistics = (this.data.personasStatistics);
+
+        Object.keys(personasStatistics).forEach(persona => {
+            let statSessionTemplate = document.createElement("div");
+            statSessionTemplate.classList.add("statSessionCard");
+            statSessionTemplate.setAttribute("id", "statSessionCard"+persona);
+
+            let statSessionTemplateTitle = document.createElement("p")
+            statSessionTemplateTitle.innerHTML = personasStatistics[persona].name;
+            statSessionTemplate.appendChild(statSessionTemplateTitle);
+
+            let canvas = document.createElement('canvas');
+            canvas.setAttribute('id','chart'+persona);
+            statSessionTemplate.appendChild(canvas);
+            
+            
+            statArea.appendChild(statSessionTemplate);
+
+            let chart = new Chart(canvas, {
+                type: 'doughnut',
+                data:                      {
+                    labels: ["Echec", "Succès"],
+                    datasets: [
+                        {
+                            data: [
+                               4,6
+                            ],
+                            backgroundColor: ["#e30909", "#008a29"],
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                          display: false
+                        }
+                      }
+                }
+            });
+
+
+        });
+
+        
         }
     }
 }
