@@ -68,7 +68,7 @@ export class personaShow{
             document.querySelector('#nom_template').innerHTML  = this.data.template.name;
             document.querySelector('#nombre_clique').innerHTML = this.data.graph[0];
             document.querySelector('#button_hitmap').addEventListener('click', () => {
-                window.location.href = `/ui/${id_session}/heatmap`
+                window.open(`/ui/${id_session}/heatmap`, '_blank');
             });
         }
 
