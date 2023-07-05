@@ -98,10 +98,12 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
 
     public function sessionFixtures(ObjectManager $manager): void
     {
+        /*
         $template = new Template();
         $template->setName("Template n°1");
         $template->setData(array());
         $this->templateRepository->save($template, true);
+        */
     }
 
     public function templateFixtures(ObjectManager $manager): void
