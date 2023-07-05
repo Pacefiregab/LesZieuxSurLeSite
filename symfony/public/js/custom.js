@@ -91,8 +91,6 @@ function initEventCapture() {
         isSuccess = false
     }
 
-    console.log(flag)
-
     $(document).on('click', function (event) {
         clickRecord.push({
             X: event.pageX, Y: event.pageY, time: event.timeStamp,
@@ -126,8 +124,6 @@ function treatMessage(message) {
     const msg = JSON.parse(message.data);
     const { eyeX, eyeY } = processEyePosition(msg.data.X, msg.data.Y);
 
-    $('.navbar-brand').html(eyeX + ' : ' + eyeY);
-
     if (eyeX || eyeY) {
         eyeRecord.push({
             X: eyeX, Y: eyeY, time: msg.data.Timestamp,
@@ -136,6 +132,12 @@ function treatMessage(message) {
 }
 
 function sendRecord(ws) {
+    //end modal display
+    $('#endModal').modal('show');
+    $('#modalResultBody').html(isSuccess ? "Vous avez réussi le scénario! Veuillez attendre la redirection automatique."
+        : "Vous avez échoué le scénario! Veuillez attendre la redirection automatique.");
+
+    //closing of websocket and sending of the data
     ws.close();
     endDate = Date.now()/1000;
     $.ajax({
@@ -162,13 +164,6 @@ function sendRecord(ws) {
             ws.close();
             window.location.href =data['detail'];
         })
-
-    //notify the user that the session is finished
-    if(isSuccess) {
-        alert("Vous avez réussi le scénario! Veuillez attendre la redirection automatique.")
-    } else {
-        alert("Vous avez échoué le scénario! Veuillez attendre la redirection automatique.")
-    }
 }
 
 function processEyePosition(eyeX, eyeY) {

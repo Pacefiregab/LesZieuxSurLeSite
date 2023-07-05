@@ -5,13 +5,19 @@
 
     <div id="fields">
         <div class="card">
-            <label for="name">Nom du persona</label>
+            <label for="name">Nom de l'objectif</label>
             <input type="text" id="name" name="name" value="{{ persona.name }}">
         </div>
 
         <div class="card">
-            <label for="libelle"> Libelle du persona</label>
+            <label for="libelle"> Libelle de l'objectif</label>
             <input type="text" id="libelle" name="libelle" value="{{ persona.libelle }}">
+        </div>
+
+
+        <div class="card">
+            <label for="libelle">Temps maximum d'un enregistrement (s)</label>
+            <input type="number" id="duration" name="duration" value="{{ persona.duration }}">
         </div>
 
         <div class="card">
@@ -28,6 +34,8 @@
                 {% endfor %}
             </select>
         </div>
+
+
     </div>
 
     <button type="submit">

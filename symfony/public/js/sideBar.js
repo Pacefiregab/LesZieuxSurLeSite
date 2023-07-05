@@ -1,12 +1,12 @@
-function getCurrentURL () {
+function getCurrentURL() {
     return window.location.href;
 }
 
 function setHrefURL(url, baliseHref) {
-    if(url.includes("personas") && url.includes("sessions")) {
+    if (url.includes("personas") && url.includes("sessions")) {
         baliseHref.href = "https://localhost/ui";
-    }
-    else if (url.includes("dashboard")) {
+    } else {
+        //TODO faire la distinction entre le redirect vers les détais du persona ou de l'interface. Nécessite l'attente de la nouvelle liste
         baliseHref.href = "https://localhost/personas/index";
     }
 }

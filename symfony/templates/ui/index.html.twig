@@ -1,264 +1,283 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<meta name="description" content="">
-		<meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		<title>Festoch</title>
+    <title>Festoch</title>
 
-		<!-- CSS FILES -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- CSS FILES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-		<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;400;700&display=swap" rel="stylesheet">
 
-		<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-		<link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet">
 
-		<link href="{{ asset('css/templatemo-festava-live.css') }}" rel="stylesheet">
-         <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <link href="{{ asset('css/templatemo-festava-live.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 
-	</head>
+</head>
 
-	<body class="{{ not (heatmap??false) ? 'modal_open' : ''}}">
-    {% if not (heatmap??false)%}
-		<div id="startModal" class="modal" tabindex="-1" role="dialog">
-			<div class="modal-dialog modal-dialog-centered" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalCenterTitle">Objectif :</h5>
-					</div>
-					<div class="modal-body">{{constant ("App\\Entity\\Persona::FLAGS_LIBELLE")[persona.flag]}}</div>
-					<div class="modal-footer">
-						<button id="startSessionButton" class="btn btn-primary" type="button" data-bs-dismiss="modal">Démarrer</button>
-					</div>
-				</div>
-			</div>
-		</div>
-        {% endif %}
-		<main>
-			{% if not (heatmap??false)%}
-				<div id="heatmap" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; pointer-events: none;"></div>
-			{% endif %}
+<body class="{{ not (heatmap??false) ? 'modal_open' : '' }}">
+{% if not (heatmap??false) %}
+    <div id="startModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Objectif :</h5>
+                </div>
+                <div class="modal-body">{{ constant ("App\\Entity\\Persona::FLAGS_LIBELLE")[persona.flag] }}</div>
+                <div class="modal-footer">
+                    <button id="startSessionButton" class="btn btn-primary" type="button" data-bs-dismiss="modal">
+                        Démarrer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			<header class="site-header">
-				<div class="container">
-					<div class="row">
+    <div id="endModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Vous avez fini la simulation :</h5>
+                </div>
+                <div class="modal-body" id="modalResultBody"></div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<main>
+    {% if not (heatmap??false) %}
+        <div id="heatmap"
+             style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; pointer-events: none;"></div>
+    {% endif %}
 
-						<div class="col-lg-12 col-12 d-flex flex-wrap">
-							<p class="d-flex me-4 mb-0">
-								<i class="bi-person custom-icon me-2"></i>
-								<strong class="text-dark">Bienvenue au Festival Festoch Sympatoch 2023</strong>
-							</p>
-						</div>
+    <header class="site-header">
+        <div class="container">
+            <div class="row">
 
-					</div>
-				</div>
-			</header>
+                <div class="col-lg-12 col-12 d-flex flex-wrap">
+                    <p class="d-flex me-4 mb-0">
+                        <i class="bi-person custom-icon me-2"></i>
+                        <strong class="text-dark">Bienvenue au Festival Festoch Sympatoch 2023</strong>
+                    </p>
+                </div>
 
-			<nav class="navbar navbar-expand-lg {{(data.stickyHeader??true) ? '' : 'no-sticky '}}">
-				<div class="container">
-					<a class="navbar-brand" href="index.html">
-						Festoch Sympatoch
-					</a>
+            </div>
+        </div>
+    </header>
 
-					<a href="ticket.html" class="btn custom-btn d-lg-none ms-auto me-4">Acheter Ticket</a>
+    <nav class="navbar navbar-expand-lg {{ (data.stickyHeader??true) ? '' : 'no-sticky ' }}">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                Festoch Sympatoch
+            </a>
 
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+            <a href="ticket.html" class="btn custom-btn d-lg-none ms-auto me-4">Acheter Ticket</a>
 
-					<div class="collapse navbar-collapse" id="navbarNav">
-						<ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_1">Accueil</a>
-							</li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_2">A propos</a>
-							</li>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav align-items-lg-center ms-auto me-lg-5">
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_1">Accueil</a>
+                    </li>
 
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_3">Artistes</a>
-							</li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_2">A propos</a>
+                    </li>
 
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_4">Agenda</a>
-							</li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_3">Artistes</a>
+                    </li>
 
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_5">Tarifs</a>
-							</li>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_4">Agenda</a>
+                    </li>
 
-							<li class="nav-item">
-								<a class="nav-link click-scroll" href="#section_6">Contact</a>
-							</li>
-							{% if data.specialButtonForTicket is defined and data.specialButtonForTicket == false %}
-								<li class="nav-item">
-									<a class="nav-link click-scroll" href="#section_7">Acheter Ticket</a>
-								</li>
-							</ul>
-					{% else %}
-						</ul>
-						<a href="#section_7" class="btn custom-btn d-lg-block d-none">Acheter Ticket</a>
-					{% endif %}
-				</div>
-			</div>
-		</nav>
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_5">Tarifs</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_6">Contact</a>
+                    </li>
+                    {% if data.specialButtonForTicket is defined and data.specialButtonForTicket == false %}
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="#section_7">Acheter Ticket</a>
+                    </li>
+                </ul>
+                {% else %}
+                    </ul>
+                    <a href="#section_7" class="btn custom-btn d-lg-block d-none">Acheter Ticket</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
 
 
-		<section class="hero-section" id="section_1">
-			<div class="section-overlay"></div>
+    <section class="hero-section" id="section_1">
+        <div class="section-overlay"></div>
 
-			<div class="container d-flex justify-content-center align-items-center">
-				<div class="row">
+        <div class="container d-flex justify-content-center align-items-center">
+            <div class="row">
 
-					<div class="col-12 mt-auto mb-5 text-center">
-						<small>Festoch Sympatoch Présente</small>
+                <div class="col-12 mt-auto mb-5 text-center">
+                    <small>Festoch Sympatoch Présente</small>
 
-						<h1 class="white mb-5">La Grosse soirée 2023</h1>
+                    <h1 class="white mb-5">La Grosse soirée 2023</h1>
 
-						<a class="btn custom-btn smoothscroll" href="#section_2">C'est parti !</a>
-					</div>
+                    <a class="btn custom-btn smoothscroll" href="#section_2">C'est parti !</a>
+                </div>
 
-					<div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
-						<div class="date-wrap">
-							<h5 class="white">
-								<i class="custom-icon bi-clock me-2"></i>
-								10 - 12<sup>th</sup>, Dec 2023
-							</h5>
-						</div>
+                <div class="col-lg-12 col-12 mt-auto d-flex flex-column flex-lg-row text-center">
+                    <div class="date-wrap">
+                        <h5 class="white">
+                            <i class="custom-icon bi-clock me-2"></i>
+                            10 - 12<sup>th</sup>, Dec 2023
+                        </h5>
+                    </div>
 
-						<div class="location-wrap mx-auto py-3 py-lg-0">
-							<h5 class="white">
-								<i class="custom-icon bi-geo-alt me-2"></i>
-								Jardin Ortholan, Auch
-							</h5>
-						</div>
+                    <div class="location-wrap mx-auto py-3 py-lg-0">
+                        <h5 class="white">
+                            <i class="custom-icon bi-geo-alt me-2"></i>
+                            Jardin Ortholan, Auch
+                        </h5>
+                    </div>
 
-						<div class="social-share">
-							<ul class="social-icon d-flex align-items-center justify-content-center">
-								<span class="white me-3">Partagez:</span>
+                    <div class="social-share">
+                        <ul class="social-icon d-flex align-items-center justify-content-center">
+                            <span class="white me-3">Partagez:</span>
 
-								<li class="social-icon-item">
-									<a href="#" class="social-icon-link">
-										<span class="bi-facebook"></span>
-									</a>
-								</li>
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-facebook"></span>
+                                </a>
+                            </li>
 
-								<li class="social-icon-item">
-									<a href="#" class="social-icon-link">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
 										<span
-                                            class="bi-twitter"
-                                            data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
+                                                class="bi-twitter"
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
                                         ></span>
-									</a>
-								</li>
+                                </a>
+                            </li>
 
-								<li class="social-icon-item">
-									<a href="#" class="social-icon-link">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
 										<span
-                                            class="bi-instagram"
-                                            data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
+                                                class="bi-instagram"
+                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
                                         ></span>
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-			<div class="video-wrap">
-				<video autoplay="" loop="" muted="" class="custom-video" poster="">
-					<source src="{{ asset('video/pexels-2022395.mp4') }}" type="video/mp4">
+        <div class="video-wrap">
+            <video autoplay="" loop="" muted="" class="custom-video" poster="">
+                <source src="{{ asset('video/pexels-2022395.mp4') }}" type="video/mp4">
 
-					Your browser does not support the video tag.
-				</video>
-			</div>
-		</section>
-
-
-		<section class="about-section section-padding" id="section_2">
-			<div class="container">
-				<div class="row rowReversable">
-
-					<div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center {{ (data.reverseRow??false) ? 'order-2' : ''}}">
-						<div class="services-info">
-							<h2 class="white mb-4">Information sur le festoch 2023</h2>
-
-							<p class="white">Mesdames et messieurs, le festival "Festoch Sympatoch" d'Auch est l'endroit idéal pour célébrer la variété française avec des artistes exceptionnels tels que Jean-Pierre Fromage, Jean-Pascal l'Agitateur et Gildor.</p>
-
-							<h6 class="white mt-4">Une expérience musicale inoubliable</h6>
-
-							<p class="white">Venez nous rejoindre à Auch et laissez-vous emporter par la magie de ce festival unique en son genre.</p>
-
-							<h6 class="white mt-4">Des soirées de folies !</h6>
-
-							<p class="white">Partager avec tous vos amis ! Merci !</p>
-						</div>
-					</div>
-
-					<div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-1' : ''}}">
-						<div class="about-text-wrap">
-							<img src="{{ asset('images/pexels-alexander-suhorucov-6457579.jpg') }}" class="about-image img-fluid">
-
-							<div class="about-text-info d-flex">
-								<div class="d-flex">
-									<i class="about-text-icon bi-person"></i>
-								</div>
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
 
 
-								<div class="ms-4">
-									<h3>Un moment heureux</h3>
+    <section class="about-section section-padding" id="section_2">
+        <div class="container">
+            <div class="row rowReversable">
 
-									<p class="mb-0">Avec nous, la meilleurs des expériences festivalière</p>
-								</div>
-							</div>
-						</div>
-					</div>
+                <div class="col-lg-6 col-12 mb-4 mb-lg-0 d-flex align-items-center {{ (data.reverseRow??false) ? 'order-2' : '' }}">
+                    <div class="services-info">
+                        <h2 class="white mb-4">Information sur le festoch 2023</h2>
 
-				</div>
-			</div>
-		</section>
+                        <p class="white">Mesdames et messieurs, le festival "Festoch Sympatoch" d'Auch est l'endroit
+                            idéal pour célébrer la variété française avec des artistes exceptionnels tels que
+                            Jean-Pierre Fromage, Jean-Pascal l'Agitateur et Gildor.</p>
+
+                        <h6 class="white mt-4">Une expérience musicale inoubliable</h6>
+
+                        <p class="white">Venez nous rejoindre à Auch et laissez-vous emporter par la magie de ce
+                            festival unique en son genre.</p>
+
+                        <h6 class="white mt-4">Des soirées de folies !</h6>
+
+                        <p class="white">Partager avec tous vos amis ! Merci !</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-1' : '' }}">
+                    <div class="about-text-wrap">
+                        <img src="{{ asset('images/pexels-alexander-suhorucov-6457579.jpg') }}"
+                             class="about-image img-fluid">
+
+                        <div class="about-text-info d-flex">
+                            <div class="d-flex">
+                                <i class="about-text-icon bi-person"></i>
+                            </div>
 
 
-		<section class="artists-section section-padding" id="section_3">
-			<div class="container">
-				<div class="row justify-content-center">
+                            <div class="ms-4">
+                                <h3>Un moment heureux</h3>
 
-					<div class="col-12 text-center">
-						<h2 class="mb-4">Rencontrer vos Artistes</h1>
-					</div>
+                                <p class="mb-0">Avec nous, la meilleurs des expériences festivalière</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-					<div class="col-lg-5 col-12">
-						<div class="artists-thumb">
-							<div class="artists-image-wrap">
-								<img src="{{ asset('images/artists/jpfromage.png') }}" class="artists-image img-fluid">
-							</div>
+            </div>
+        </div>
+    </section>
 
-							<div class="artists-hover">
-								<p>
-									<strong>Nom:</strong>
-									Jean Pierre Fromage
-								</p>
 
-								<p>
-									<strong>Birthdate:</strong>
-									16 Août, 1958
-								</p>
+    <section class="artists-section section-padding" id="section_3">
+        <div class="container">
+            <div class="row justify-content-center">
 
-								<p>
-									<strong>Music:</strong>
-									Pop, R&amp;B
-								</p>
+                <div class="col-12 text-center">
+                    <h2 class="mb-4">Rencontrer vos Artistes</h1>
+                </div>
 
-								<hr>
+                <div class="col-lg-5 col-12">
+                    <div class="artists-thumb">
+                        <div class="artists-image-wrap">
+                            <img src="{{ asset('images/artists/jpfromage.png') }}" class="artists-image img-fluid">
+                        </div>
+
+                        <div class="artists-hover">
+                            <p>
+                                <strong>Nom:</strong>
+                                Jean Pierre Fromage
+                            </p>
+
+                            <p>
+                                <strong>Birthdate:</strong>
+                                16 Août, 1958
+                            </p>
+
+                            <p>
+                                <strong>Music:</strong>
+                                Pop, R&amp;B
+                            </p>
+
+                            <hr>
 
 								<p class="mb-0">
 									<strong>Youtube Channel:</strong>
@@ -268,344 +287,364 @@
 						</div>
 					</div>
 
-					<div class="col-lg-5 col-12">
-						<div class="artists-thumb">
-							<div class="artists-image-wrap">
-								<img src="{{ asset('images/artists/gildor.png') }}" class="artists-image img-fluid">
-							</div>
+                <div class="col-lg-5 col-12">
+                    <div class="artists-thumb">
+                        <div class="artists-image-wrap">
+                            <img src="{{ asset('images/artists/gildor.png') }}" class="artists-image img-fluid">
+                        </div>
 
-							<div class="artists-hover">
-								<p>
-									<strong>Nom:</strong>
-									Gildor
-								</p>
+                        <div class="artists-hover">
+                            <p>
+                                <strong>Nom:</strong>
+                                Gildor
+                            </p>
 
-								<p>
-									<strong>Birthdate:</strong>
-									20 Février, 1988
-								</p>
+                            <p>
+                                <strong>Birthdate:</strong>
+                                20 Février, 1988
+                            </p>
 
-								<p>
-									<strong>Style:</strong>
-									Punk Conscient
-								</p>
+                            <p>
+                                <strong>Style:</strong>
+                                Punk Conscient
+                            </p>
 
-								<hr>
+                            <hr>
 
-								<p class="mb-0">
-									<strong>Chaine Youtube:</strong>
-									<a href="#" data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_GILDOR') }}">Gildor Official</a>
-								</p>
-							</div>
-						</div>
+                            <p class="mb-0">
+                                <strong>Chaine Youtube:</strong>
+                                <a href="#" data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_GILDOR') }}">Gildor
+                                    Official</a>
+                            </p>
+                        </div>
+                    </div>
 
-						<div class="artists-thumb">
-							<img src="{{ asset('images/artists/jean-pascal-lacoste.jpg') }}" class="artists-image img-fluid">
+                    <div class="artists-thumb">
+                        <img src="{{ asset('images/artists/jean-pascal-lacoste.jpg') }}"
+                             class="artists-image img-fluid">
 
-							<div class="artists-hover">
-								<p>
-									<strong>Nom:</strong>
-									Jean Pascal Lacoste
-								</p>
+                        <div class="artists-hover">
+                            <p>
+                                <strong>Nom:</strong>
+                                Jean Pascal Lacoste
+                            </p>
 
-								<p>
-									<strong>Naissance:</strong>
-									8 octobre, 1985
-								</p>
+                            <p>
+                                <strong>Naissance:</strong>
+                                8 octobre, 1985
+                            </p>
 
-								<p>
-									<strong>Style:</strong>
-									Pop
-								</p>
+                            <p>
+                                <strong>Style:</strong>
+                                Pop
+                            </p>
 
-								<hr>
+                            <hr>
 
-								<p class="mb-0">
-									<strong>Chaine Youtube :</strong>
-									<a
+                            <p class="mb-0">
+                                <strong>Chaine Youtube :</strong>
+                                <a
                                         href="#"
                                         data-flag="{{ constant('App\\Entity\\Persona::FLAG_YT_JPLACOSTE') }}">
-                                        JPlacoste Official
-                                    </a>
-								</p>
-							</div>
-						</div>
-					</div>
+                                    JPlacoste Official
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
 
-				</div>
-			</div>
-		</section>
+            </div>
+        </div>
+    </section>
 
 
-		<section class="schedule-section section-padding" id="section_4">
-			<div class="container">
-				<div class="row">
+    <section class="schedule-section section-padding" id="section_4">
+        <div class="container">
+            <div class="row">
 
-					<div class="col-12 text-center">
-						<h2 class="white mb-4">Agenda des concerts</h1>
+                <div class="col-12 text-center">
+                    <h2 class="white mb-4">Agenda des concerts</h1>
 
-						<div class="table-responsive">
-							<table class="schedule-table table table-dark">
-								<thead>
-									<tr>
-										<th scope="col">Date</th>
+                        <div class="table-responsive">
+                            <table class="schedule-table table table-dark">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Date</th>
 
-										<th scope="col">Mercredi</th>
+                                    <th scope="col">Mercredi</th>
 
-										<th scope="col">Jeudi</th>
+                                    <th scope="col">Jeudi</th>
 
-										<th scope="col">Vendredi</th>
+                                    <th scope="col">Vendredi</th>
 
-									</tr>
-								</thead>
+                                </tr>
+                                </thead>
 
-								<tbody>
-									<tr>
-										<th scope="row">Scéne 1</th>
+                                <tbody>
+                                <tr>
+                                    <th scope="row">Scéne 1</th>
 
-										<td class="table-background-image-wrap pop-background-image">
-											<h3>Nuit de la Pop</h3>
+                                    <td class="table-background-image-wrap pop-background-image">
+                                        <h3>Nuit de la Pop</h3>
 
-											<p class="mb-2">19:00 - 23:00</p>
+                                        <p class="mb-2">19:00 - 23:00</p>
 
-											<p>Par Gildor</p>
+                                        <p>Par Gildor</p>
 
-											<div class="section-overlay"></div>
-										</td>
+                                        <div class="section-overlay"></div>
+                                    </td>
 
-										<td class="tab-empty-case"></td>
+                                    <td class="tab-empty-case"></td>
 
-										<td class="table-background-image-wrap rock-background-image">
-											<h3>Rock & Roll</h3>
+                                    <td class="table-background-image-wrap rock-background-image">
+                                        <h3>Rock & Roll</h3>
 
-											<p class="mb-2">19:00 - 22:00</p>
+                                        <p class="mb-2">19:00 - 22:00</p>
 
-											<p>Par Rihana</p>
+                                        <p>Par Rihana</p>
 
-											<div class="section-overlay"></div>
-										</td>
-									</tr>
+                                        <div class="section-overlay"></div>
+                                    </td>
+                                </tr>
 
-									<tr>
-										<th scope="row">Scène 2</th>
+                                <tr>
+                                    <th scope="row">Scène 2</th>
 
-										<td class="tab-empty-case"></td>
+                                    <td class="tab-empty-case"></td>
 
-										<td>
-											<h3>DJ Set</h3>
+                                    <td>
+                                        <h3>DJ Set</h3>
 
-											<p class="mb-2">18:30 - 22:30</p>
+                                        <p class="mb-2">18:30 - 22:30</p>
 
-											<p>Par Jean Pascal</p>
-										</td>
+                                        <p>Par Jean Pascal</p>
+                                    </td>
 
-										<td class="tab-empty-case"></td>
-									</tr>
+                                    <td class="tab-empty-case"></td>
+                                </tr>
 
-									<tr>
-										<th scope="row">Scène 3</th>
+                                <tr>
+                                    <th scope="row">Scène 3</th>
 
-										<td class="table-background-image-wrap country-background-image">
-											<h3>Soirée Country</h3>
+                                    <td class="table-background-image-wrap country-background-image">
+                                        <h3>Soirée Country</h3>
 
-											<p class="mb-2">16:30 - 19:30</p>
+                                        <p class="mb-2">16:30 - 19:30</p>
 
-											<p>By Gildor</p>
+                                        <p>By Gildor</p>
 
-											<div class="section-overlay"></div>
-										</td>
+                                        <div class="section-overlay"></div>
+                                    </td>
 
-										<td class="tab-empty-case"></td>
+                                    <td class="tab-empty-case"></td>
 
-										<td>
-											<h3>Free Styles</h3>
+                                    <td>
+                                        <h3>Free Styles</h3>
 
-											<p class="mb-2">18:00 - 2:00</p>
+                                        <p class="mb-2">18:00 - 2:00</p>
 
-											<p
+                                        <p
                                                 data-flag="{{ constant('App\\Entity\\Persona::FLAG_FREESYLE_ARTIST') }}"
-                                            >Par Alkapote</p>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                                        >Par Alkapote</p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
-		<section class="pricing-section section-padding section-bg" id="section_5">
-			<div class="container">
-				<div class="col-lg-8 col-12 mx-auto">
-					<h2 class="white text-center mb-4">Planifier votre Festoch</h2>
-				</div>
-				<div class="row rowReversable">
+    <section class="pricing-section section-padding section-bg" id="section_5">
+        <div class="container">
+            <div class="col-lg-8 col-12 mx-auto">
+                <h2 class="white text-center mb-4">Planifier votre Festoch</h2>
+            </div>
+            <div class="row rowReversable">
 
-					<div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-2' : ''}}">
-						<div class="pricing-thumb">
-							<div class="d-flex">
-								<div>
-									<h3>
-										<small>Pass Sympatoch</small>
-										120€
-									</h3>
-									<p>Inclus de nombreuses choses:</p>
-								</div>
+                <div class="col-lg-6 col-12 {{ (data.reverseRow??false) ? 'order-2' : '' }}">
+                    <div class="pricing-thumb">
+                        <div class="d-flex">
+                            <div>
+                                <h3>
+                                    <small>Pass Sympatoch</small>
+                                    120€
+                                </h3>
+                                <p>Inclus de nombreuses choses:</p>
+                            </div>
 
-								<p class="pricing-tag ms-auto">Economiser
-									<span>20%</span>
-								</p>
-							</div>
+                            <p class="pricing-tag ms-auto">Economiser
+                                <span>20%</span>
+                            </p>
+                        </div>
 
-							<ul class="pricing-list mt-3">
-								<li class="pricing-list-item">Plateforme en ligne</li>
+                        <ul class="pricing-list mt-3">
+                            <li class="pricing-list-item">Plateforme en ligne</li>
 
-								<li class="pricing-list-item">Musique de haute qualitée</li>
+                            <li class="pricing-list-item">Musique de haute qualitée</li>
 
-								<li class="pricing-list-item">Accès parking</li>
+                            <li class="pricing-list-item">Accès parking</li>
 
-								<li class="pricing-list-item">Contenu standard</li>
-							</ul>
+                            <li class="pricing-list-item">Contenu standard</li>
+                        </ul>
 
-							<a class="link-fx-1 color-contrast-higher mt-4" href="#section_7">
-								<span>Acheter un Ticket</span>
-								<svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
-									<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-										<circle cx="16" cy="16" r="15.5"></circle>
-										<line x1="10" y1="18" x2="16" y2="12"></line>
-										<line x1="16" y1="12" x2="22" y2="18"></line>
-									</g>
-								</svg>
-							</a>
-						</div>
-					</div>
+                        <a class="link-fx-1 color-contrast-higher mt-4" href="#section_7">
+                            <span>Acheter un Ticket</span>
+                            <svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="16" cy="16" r="15.5"></circle>
+                                    <line x1="10" y1="18" x2="16" y2="12"></line>
+                                    <line x1="16" y1="12" x2="22" y2="18"></line>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
 
-					<div class="col-lg-6 col-12 mt-4 mt-lg-0 {{ (data.reverseRow??false) ? 'order-1' : ''}}">
-						<div class="pricing-thumb">
-							<div class="d-flex">
-								<div>
-									<h3>
-										<small>Pass Premium</small>
-										240€</h3>
+                <div class="col-lg-6 col-12 mt-4 mt-lg-0 {{ (data.reverseRow??false) ? 'order-1' : '' }}">
+                    <div class="pricing-thumb">
+                        <div class="d-flex">
+                            <div>
+                                <h3>
+                                    <small>Pass Premium</small>
+                                    240€</h3>
 
-									<p>Une experience premium ?</p>
-								</div>
-							</div>
+                                <p>Une experience premium ?</p>
+                            </div>
+                        </div>
 
-							<ul class="pricing-list mt-3">
-								<li class="pricing-list-item">Plateforme en ligne</li>
+                        <ul class="pricing-list mt-3">
+                            <li class="pricing-list-item">Plateforme en ligne</li>
 
-								<li class="pricing-list-item">Musique de haute qualitée</li>
+                            <li class="pricing-list-item">Musique de haute qualitée</li>
 
-								<li class="pricing-list-item">Accès parking</li>
+                            <li class="pricing-list-item">Accès parking</li>
 
-								<li class="pricing-list-item">Accès Carré VIP</li>
+                            <li class="pricing-list-item">Accès Carré VIP</li>
 
-							</ul>
+                        </ul>
 
-							<a class="link-fx-1 color-contrast-higher mt-4" href="#section_7">
-								<span>Buy Ticket</span>
-								<svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
-									<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-										<circle cx="16" cy="16" r="15.5"></circle>
-										<line x1="10" y1="18" x2="16" y2="12"></line>
-										<line x1="16" y1="12" x2="22" y2="18"></line>
-									</g>
-								</svg>
-							</a>
-						</div>
-					</div>
+                        <a class="link-fx-1 color-contrast-higher mt-4" href="#section_7">
+                            <span>Buy Ticket</span>
+                            <svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
+                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="16" cy="16" r="15.5"></circle>
+                                    <line x1="10" y1="18" x2="16" y2="12"></line>
+                                    <line x1="16" y1="12" x2="22" y2="18"></line>
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
 
-				</div>
-			</div>
-		</section>
+            </div>
+        </div>
+    </section>
 
 
-		<section class="contact-section section-padding" id="section_6">
-			<div class="container">
-				<div class="row">
+    <section class="contact-section section-padding" id="section_6">
+        <div class="container">
+            <div class="row">
 
-					<div class="col-lg-8 col-12 mx-auto">
-						<h2 class="text-center mb-4">Intéressé? Dites Nous</h2>
+                <div class="col-lg-8 col-12 mx-auto">
+                    <h2 class="text-center mb-4">Intéressé? Dites Nous</h2>
 
-						<nav class="d-flex justify-content-center">
-							<div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab" role="tablist">
-								<button class="nav-link {{ (data.contactMapFirst??false) ? 'order-2' : 'active order-1'}}" id="nav-ContactForm-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactForm" type="button" role="tab" aria-controls="nav-ContactForm" aria-selected="false">
-									<h5>Formulaire de contact</h5>
-								</button>
+                    <nav class="d-flex justify-content-center">
+                        <div class="nav nav-tabs align-items-baseline justify-content-center" id="nav-tab"
+                             role="tablist">
+                            <button class="nav-link {{ (data.contactMapFirst??false) ? 'order-2' : 'active order-1' }}"
+                                    id="nav-ContactForm-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactForm"
+                                    type="button" role="tab" aria-controls="nav-ContactForm" aria-selected="false">
+                                <h5>Formulaire de contact</h5>
+                            </button>
 
-								<button class="nav-link {{ (data.contactMapFirst??false) ? 'active order-1' : 'order-2'}}" id="nav-ContactMap-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactMap" type="button" role="tab" aria-controls="nav-ContactMap" aria-selected="false">
-									<h5>Google Maps</h5>
-								</button>
-							</div>
-						</nav>
+                            <button class="nav-link {{ (data.contactMapFirst??false) ? 'active order-1' : 'order-2' }}"
+                                    id="nav-ContactMap-tab" data-bs-toggle="tab" data-bs-target="#nav-ContactMap"
+                                    type="button" role="tab" aria-controls="nav-ContactMap" aria-selected="false">
+                                <h5>Google Maps</h5>
+                            </button>
+                        </div>
+                    </nav>
 
-						<div class="tab-content shadow-lg mt-5" id="nav-tabContent">
-							<div class="tab-pane fade {{ (data.contactMapFirst??false) ? '' : 'active show'}}" id="nav-ContactForm" role="tabpanel" aria-labelledby="nav-ContactForm-tab">
-								<form class="custom-form contact-form mb-5 mb-lg-0" action="#" method="post" role="form">
-									<div class="contact-form-body">
-										<div class="row">
-											<div class="col-lg-6 col-md-6 col-12">
-												<input type="text" name="contact-name" id="contact-name" class="form-control" placeholder="Nom" required>
-											</div>
+                    <div class="tab-content shadow-lg mt-5" id="nav-tabContent">
+                        <div class="tab-pane fade {{ (data.contactMapFirst??false) ? '' : 'active show' }}"
+                             id="nav-ContactForm" role="tabpanel" aria-labelledby="nav-ContactForm-tab">
+                            <form class="custom-form contact-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                                <div class="contact-form-body">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <input type="text" name="contact-name" id="contact-name"
+                                                   class="form-control" placeholder="Nom" required>
+                                        </div>
 
-											<div class="col-lg-6 col-md-6 col-12">
-												<input type="email" name="contact-email" id="contact-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required>
-											</div>
-										</div>
+                                        <div class="col-lg-6 col-md-6 col-12">
+                                            <input type="email" name="contact-email" id="contact-email"
+                                                   pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email"
+                                                   required>
+                                        </div>
+                                    </div>
 
-										<input type="text" name="contact-company" id="contact-company" class="form-control" placeholder="Entreprise" required>
+                                    <input type="text" name="contact-company" id="contact-company" class="form-control"
+                                           placeholder="Entreprise" required>
 
-										<textarea name="contact-message" rows="3" class="form-control" id="contact-message" placeholder="Message"></textarea>
+                                    <textarea name="contact-message" rows="3" class="form-control" id="contact-message"
+                                              placeholder="Message"></textarea>
 
-										<div class="col-lg-4 col-md-10 col-8 mx-auto">
-											<button
+                                    <div class="col-lg-4 col-md-10 col-8 mx-auto">
+                                        <button
                                                 type="submit"
                                                 data-flag="{{ constant('App\\Entity\\Persona::FLAG_CONTACT') }}"
                                                 class="form-control">
-                                                Envoyer
-                                            </button>
-										</div>
-									</div>
-								</form>
-							</div>
+                                            Envoyer
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
 
-							<div class="tab-pane fade {{ (data.contactMapFirst??false) ? 'active show' : ''}}" id="nav-ContactMap" role="tabpanel" aria-labelledby="nav-ContactMap-tab">
-								<iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4496.183167077823!2d0.588379391892189!3d43.647443329449324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a982d000000001%3A0x21172a028220ebbb!2sJardin%20Ortholan!5e1!3m2!1sfr!2sfr!4v1687858029663!5m2!1sfr!2sfr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-							</div>
-						</div>
-					</div>
+                        <div class="tab-pane fade {{ (data.contactMapFirst??false) ? 'active show' : '' }}"
+                             id="nav-ContactMap" role="tabpanel" aria-labelledby="nav-ContactMap-tab">
+                            <iframe class="google-map"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4496.183167077823!2d0.588379391892189!3d43.647443329449324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a982d000000001%3A0x21172a028220ebbb!2sJardin%20Ortholan!5e1!3m2!1sfr!2sfr!4v1687858029663!5m2!1sfr!2sfr"
+                                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
 
-				</div>
-			</div>
-		</section>
+            </div>
+        </div>
+    </section>
 
-		<section class="ticket-section section-padding" id="section_7">
-			<div class="section-overlay"></div>
+    <section class="ticket-section section-padding" id="section_7">
+        <div class="section-overlay"></div>
 
-			<div class="container">
-				<div class="row">
+        <div class="container">
+            <div class="row">
 
 					<div class="col-lg-6 col-10 mx-auto">
 						<form class="custom-form ticket-form mb-5 mb-lg-0" id="ticket-form">
 							<h2 class="text-center mb-4">C'est partis mon kiki</h2>
 
-							<div class="ticket-form-body">
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-12">
-										<input type="text" name="ticket-form-name" id="ticket-form-name" class="form-control" placeholder="Nom" required>
-									</div>
+                        <div class="ticket-form-body">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <input type="text" name="ticket-form-name" id="ticket-form-name"
+                                           class="form-control" placeholder="Nom" required>
+                                </div>
 
-									<div class="col-lg-6 col-md-6 col-12">
-										<input type="email" name="ticket-form-email" id="ticket-form-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required>
-									</div>
-								</div>
+                                <div class="col-lg-6 col-md-6 col-12">
+                                    <input type="email" name="ticket-form-email" id="ticket-form-email"
+                                           pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required>
+                                </div>
+                            </div>
 
-								<input type="tel" class="form-control" name="ticket-form-phone" pattern="[0-9]{10}" placeholder="Téléphone" required="">
+                            <input type="tel" class="form-control" name="ticket-form-phone" pattern="[0-9]{10}"
+                                   placeholder="Téléphone" required="">
 
-								<h6>Choose Ticket Type</h6>
+                            <h6>Choose Ticket Type</h6>
 
 								<div class="row {{ (data.changeCheckBoxSelect??false ? 'd-none' : '')}}">
 									<div class="col-lg-6 col-md-6 col-12">
@@ -627,16 +666,18 @@
 									</div>
 								</div>
 
-								<div class="form-group {{ (data.changeCheckBoxSelect??false ? '' : 'd-none')}}">
-									<select class="form-control" id="TicketForm" name="TicketForm">
-										<option value="Pass Sympatoch">Pass Sympatoch - 120€</option>
-										<option value="Pass Premium">Pass Premium - 240€</option>
-									</select>
-								</div>
+                            <div class="form-group {{ (data.changeCheckBoxSelect??false ? '' : 'd-none') }}">
+                                <select class="form-control" id="TicketForm" name="TicketForm">
+                                    <option value="Pass Sympatoch">Pass Sympatoch - 120€</option>
+                                    <option value="Pass Premium">Pass Premium - 240€</option>
+                                </select>
+                            </div>
 
-								<input type="number" name="ticket-form-number" id="ticket-form-number" class="form-control" min="1" placeholder="Nombres de Tickets" required>
+                            <input type="number" name="ticket-form-number" id="ticket-form-number" class="form-control"
+                                   min="1" placeholder="Nombres de Tickets" required>
 
-								<textarea name="ticket-form-message" rows="3" class="form-control" id="ticket-form-message" placeholder="Requête Spéciales "></textarea>
+                            <textarea name="ticket-form-message" rows="3" class="form-control" id="ticket-form-message"
+                                      placeholder="Requête Spéciales "></textarea>
 
 								<div class="col-lg-4 col-md-10 col-8 mx-auto">
 									<button type="submit" class="form-control">Acheter</button>
@@ -647,198 +688,201 @@
 				</div>
 			</section>
 
-			<footer class="site-footer">
-				<div class="site-footer-top">
-					<div class="container">
-						<div class="row">
+    <footer class="site-footer">
+        <div class="site-footer-top">
+            <div class="container">
+                <div class="row">
 
-							<div class="col-lg-6 col-12">
-								<h2 class="white mb-lg-0">Festoch Sympatoch</h2>
-							</div>
+                    <div class="col-lg-6 col-12">
+                        <h2 class="white mb-lg-0">Festoch Sympatoch</h2>
+                    </div>
 
-							<div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
-								<ul class="social-icon d-flex justify-content-lg-end">
-									<li class="social-icon-item">
-										<a href="#" class="social-icon-link">
+                    <div class="col-lg-6 col-12 d-flex justify-content-lg-end align-items-center">
+                        <ul class="social-icon d-flex justify-content-lg-end">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
 											<span
-                                                class="bi-twitter"
-                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
+                                                    class="bi-twitter"
+                                                    data-flag="{{ constant('App\\Entity\\Persona::FLAG_TWITTER') }}"
                                             ></span>
-										</a>
-									</li>
+                                </a>
+                            </li>
 
-									<li class="social-icon-item">
-										<a href="#" class="social-icon-link">
-											<span class="bi-apple"></span>
-										</a>
-									</li>
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-apple"></span>
+                                </a>
+                            </li>
 
-									<li class="social-icon-item">
-										<a href="#" class="social-icon-link">
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
 											<span
-                                                class="bi-instagram"
-                                                data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
+                                                    class="bi-instagram"
+                                                    data-flag="{{ constant('App\\Entity\\Persona::FLAG_INSTAGRAM') }}"
                                             ></span>
-										</a>
-									</li>
+                                </a>
+                            </li>
 
-									<li class="social-icon-item">
-										<a href="#" class="social-icon-link">
-											<span class="bi-youtube"></span>
-										</a>
-									</li>
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-youtube"></span>
+                                </a>
+                            </li>
 
-									<li class="social-icon-item">
-										<a href="#" class="social-icon-link">
-											<span class="bi-pinterest"></span>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="row">
-
-						<div class="col-lg-6 col-12 mb-4 pb-2">
-							<h5 class="site-footer-title mb-3">Liens</h5>
-
-							<ul class="site-footer-links">
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">Accueil</a>
-								</li>
-
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">A propos</a>
-								</li>
-
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">Artistes</a>
-								</li>
-
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">Agenda</a>
-								</li>
-
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">Tarifs</a>
-								</li>
-
-								<li class="site-footer-link-item">
-									<a href="#" class="site-footer-link">Contact</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-							<h5 class="site-footer-title mb-3">Vous avez un question?</h5>
-
-							<p class="white d-flex mb-1">
-								<a href="tel: 090-080-0760" class="site-footer-link">
-									090-080-0760
-								</a>
-							</p>
-
-							<p class="white d-flex">
-								<a href="mailto:hello@company.com" class="site-footer-link">
-									festochSympatoch@company.com
-								</a>
-							</p>
-						</div>
-
-						<div class="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
-							<h5 class="site-footer-title mb-3">Adresse</h5>
-
-							<p class="white d-flex mt-3 mb-2">
-								9 Quai Lissagaray, 32000 Auch, France</p>
-
-							<a class="link-fx-1 color-contrast-higher mt-3" href="#">
-								<span>Our Maps</span>
-								<svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
-									<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-										<circle cx="16" cy="16" r="15.5"></circle>
-										<line x1="10" y1="18" x2="16" y2="12"></line>
-										<line x1="16" y1="12" x2="22" y2="18"></line>
-									</g>
-								</svg>
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="site-footer-bottom">
-					<div class="container">
-						<div class="row">
-
-							<div class="col-lg-3 col-12 mt-5">
-								<p class="copyright-text">Copyright © 2036 Festoch Sympatoch Company</p>
-							</div>
-							<div class="col-lg-8 col-12 mt-lg-5">
-								<ul class="site-footer-links">
-									<li class="site-footer-link-item">
-										<a href="#" class="site-footer-link">Terms &amp; Conditions</a>
-									</li>
-
-									<li class="site-footer-link-item">
-										<a href="#" class="site-footer-link">Privacy Policy</a>
-									</li>
-
-									<li class="site-footer-link-item">
-										<a href="#" class="site-footer-link">Votre Feedback</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-
-            {% set heatmapDataEyeData = heatmapDataEye is defined ? (heatmapDataEye|json_encode()) : false %}
-            {% set heatmapDataClickData = heatmapDataClick is defined ? (heatmapDataClick|json_encode()) : false %}
-            {% set heatmapDataMouseData = heatmapDataMouse is defined ? (heatmapDataMouse|json_encode()) : false %}
-
-            {%  if heatmapDataClickData and heatmapDataEyeData and heatmapDataMouseData%}
-                <div class="fixed-top">
-                        <div>
-                            <label for="type">Click</label>
-                            <input type="radio" value="heatmapClick" name="heatMapType" checked>
-                        </div>
-                        <div>
-                            <label for="type">Vision</label>
-                            <input type="radio" value="heatmapEye" name="heatMapType">
-                        </div>
-                        <div>
-                            <label for="type">Souris</label>
-                            <input type="radio" value="heatmapMouse" name="heatMapType">
-                        </div>
+                            <li class="social-icon-item">
+                                <a href="#" class="social-icon-link">
+                                    <span class="bi-pinterest"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            {% endif %}
-		</main>
+            </div>
+        </div>
 
-        <!-- TEMPLATE DATA -->
-        <input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
-        <input type="hidden" name="duration" value="{{ persona.duration ?? '' }}">
-        <input type="hidden" name="template_data" value="{{ data|json_encode() }}">
-        <input type="hidden" name="template_id" value="{{ session.template.id }}">
-        <input type="hidden" name="persona_id" value="{{ session.persona.id }}">
-        <input type="hidden" name="session_id" value="{{ session.id }}">
-		<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
-		<input type="hidden" name="heatmapEye" value="{{ heatmapDataEyeData }}">
-		<input type="hidden" name="heatmapClick" value="{{ heatmapDataClickData }}">
-        <input type="hidden" name="heatmapMouse" value="{{ heatmapDataMouseData }}">
-		<input type="hidden" name="session_id" value="{{ (session_id??false) }}">
+        <div class="container">
+            <div class="row">
 
-		<!-- JAVASCRIPT FILES -->
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-		<script src="{{ asset('js/heatmap.min.js') }}"></script>
-		<script src="{{ asset('js/change-interface.js') }}"></script>
-		<script src="{{ asset('js/click-scroll.js') }}"></script>
-		<script src="{{ asset('js/jquery.sticky.js') }}"></script>
-		<script src="{{ asset('js/custom.js') }}"></script>
-			</body>
-		</body>
-	</body>
+                <div class="col-lg-6 col-12 mb-4 pb-2">
+                    <h5 class="site-footer-title mb-3">Liens</h5>
+
+                    <ul class="site-footer-links">
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Accueil</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">A propos</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Artistes</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Agenda</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Tarifs</a>
+                        </li>
+
+                        <li class="site-footer-link-item">
+                            <a href="#" class="site-footer-link">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
+                    <h5 class="site-footer-title mb-3">Vous avez un question?</h5>
+
+                    <p class="white d-flex mb-1">
+                        <a href="tel: 090-080-0760" class="site-footer-link">
+                            090-080-0760
+                        </a>
+                    </p>
+
+                    <p class="white d-flex">
+                        <a href="mailto:hello@company.com" class="site-footer-link">
+                            festochSympatoch@company.com
+                        </a>
+                    </p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-11 mb-4 mb-lg-0 mb-md-0">
+                    <h5 class="site-footer-title mb-3">Adresse</h5>
+
+                    <p class="white d-flex mt-3 mb-2">
+                        9 Quai Lissagaray, 32000 Auch, France</p>
+
+                    <a class="link-fx-1 color-contrast-higher mt-3" href="#">
+                        <span>Our Maps</span>
+                        <svg class="icon" viewbox="0 0 32 32" aria-hidden="true">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="16" cy="16" r="15.5"></circle>
+                                <line x1="10" y1="18" x2="16" y2="12"></line>
+                                <line x1="16" y1="12" x2="22" y2="18"></line>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="site-footer-bottom">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-12 mt-5">
+                        <p class="copyright-text">Copyright © 2036 Festoch Sympatoch Company</p>
+                    </div>
+                    <div class="col-lg-8 col-12 mt-lg-5">
+                        <ul class="site-footer-links">
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Terms &amp; Conditions</a>
+                            </li>
+
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Privacy Policy</a>
+                            </li>
+
+                            <li class="site-footer-link-item">
+                                <a href="#" class="site-footer-link">Votre Feedback</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    {% set heatmapDataEyeData = heatmapDataEye is defined ? (heatmapDataEye|json_encode()) : false %}
+    {% set heatmapDataClickData = heatmapDataClick is defined ? (heatmapDataClick|json_encode()) : false %}
+    {% set heatmapDataMouseData = heatmapDataMouse is defined ? (heatmapDataMouse|json_encode()) : false %}
+
+    {% if heatmapDataClickData and heatmapDataEyeData and heatmapDataMouseData %}
+        <div class="fixed-top container_input_radio">
+            <div>
+                <span class="menu_burger">Menu</span>
+            </div>
+            <div>
+                <label for="type">Click</label>
+                <input type="radio" value="heatmapClick" name="heatMapType" checked>
+            </div>
+            <div>
+                <label for="type">Vision</label>
+                <input type="radio" value="heatmapEye" name="heatMapType">
+            </div>
+            <div>
+                <label for="type">Souris</label>
+                <input type="radio" value="heatmapMouse" name="heatMapType">
+            </div>
+        </div>
+    {% endif %}
+</main>
+
+<!-- TEMPLATE DATA -->
+<input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
+<input type="hidden" name="duration" value="{{ persona.duration ?? '' }}">
+<input type="hidden" name="template_data" value="{{ data|json_encode() }}">
+<input type="hidden" name="template_id" value="{{ session.template.id }}">
+<input type="hidden" name="persona_id" value="{{ session.persona.id }}">
+<input type="hidden" name="session_id" value="{{ session.id }}">
+<input type="hidden" name="header_hidden" value="{{ (data.stickyHeader??true) }}">
+<input type="hidden" name="heatmapEye" value="{{ heatmapDataEyeData }}">
+<input type="hidden" name="heatmapClick" value="{{ heatmapDataClickData }}">
+<input type="hidden" name="heatmapMouse" value="{{ heatmapDataMouseData }}">
+<input type="hidden" name="session_id" value="{{ (session_id??false) }}">
+
+<!-- JAVASCRIPT FILES -->
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/heatmap.min.js') }}"></script>
+<script src="{{ asset('js/change-interface.js') }}"></script>
+<script src="{{ asset('js/click-scroll.js') }}"></script>
+<script src="{{ asset('js/jquery.sticky.js') }}"></script>
+<script src="{{ asset('js/custom.js') }}"></script>
+</body>
+</body>
+</body>
 </html>
 
