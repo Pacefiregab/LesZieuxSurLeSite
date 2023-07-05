@@ -1,9 +1,10 @@
-
-import {filtre} from "/js/sidebar/filtre.js";
 import {details} from "/js/template/details.js";
+import {filtre} from "/js/sidebar/filtre.js";
 
-let filtre2 = new filtre('/templates/api/', (data) => {
- details(data);
+let perso = new details(null);
+
+new filtre('/templates/api/', (data) => {
+ new details(data);
 });
 
 
