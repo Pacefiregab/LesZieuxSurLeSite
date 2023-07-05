@@ -33,7 +33,7 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalCenterTitle">Objectif :</h5>
                 </div>
-                <div class="modal-body">{{ constant ("App\\Entity\\Persona::FLAGS_LIBELLE")[persona.flag] }}</div>
+                <div class="modal-body">{{ persona.libelle ?? constant ("App\\Entity\\Persona::FLAGS_LIBELLE")[persona.flag] }}</div>
                 <div class="modal-footer">
                     <button id="startSessionButton" class="btn btn-primary" type="button" data-bs-dismiss="modal">
                         Démarrer
