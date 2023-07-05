@@ -188,4 +188,16 @@ class TemplateController extends AbstractController
 
         return new JsonResponse($template);
     }
+
+
+    #[Route('/{id}/sessions', name: 'templates_show_sessions', methods: 'GET')]
+    public function show(Template $template): Response
+    {
+        $sessions = $this->sessionRepository->findBy(['template' => $template]);
+
+        return $this->render('template/show.html.twig', [
+            'template' => $template,
+            'sessions' => $sessions
+        ]);
+    }
 }

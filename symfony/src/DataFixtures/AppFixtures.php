@@ -71,7 +71,7 @@ class AppFixtures extends Fixture
     {
         for ($i = 0; $i < 10; $i++) {
             $template = new Template();
-            $template->setName("session n'" . $i);
+            $template->setName("sTemplate n'" . $i);
             $template->setData(array(
                 "reverseRow" => $this->faker->boolean(),
                 "hideHeader" => $this->faker->boolean(),
