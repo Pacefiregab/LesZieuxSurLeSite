@@ -146,7 +146,6 @@ class SessionController extends AbstractController
                 }
             }
         }
-
         //Persona of the session data
         $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
         $sessionPersonaTimes = [];
