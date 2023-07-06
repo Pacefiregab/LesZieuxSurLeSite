@@ -42,6 +42,7 @@ class SessionController extends AbstractController
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->sessionRepository->save($session);
 
