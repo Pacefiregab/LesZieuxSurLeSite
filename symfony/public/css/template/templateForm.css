@@ -51,15 +51,17 @@
 
 #templateDetails {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .cardTemplate {
     background-color: var(--color_card);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     height: 20%;
     min-height: 150px;
     margin: var(--margin);
@@ -72,7 +74,7 @@
 .presentationCard {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 100%;
 }
@@ -197,4 +199,97 @@
 .gg-close-o::after {
     transform: rotate(-45deg);
     color:red;
+}
+
+#templateStat {
+    width: 100%;
+    height: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.templateSession {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+#templateChart {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.averageTime, .averageClick {
+    display: flex;
+    height: 70%;
+    width: 33%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.TemplateTime, .TemplateClick {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+    width: 100%;
+}
+*
+#statPersonatemplate {
+    width: 100%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#statPersonatemplate h4 {
+    width: 100%;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+#statSessionTemplateArea{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border-radius: var(--border_radius);
+    box-shadow: inset 0 11px 8px -10px #CCC, inset 0 -11px 8px -10px #CCC;
+
+}
+
+.statSessionChart {
+    width: 100%;
+    height: 50%;
+}
+
+.statSessionContainer {
+    height: 50%;
+    width: 50%;
+}
+
+.statSessionCard {
+    width: 200px !important;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }

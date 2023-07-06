@@ -16,8 +16,8 @@
         'items': templates|map(template => {
             'name': template.name,
             'id': template.id,
-            'primary': template.data.primaryColor,
-            'secondary': template.data.secondaryColor,
+            'primary': template.data.primaryColor ?? null ,
+            'secondary': template.data.secondaryColor ?? null,
         })
     } %}
 {% endblock %}
@@ -63,19 +63,38 @@
 		</div>
 		<div id="templateStat">
 			<div class="templateSession">
-				<h3>Temps moyen</h3>
-				<div class="container_canvas" id="chart">
-					<canvas id="sessionsChart" height="400" width="400"></canvas>
+				<div class="container_canvas" id="templateChart">
+					<canvas id="sessionsChart"></canvas>
 				</div>
 			</div>
 
 			<div class="averageTime">
-				<h3>Temps moyen</h3>
+				<h4>Temps moyen</h4>
+				<h3></h3>
+				<div class="TemplateTime">
+					<p class="minTime">min :</p>
+					<p class="maxTime">max :</p>
+				</div>
 			</div>
+
+
+			<div class="averageClick">
+				<h4>Clics moyen</h4>
+				<h3></h3>
+				<div class="TemplateClick">
+					<p class="minClick">min :</p>
+					<p class="maxClick">max :</p>
+				</div>
+			</div>
+
+			<button id="details">Details</button>
+		</div>
+		<div id="statPersonatemplate">
+			<h4>Objectifs : </h4>
+			<div id="statSessionTemplateArea"></div>
 		</div>
 	</div>
 {% endblock %}
 {% block javascript %}
 <script type="module" src="/js/template/import.js"></script>
 {% endblock %}
-

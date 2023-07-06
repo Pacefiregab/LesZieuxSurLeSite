@@ -42,7 +42,9 @@ let flag = undefined;
     if(flag === 'buy4ticket+') {
         $('#ticket-form').submit(function (event) {
            event.preventDefault();
-           if($(this).find('[name=TicketForm]:checked').val() === '+' && $(this).find('[name=ticket-form-number]').val() == 4 ) {
+           if(
+               ($(this).find('[name=TicketForm]:checked').val() === '+' || ($(this).find('[name=TicketFormSelect]').val() === '+' ))
+                   && $(this).find('[name=ticket-form-number]').val() == 4 ) {
                isSuccess = true;
                sendRecord(ws);
            }

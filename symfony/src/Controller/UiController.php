@@ -17,16 +17,18 @@ use Symfony\Component\HttpFoundation\Response;
 #[Route('/ui')]
 class UiController extends AbstractController
 {
-    #[Route(['/{session}','/'] ,name: 'app_ui')]
-    public function index(?Session $session, EntityManagerInterface $entityManager): Response {
-        if (!$session->getId()) {
+    #[Route(['/{persona}/persona','/', '/{template}/template'] ,name: 'app_ui')]
+    public function index(?Persona $persona, ?Template $template, EntityManagerInterface $entityManager): Response {
+        if (!$persona?->getId()){
             $personas = $entityManager->getRepository(Persona::class)->findAll();
             $persona = $personas[array_rand($personas)];
-            $templates = $entityManager->getRepository(Template::class)->findAll();
-            $template = $templates[array_rand($templates)];
-            $session->setTemplate($template);
-            $session->setPersona($persona);
         }
+        $session = new Session();
+        $templates = $entityManager->getRepository(Template::class)->findAll();
+        $template = $templates[array_rand($templates)];
+        $session->setTemplate($template);
+        $session->setPersona($persona);
+
         return $this->render('ui/index.html.twig', [
             'data' => $session->getTemplate()?->getData() ?? [],
             'persona' => $session->getPersona(),
