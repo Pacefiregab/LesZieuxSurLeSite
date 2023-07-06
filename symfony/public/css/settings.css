@@ -232,9 +232,18 @@ button#backButton {
     left: 30px;
 }
 
-button#launchButton {
-    width: 250px;
+button#launchButton, #selectLaunch {
+    width: 180px;
+}
+
+#areaLaunching {
+    position: absolute;
     left: 30px;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items:  center;
+    gap:10px;
 }
 
 .navbar{
