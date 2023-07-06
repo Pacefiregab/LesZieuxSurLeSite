@@ -59,7 +59,7 @@ div.element_filtre {
     height: 50px;
     display: flex;
     align-items: center;
-    padding: 0 10px 0 10px;
+    padding: 10px 10px 10px 10px;
     overflow: hidden;
 }
 
@@ -143,18 +143,18 @@ div.filtre::-webkit-scrollbar {
 }
 
 
-#listElement::-webkit-scrollbar {
+#listElement::-webkit-scrollbar, #statSessionTemplateArea::-webkit-scrollbar {
     width: 5px;
 }
 
-#listElement::-webkit-scrollbar-track {
+#listElement::-webkit-scrollbar-track, #statSessionTemplateArea::-webkit-scrollbar-track {
     background: var(--color_background);
     border: var(--border_radius);
 }
 
 /* Handle */
 
-#listElement::-webkit-scrollbar-thumb {
+#listElement::-webkit-scrollbar-thumb, #statSessionTemplateArea::-webkit-scrollbar-thumb {
     background: var(--color_secondary);
 }
 

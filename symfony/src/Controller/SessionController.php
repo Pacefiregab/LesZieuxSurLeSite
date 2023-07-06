@@ -146,8 +146,6 @@ class SessionController extends AbstractController
                 }
             }
         }
-        /* dd($templateClicks, $templateScroll, $sessionTemplateTimes, $sessionTemplateSuccess, count($sessionsTemplate)); */
-
         //Persona of the session data
         $sessionsPersona = $this->sessionRepository->findBy(['persona' => $session->getPersona()]);
         $sessionPersonaTimes = [];

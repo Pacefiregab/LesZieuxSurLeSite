@@ -131,10 +131,16 @@ class TemplateController extends AbstractController
         $personas = [];
         $personasSessions = [];
         $statistics = [];
+        $clicks = [];
 
         foreach ($sessions as $session) {
             $personasSessions[$session->getPersona()->getId()][] = $session;
             $personas[] = $session->getPersona();
+            foreach ($session->getTrackings() as $trackings) {
+               if($trackings->getType() == 'click') {
+                   $clicks[]= count($trackings->getData());
+               }
+            }
         }
 
         foreach ($personas as $persona) {
@@ -175,6 +181,9 @@ class TemplateController extends AbstractController
             'maxTime' => count($sessions) > 0 ? max(array_map(function ($session) {
                 return ($session->getDateEnd() != null || $session->getDateStart() != null) ? $session->getDateEnd()->getTimestamp() - $session->getDateStart()->getTimestamp() : 0;
             }, $sessions)) : 0,
+            'averageClicks' => count($sessions) > 0 ? array_sum($clicks) / count($sessions) : 0,
+            'minClicks' => count($sessions) > 0 ? min($clicks) : 0,
+            'maxClicks' => count($sessions) > 0 ? max($clicks) : 0,
         ];
 
 
@@ -187,5 +196,17 @@ class TemplateController extends AbstractController
         ];
 
         return new JsonResponse($template);
+    }
+
+
+    #[Route('/{id}/sessions', name: 'templates_show_sessions', methods: 'GET')]
+    public function show(Template $template): Response
+    {
+        $sessions = $this->sessionRepository->findBy(['template' => $template]);
+
+        return $this->render('template/show.html.twig', [
+            'template' => $template,
+            'sessions' => $sessions
+        ]);
     }
 }

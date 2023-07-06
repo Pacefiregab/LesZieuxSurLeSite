@@ -5,35 +5,38 @@ export class chartGenerateTemplate {
     ctx;
     myChart;
 
-    constructor() {
+    constructor(element) {
         this.ctx = document.getElementById("sessionsChart");
-        //vider ctx
     }
 
-    buildChart(data) {
+    buildChart(data, title) {
         console.log(data);
-        if (this.myChart != undefined){
-            this.myChart.destroy()
+        if (this.myChart != undefined) {
+            this.myChart.destroy();
         }
 
-        document.querySelector("#chart").innerHTML = '<canvas id="sessionsChart"></canvas>';
-        this.ctx = document.getElementById('sessionsChart');
-
+        document.querySelector("#templateChart").innerHTML =
+            '<canvas id="sessionsChart"></canvas>';
+        this.ctx = document.getElementById("sessionsChart");
 
         this.myChart = new Chart(this.ctx, {
-            type: 'doughnut',
+            type: "doughnut",
             data: data,
             options: {
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: 'top',
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "right",
+                        align: "middle",
+                    },
+                    title: {
+                        display: true,
+                        text: title,
+                        padding: {
+                            top: 10,
+                        },
+                    },
                 },
-                title: {
-                  display: true,
-                  text: 'Chart.js Doughnut Chart'
-                }
-              }
             },
         });
     }
