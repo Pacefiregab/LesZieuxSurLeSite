@@ -37,19 +37,6 @@ let flag = undefined;
 
         headerHeight = $('[name=header_hidden]').val ? 85 : 0;
     });
-
-    flag = $('input[name="flag"]').val();
-    if(flag === 'buy4ticket+') {
-        $('#ticket-form').submit(function (event) {
-           event.preventDefault();
-           if(
-               ($(this).find('[name=TicketForm]:checked').val() === '+' || ($(this).find('[name=TicketFormSelect]').val() === '+' ))
-                   && $(this).find('[name=ticket-form-number]').val() == 4 ) {
-               isSuccess = true;
-               sendRecord(ws);
-           }
-        });
-    }
 })(window.jQuery);
 
 let startDate = Date.now()/1000; //default data
@@ -91,6 +78,19 @@ function initEventCapture() {
         scrollRecord = []
         mouseRecord = []
         isSuccess = false
+    }
+
+    flag = $('input[name="flag"]').val();
+    if(flag === 'buy4ticket+') {
+        $('#ticket-form').submit(function (event) {
+            event.preventDefault();
+            if(
+                ($(this).find('[name=TicketForm]:checked').val() === '+' || ($(this).find('[name=TicketFormSelect]').val() === '+' ))
+                && $(this).find('[name=ticket-form-number]').val() == 4 ) {
+                isSuccess = true;
+                sendRecord(ws);
+            }
+        });
     }
 
     $(document).on('click', function (event) {
