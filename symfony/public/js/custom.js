@@ -1,3 +1,5 @@
+let flag = undefined;
+
 (function ($) {
 
     "use strict";
@@ -35,6 +37,19 @@
 
         headerHeight = $('[name=header_hidden]').val ? 85 : 0;
     });
+
+    flag = $('input[name="flag"]').val();
+    if(flag === 'buy4ticket+') {
+        $('#ticket-form').submit(function (event) {
+           event.preventDefault();
+           if(
+               ($(this).find('[name=TicketForm]:checked').val() === '+' || ($(this).find('[name=TicketFormSelect]').val() === '+' ))
+                   && $(this).find('[name=ticket-form-number]').val() == 4 ) {
+               isSuccess = true;
+               sendRecord(ws);
+           }
+        });
+    }
 })(window.jQuery);
 
 let startDate = Date.now()/1000; //default data
@@ -54,8 +69,6 @@ let headerHeight = 85
 let scrollPosition = 0
 let windowWidth = document.body.clientWidth;
 let windowHeight = document.body.clientHeight;
-
-const flag = $('input[name="flag"]').val();
 const duration = $('input[name="duration"]').val();
 
 function initEventCapture() {
@@ -79,8 +92,6 @@ function initEventCapture() {
         mouseRecord = []
         isSuccess = false
     }
-
-    console.log(flag)
 
     $(document).on('click', function (event) {
         clickRecord.push({
@@ -115,8 +126,6 @@ function treatMessage(message) {
     const msg = JSON.parse(message.data);
     const { eyeX, eyeY } = processEyePosition(msg.data.X, msg.data.Y);
 
-    $('.navbar-brand').html(eyeX + ' : ' + eyeY);
-
     if (eyeX || eyeY) {
         eyeRecord.push({
             X: eyeX, Y: eyeY, time: msg.data.Timestamp,
@@ -125,6 +134,12 @@ function treatMessage(message) {
 }
 
 function sendRecord(ws) {
+    //end modal display
+    $('#endModal').modal('show');
+    $('#modalResultBody').html(isSuccess ? "Vous avez réussi le scénario! Veuillez attendre la redirection automatique."
+        : "Vous avez échoué le scénario! Veuillez attendre la redirection automatique.");
+
+    //closing of websocket and sending of the data
     ws.close();
     endDate = Date.now()/1000;
     $.ajax({
@@ -151,13 +166,6 @@ function sendRecord(ws) {
             ws.close();
             window.location.href =data['detail'];
         })
-
-    //notify the user that the session is finished
-    if(isSuccess) {
-        alert("Vous avez réussi le scénario! Veuillez attendre la redirection automatique.")
-    } else {
-        alert("Vous avez échoué le scénario! Veuillez attendre la redirection automatique.")
-    }
 }
 
 function processEyePosition(eyeX, eyeY) {

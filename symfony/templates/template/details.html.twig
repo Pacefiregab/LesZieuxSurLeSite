@@ -1,14 +1,24 @@
 {% extends 'base.html.twig' %}
+{% block navbar %}
+    {% include 'navBar.html.twig' with {
+        'focus' : 'template',
+        'lienPersonas': path('dashboard'),
+        'lienTemplate': path('templates_details'),
+    } %}
+{% endblock %}
+
+{% block backButton %}
+    {% include 'launchButton.html.twig' %}
+{% endblock %}
 
 {% block sidebar %}
-	{% include 'sideBar.html.twig' with {
+    {% include 'sideBar.html.twig' with {
         'items': templates|map(template => {
             'name': template.name,
             'id': template.id,
-            'primary': template.data.primaryColor,
-            'secondary': template.data.secondaryColor,
-        }),
-        'noPlus' : true,
+            'primary': template.data.primaryColor ?? null ,
+            'secondary': template.data.secondaryColor ?? null,
+        })
     } %}
 {% endblock %}
 
@@ -86,5 +96,5 @@
 	</div>
 {% endblock %}
 {% block javascript %}
-	<script type="module" src="/js/template/import.js"></script>
+<script type="module" src="/js/template/import.js"></script>
 {% endblock %}

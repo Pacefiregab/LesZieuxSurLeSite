@@ -55,13 +55,6 @@ services:
         published: ${HTTP3_PORT:-443}
         protocol: udp
   
-  adminer:
-    container_name: lesZieuxSurLeSite-adminer
-    image: adminer
-    restart: unless-stopped
-    ports:
-      - 8080:8080
-  
 
   # Mercure is installed as a Caddy module, prevent the Flex recipe from installing another service
   ###> symfony/mercure-bundle ###

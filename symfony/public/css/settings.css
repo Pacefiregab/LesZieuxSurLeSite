@@ -22,7 +22,7 @@
     box-sizing: border-box;
 }
 
-div.card {
+.card {
     background-color: var(--color_card);
     font-family: 'Roboto', sans-serif;
     border-radius: var(--border_radius);
@@ -56,7 +56,7 @@ div.element_filtre {
     width: 100%;
     text-align: center;
     justify-content: space-between;
-    height : 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     padding: 10px 10px 10px 10px;
@@ -138,7 +138,9 @@ div.filtre::-webkit-scrollbar {
     height: 100%;
 }
 
-div.filtre::-webkit-scrollbar { width: 0 !important }
+div.filtre::-webkit-scrollbar {
+    width: 0 !important
+}
 
 
 #listElement::-webkit-scrollbar, #statSessionTemplateArea::-webkit-scrollbar {
@@ -166,12 +168,13 @@ button {
     border-radius: var(--border_radius);
     background-color: var(--color_secondary);
     width: 100%;
-    max-width: 200px;
+    max-width: 300px;
     height: 50px;
     font-size: 1.2em;
     font-weight: lighter;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     cursor: pointer;
+    transition: color, background-color 0.3s;
 }
 
 button :hover {
@@ -222,14 +225,54 @@ a, a:hover, a:active, a:visited {
     border-radius: 50%;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
-button#backButton{
-    width:100px;
+
+button#backButton {
+    width: 100px;
     position: absolute;
     left: 30px;
 }
 
 button#launchButton {
     width: 250px;
-    position: absolute;
     left: 30px;
+}
+
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px 0 20px;
+    list-style: none;
+    flex-direction: row;
+    position: absolute;
+    width: 20%;
+    top: 0%;
+    right: 2%;
+
+}
+.navbar a{
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    list-style: none;
+}
+.navbar a.active{
+    border-bottom: 2px solid var(--color_primary);
+}
+
+.navbar a:hover {
+/*    transition de la border bottom de gauche a droite*/
+    border-bottom: 2px solid var(--color_primary);
+    transition: border-bottom 0.3s ease-in-out;
+
+}
+button.button_hitmap {
+    margin: 0 auto;
+}
+
+button:hover{
+    color:white;
+    background-color: #257c77;
+    transition: 0.3s;
+    transition-timing-function: linear;
 }
