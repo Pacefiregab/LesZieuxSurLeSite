@@ -49,11 +49,11 @@ class TemplateController extends AbstractController
         $template = new Template();
         $formData = $request->request;
         $data = [
-            "stickyHeader" => $formData->get('stickyHeader'),
-            "reverseRows" => $formData->get('reverseRows'),
-            "specialButtonForTicket" => $formData->get('specialButtonForTicket'),
-            "contactMapFirst" => $formData->get('contactMapFirst'),
-            "changeCheckBoxSelect" => $formData->get('changeCheckBoxSelect'),
+            "stickyHeader" => $formData->getBoolean('stickyHeader'),
+            "reverseRows" => $formData->getBoolean('reverseRows'),
+            "specialButtonForTicket" => $formData->getBoolean('specialButtonForTicket'),
+            "contactMapFirst" => $formData->getBoolean('contactMapFirst'),
+            "changeCheckBoxSelect" => $formData->getBoolean('changeCheckBoxSelect'),
             "whiteColor" => $formData->get('whiteColor'),
             "darkColor" => $formData->get('darkColor'),
             "primaryColor" => $formData->get('primaryColor'),
