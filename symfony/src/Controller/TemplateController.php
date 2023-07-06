@@ -35,6 +35,9 @@ class TemplateController extends AbstractController
     {
         $templates = $entityManager->getRepository(Template::class)->findAll();
 
+        if (sizeof($templates)<1){
+            $templates = [new Template()];
+        }
         return $this->render('template/index.html.twig', [
             'templates' => $templates,
         ]);

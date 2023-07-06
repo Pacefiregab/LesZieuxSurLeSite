@@ -38,6 +38,9 @@ class PersonaController extends AbstractController
     {
         $personas = $this->personaRepository->findAll();
 
+        if (sizeof($personas)<1){
+            $personas = [new Persona()];
+        }
         return $this->render('persona/index.html.twig', [
             'personas' => $personas,
         ]);
