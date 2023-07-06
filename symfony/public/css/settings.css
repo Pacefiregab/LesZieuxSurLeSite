@@ -141,18 +141,18 @@ div.filtre::-webkit-scrollbar {
 div.filtre::-webkit-scrollbar { width: 0 !important }
 
 
-#listElement::-webkit-scrollbar {
+#listElement::-webkit-scrollbar, #statSessionTemplateArea::-webkit-scrollbar {
     width: 5px;
 }
 
-#listElement::-webkit-scrollbar-track {
+#listElement::-webkit-scrollbar-track, #statSessionTemplateArea::-webkit-scrollbar-track {
     background: var(--color_background);
     border: var(--border_radius);
 }
 
 /* Handle */
 
-#listElement::-webkit-scrollbar-thumb {
+#listElement::-webkit-scrollbar-thumb, #statSessionTemplateArea::-webkit-scrollbar-thumb {
     background: var(--color_secondary);
 }
 

@@ -51,6 +51,7 @@
 
 #templateDetails {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,7 +61,7 @@
     background-color: var(--color_card);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
     height: 20%;
     min-height: 150px;
     margin: var(--margin);
@@ -73,7 +74,7 @@
 .presentationCard {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     height: 100%;
 }
@@ -201,8 +202,8 @@
 }
 
 #templateStat {
-    width: 90%;
-    height: 30%;
+    width: 100%;
+    height: 33%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -218,21 +219,22 @@
     align-items: center;
 }
 
-#sessionsChart {
-    width: 100%;
-    height: 100%;
-}
 
 #templateChart {
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
 }
 .averageTime {
     display: flex;
     height: 70%;
     width: 33%;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -247,10 +249,17 @@
 *
 #statPersonatemplate {
     width: 100%;
+    height: 40%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+}
+
+#statPersonatemplate h4 {
+    width: 100%;
+    margin: 10px;
+    text-align: left;
 }
 
 #statSessionTemplateArea{
@@ -270,8 +279,13 @@
     height: 50%;
 }
 
+.statSessionContainer {
+    height: 50%;
+    width: 50%;
+}
+
 .statSessionCard {
-    width: 100%;
+    width: 200px !important;
     height: 90%;
     display: flex;
     flex-direction: row;

@@ -9,7 +9,7 @@ function formatTime(seconds) {
     var formattedSeconds =
         remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
 
-    var formattedTime = formattedMinutes + ":" + formattedSeconds;
+    var formattedTime = parseInt(formattedMinutes) + ":" + parseInt(formattedSeconds);
     return formattedTime;
 }
 
@@ -104,9 +104,7 @@ export class details {
                     ],
                 };
 
-                this.chartGenerateTemplate.buildChart(chartData);
-                document.querySelector("#numberSessions").innerHTML =
-                    this.data.templateStatistics.nbSessions;
+                this.chartGenerateTemplate.buildChart(chartData, "Nombre de sessions : "+this.data.templateStatistics.nbSessions);
             } else {
                 document.querySelector("#templateChart").innerHTML =
                     "<p>Aucune session pour ce template</p>";
@@ -137,11 +135,24 @@ export class details {
                 statSessionTemplateTitle.innerHTML = personasStatistics[persona].name;
                 statSessionTemplate.appendChild(statSessionTemplateTitle);
 
+                let statSessionContainer = document.createElement("div");
+                statSessionContainer.classList.add("statSessionContainer");
+
+                let statTimeContainer = document.createElement("div");
+                statSessionContainer.classList.add("statTimeContainer");
+
                 let canvas = document.createElement("canvas");
                 canvas.classList.add("statSessionChart");
                 canvas.setAttribute("id", "chart" + persona);
-                statSessionTemplate.appendChild(canvas);
+                statSessionContainer.appendChild(canvas);
 
+                let statTime = document.createElement("p");
+                statTime.innerHTML = "Temps moyen : " +formatTime(personasStatistics[persona].sessions.averageTime);
+
+
+
+                statSessionTemplate.appendChild(statSessionContainer);
+                statSessionTemplate.appendChild(statTime);
                 statArea.appendChild(statSessionTemplate);
 
                 let chart = new Chart(canvas, {
@@ -149,7 +160,7 @@ export class details {
                     data: {
                         datasets: [
                             {
-                                data: [4, 6],
+                                data: [personasStatistics[persona].sessions.total - personasStatistics[persona].sessions.isSuccess, personasStatistics[persona].sessions.isSuccess],
                                 backgroundColor: ["#e30909", "#008a29"],
                             },
                         ],
