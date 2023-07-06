@@ -118,6 +118,14 @@ export class details {
                 this.data.templateStatistics.averageTime
             );
 
+            document.querySelector(".minClick").innerHTML =
+                "min : " + formatTime(this.data.templateStatistics.minClicks);
+            document.querySelector(".maxClick").innerHTML =
+                "max : " + formatTime(this.data.templateStatistics.maxClicks);
+            document.querySelector(".averageClick h3").innerHTML = formatTime(
+                this.data.templateStatistics.averageClicks
+            );
+
             let statArea = document.querySelector("#statSessionTemplateArea");
             statArea.innerHTML = "";
             let personasStatistics = this.data.personasStatistics;
@@ -167,7 +175,7 @@ export class details {
                     },
                     options: {
                         responsive: true,
-                       
+
                     },
                 });
             });
