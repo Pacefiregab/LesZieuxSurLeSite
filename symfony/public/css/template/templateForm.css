@@ -244,3 +244,37 @@
     gap:20px;
     width: 100%;
 }
+*
+#statPersonatemplate {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#statSessionTemplateArea{
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border-radius: var(--border_radius);
+    box-shadow: inset 0 11px 8px -10px #CCC, inset 0 -11px 8px -10px #CCC;
+
+}
+
+.statSessionChart {
+    width: 100%;
+    height: 50%;
+}
+
+.statSessionCard {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+} 

@@ -5,13 +5,14 @@ function formatTime(seconds) {
     var remainingSeconds = seconds % 60;
 
     // Ajouter un zéro devant les minutes et les secondes si nécessaire
-    var formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
-    var formattedSeconds = (remainingSeconds < 10) ? "0" + remainingSeconds : remainingSeconds;
+    var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    var formattedSeconds =
+        remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
 
     var formattedTime = formattedMinutes + ":" + formattedSeconds;
     return formattedTime;
-  }
-  
+}
+
 export class details {
     /**
      * @var {Array} data - tableau des données en clé les cards et en valeur les données
@@ -25,14 +26,17 @@ export class details {
     /**
      * @var {Node} bouton_detail - bouton pour afficher les détails
      */
-    bouton_detail = document.querySelector('#details');
+    bouton_detail = document.querySelector("#details");
 
     constructor(data) {
         this.data = data;
         this.chartGenerateTemplate = new chartGenerateTemplate();
         console.log(this.data);
         if (this.data !== null) {
-            this.bouton_detail.setAttribute('onclick', 'window.location.href = "' + this.data.id + '/sessions"');
+            this.bouton_detail.setAttribute(
+                "onclick",
+                'window.location.href = "' + this.data.id + '/sessions"'
+            );
 
             document.querySelector("#titleTemplate").innerHTML = this.data.name;
             document.querySelector(".primaryColor").style.backgroundColor =
@@ -101,63 +105,61 @@ export class details {
                 };
 
                 this.chartGenerateTemplate.buildChart(chartData);
-                document.querySelector("#numberSessions").innerHTML = this.data.templateStatistics.nbSessions
+                document.querySelector("#numberSessions").innerHTML =
+                    this.data.templateStatistics.nbSessions;
             } else {
                 document.querySelector("#templateChart").innerHTML =
                     "<p>Aucune session pour ce template</p>";
-                    document.querySelector("#numberSessions").innerHTML = ""
+                document.querySelector("#numberSessions").innerHTML = "";
             }
-            document.querySelector(".minTime").innerHTML = "min : " + formatTime(this.data.templateStatistics.minTime)
-            document.querySelector(".maxTime").innerHTML = "max : " + formatTime(this.data.templateStatistics.maxTime)
-            document.querySelector(".averageTime h3").innerHTML = formatTime(this.data.templateStatistics.averageTime)
-        
-        let statArea = document.querySelector("#statSessionTemplateArea");
-        statArea.innerHTML = "";
-        let personasStatistics = (this.data.personasStatistics);
+            document.querySelector(".minTime").innerHTML =
+                "min : " + formatTime(this.data.templateStatistics.minTime);
+            document.querySelector(".maxTime").innerHTML =
+                "max : " + formatTime(this.data.templateStatistics.maxTime);
+            document.querySelector(".averageTime h3").innerHTML = formatTime(
+                this.data.templateStatistics.averageTime
+            );
 
-        Object.keys(personasStatistics).forEach(persona => {
-            let statSessionTemplate = document.createElement("div");
-            statSessionTemplate.classList.add("statSessionCard");
-            statSessionTemplate.setAttribute("id", "statSessionCard"+persona);
+            let statArea = document.querySelector("#statSessionTemplateArea");
+            statArea.innerHTML = "";
+            let personasStatistics = this.data.personasStatistics;
 
-            let statSessionTemplateTitle = document.createElement("p")
-            statSessionTemplateTitle.innerHTML = personasStatistics[persona].name;
-            statSessionTemplate.appendChild(statSessionTemplateTitle);
+            Object.keys(personasStatistics).forEach((persona) => {
+                let statSessionTemplate = document.createElement("div");
+                statSessionTemplate.classList.add("statSessionCard");
+                statSessionTemplate.classList.add("card");
+                statSessionTemplate.setAttribute(
+                    "id",
+                    "statSessionCard" + persona
+                );
 
-            let canvas = document.createElement('canvas');
-            canvas.setAttribute('id','chart'+persona);
-            statSessionTemplate.appendChild(canvas);
-            
-            
-            statArea.appendChild(statSessionTemplate);
+                let statSessionTemplateTitle = document.createElement("p");
+                statSessionTemplateTitle.innerHTML = personasStatistics[persona].name;
+                statSessionTemplate.appendChild(statSessionTemplateTitle);
 
-            let chart = new Chart(canvas, {
-                type: 'doughnut',
-                data:                      {
-                    labels: ["Echec", "Succès"],
-                    datasets: [
-                        {
-                            data: [
-                               4,6
-                            ],
-                            backgroundColor: ["#e30909", "#008a29"],
-                        },
-                    ],
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                          display: false
-                        }
-                      }
-                }
+                let canvas = document.createElement("canvas");
+                canvas.classList.add("statSessionChart");
+                canvas.setAttribute("id", "chart" + persona);
+                statSessionTemplate.appendChild(canvas);
+
+                statArea.appendChild(statSessionTemplate);
+
+                let chart = new Chart(canvas, {
+                    type: "doughnut",
+                    data: {
+                        datasets: [
+                            {
+                                data: [4, 6],
+                                backgroundColor: ["#e30909", "#008a29"],
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                       
+                    },
+                });
             });
-
-
-        });
-
-        
         }
     }
 }
