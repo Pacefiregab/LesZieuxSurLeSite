@@ -9,5 +9,8 @@ function goBack() {
 }
 
 function launchSession() {
-    window.location.replace("http://localhost/ui");
+    const entity = document.querySelector("[name=entityForLaunch]")?.value
+    const entityType = document.querySelector("[name=entityType]")?.value
+    const url = entity ? '/' + entity + '/' + entityType : '';
+    window.location.replace("http://localhost/ui" + url);
 }
