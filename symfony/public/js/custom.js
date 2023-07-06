@@ -66,6 +66,8 @@ let sreenWidth = 1920
 let screenHeight = 1080
 let headerHeight = 85
 
+let headerOffset = 51
+
 let scrollPosition = 0
 let windowWidth = document.body.clientWidth;
 let windowHeight = document.body.clientHeight;
@@ -95,7 +97,7 @@ function initEventCapture() {
 
     $(document).on('click', function (event) {
         clickRecord.push({
-            X: event.pageX, Y: event.pageY, time: event.timeStamp,
+            X: event.pageX, Y: event.pageY - headerOffset, time: event.timeStamp,
         })
 
         const $target = $(event.target);
@@ -117,7 +119,7 @@ function initEventCapture() {
 function startMouseRecord(){
     window.addEventListener('mousemove', (event) => {
         mouseRecord.push({
-            x: event.clientX, y: event.clientY + scrollPosition, time: Date.now()
+            x: event.clientX, y: event.clientY + scrollPosition - headerOffset, time: Date.now()
         })
     });
 }
@@ -187,7 +189,7 @@ function processEyePosition(eyeX, eyeY) {
         iY = 0;
     } else {
         //sinon, on ajoute la valeur du eye tracker avec la valeur de scroll
-        iY = Math.floor(eyeY) + scrollPosition;
+        iY = Math.floor(eyeY) + scrollPosition - headerOffset;
     }
 
     return { eyeX: iX, eyeY: iY }
