@@ -844,18 +844,19 @@
 
     {% if heatmapDataClickData and heatmapDataEyeData and heatmapDataMouseData %}
         <div class="fixed-top container_input_radio">
-            <div>
-                <span class="menu_burger">Menu</span>
+            <div class="icon_menu">
+                <span class="menu_burger" id="icon_burger_id">
+                    <img src="/images/logo_background_remove.png" alt="logo"></span>
             </div>
-            <div>
+            <div class="element_input_radio">
                 <label for="type">Click</label>
                 <input type="radio" value="heatmapClick" name="heatMapType" checked>
             </div>
-            <div>
+            <div class="element_input_radio">
                 <label for="type">Vision</label>
                 <input type="radio" value="heatmapEye" name="heatMapType">
             </div>
-            <div>
+            <div class="element_input_radio">
                 <label for="type">Souris</label>
                 <input type="radio" value="heatmapMouse" name="heatMapType">
             </div>
@@ -864,6 +865,7 @@
 </main>
 
 <!-- TEMPLATE DATA -->
+
 <input type="hidden" name="flag" value="{{ persona.flag ?? '' }}">
 <input type="hidden" name="duration" value="{{ persona.duration ?? '' }}">
 <input type="hidden" name="template_data" value="{{ data|json_encode() }}">
@@ -877,6 +879,16 @@
 <input type="hidden" name="session_id" value="{{ (session_id??false) }}">
 
 <!-- JAVASCRIPT FILES -->
+<script>
+    let icon_menu_burger = document.getElementById('icon_burger_id');
+    icon_menu_burger.addEventListener('click', function(){
+        let menu = document.getElementsByClassName('fixed-top container_input_radio');
+        console.log(menu)
+        menu[0].classList.toggle('hidden');
+        let img = document.querySelector('.menu_burger img');
+        img.classList.toggle('hidden');
+    });
+</script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/heatmap.min.js') }}"></script>
 <script src="{{ asset('js/change-interface.js') }}"></script>
