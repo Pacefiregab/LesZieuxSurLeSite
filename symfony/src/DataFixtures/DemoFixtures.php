@@ -113,7 +113,6 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
         $template->setName("Template haut contraste");
         $template->setData(array(
             "reverseRow" => false,
-            "hideHeader" => true,
             "stickyHeader" => false,
             "specialButtonForTicket" => false,
             "contactMapFirst" => true,
@@ -131,7 +130,6 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
         $template->setName("Template bas contraste");
         $template->setData(array(
             "reverseRow" => true,
-            "hideHeader" => true,
             "stickyHeader" => false,
             "specialButtonForTicket" => true,
             "contactMapFirst" => true,
@@ -149,7 +147,6 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
         $template->setName("Template contraste modéré");
         $template->setData(array(
             "reverseRow" => false,
-            "hideHeader" => true,
             "stickyHeader" => false,
             "specialButtonForTicket" => false,
             "contactMapFirst" => false,
@@ -167,7 +164,6 @@ class DemoFixtures extends Fixture implements FixtureGroupInterface
         $template->setName("Template de rose");
         $template->setData(array(
             "reverseRow" => true,
-            "hideHeader" => false,
             "stickyHeader" => false,
             "specialButtonForTicket" => true,
             "contactMapFirst" => true,
