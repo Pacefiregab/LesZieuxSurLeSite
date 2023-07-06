@@ -108,7 +108,7 @@ export class details {
             } else {
                 document.querySelector("#templateChart").innerHTML =
                     "<p>Aucune session pour ce template</p>";
-              
+
             }
             document.querySelector(".minTime").innerHTML =
                 "min : " + formatTime(this.data.templateStatistics.minTime);
@@ -119,12 +119,11 @@ export class details {
             );
 
             document.querySelector(".minClick").innerHTML =
-                "min : " + formatTime(this.data.templateStatistics.minClicks);
+                "min : " + this.data.templateStatistics.minClicks;
             document.querySelector(".maxClick").innerHTML =
-                "max : " + formatTime(this.data.templateStatistics.maxClicks);
-            document.querySelector(".averageClick h3").innerHTML = formatTime(
-                this.data.templateStatistics.averageClicks
-            );
+                "max : " + this.data.templateStatistics.maxClicks;
+            document.querySelector(".averageClick h3").innerHTML =
+                this.data.templateStatistics.averageClicks;
 
             let statArea = document.querySelector("#statSessionTemplateArea");
             statArea.innerHTML = "";
