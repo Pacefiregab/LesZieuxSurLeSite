@@ -108,7 +108,7 @@ export class details {
             } else {
                 document.querySelector("#templateChart").innerHTML =
                     "<p>Aucune session pour ce template</p>";
-                document.querySelector("#numberSessions").innerHTML = "";
+              
             }
             document.querySelector(".minTime").innerHTML =
                 "min : " + formatTime(this.data.templateStatistics.minTime);
