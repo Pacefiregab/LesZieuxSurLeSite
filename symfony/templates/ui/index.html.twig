@@ -252,7 +252,7 @@
             <div class="row justify-content-center">
 
                 <div class="col-12 text-center">
-                    <h2 class="mb-4">Rencontrer vos Artistes</h1>
+                    <h1 class="mb-4">Rencontrer vos Artistes</h1>
                 </div>
 
                 <div class="col-lg-5 col-12">
@@ -625,32 +625,28 @@
             <div class="row">
 
                 <div class="col-lg-6 col-10 mx-auto">
-                    <form class="custom-form ticket-form mb-5 mb-lg-0" action="#" method="post" role="form">
+                    <form class="custom-form ticket-form mb-5 mb-lg-0" id="ticket-form">
                         <h2 class="text-center mb-4">C'est partis mon kiki</h2>
 
                         <div class="ticket-form-body">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="text" name="ticket-form-name" id="ticket-form-name"
-                                           class="form-control" placeholder="Nom" required>
+                                    <input type="text" name="ticket-form-name" id="ticket-form-name" class="form-control" placeholder="Nom" required>
                                 </div>
 
                                 <div class="col-lg-6 col-md-6 col-12">
-                                    <input type="email" name="ticket-form-email" id="ticket-form-email"
-                                           pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required>
+                                    <input type="email" name="ticket-form-email" id="ticket-form-email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="Email" required>
                                 </div>
                             </div>
 
-                            <input type="tel" class="form-control" name="ticket-form-phone" pattern="[0-9]{10}"
-                                   placeholder="Téléphone" required="">
+                            <input type="tel" class="form-control" name="ticket-form-phone" pattern="[0-9]{10}" placeholder="Téléphone" required="">
 
                             <h6>Choose Ticket Type</h6>
 
-                            <div class="row {{ (data.changeCheckBoxSelect??false ? 'd-none' : '') }}">
+                            <div class="row {{ (data.changeCheckBoxSelect??false ? 'd-none' : '')}}">
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-check form-control">
-                                        <input class="form-check-input" type="radio" name="TicketForm"
-                                               id="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="TicketForm" id="flexRadioDefault1" value="-">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             Pass Sympatoch 120€
                                         </label>
@@ -659,8 +655,7 @@
 
                                 <div class="col-lg-6 col-md-6 col-12">
                                     <div class="form-check form-check-radio form-control">
-                                        <input class="form-check-input" type="radio" name="TicketForm"
-                                               id="flexRadioDefault2">
+                                        <input class="form-check-input" type="radio" name="TicketForm" id="flexRadioDefault2" value="+">
                                         <label class="form-check-label" for="flexRadioDefault2">
                                             Pass Premium 240€
                                         </label>
@@ -668,18 +663,16 @@
                                 </div>
                             </div>
 
-                            <div class="form-group {{ (data.changeCheckBoxSelect??false ? '' : 'd-none') }}">
-                                <select class="form-control" id="TicketForm" name="TicketFormSelect">
-                                    <option value="-">Pass Sympatoch - 120€</option>
-                                    <option value="+">Pass Premium - 240€</option>
+                            <div class="form-group {{ (data.changeCheckBoxSelect??false ? '' : 'd-none')}}">
+                                <select class="form-control" id="TicketForm" name="TicketForm">
+                                    <option value="Pass Sympatoch">Pass Sympatoch - 120€</option>
+                                    <option value="Pass Premium">Pass Premium - 240€</option>
                                 </select>
                             </div>
 
-                            <input type="number" name="ticket-form-number" id="ticket-form-number" class="form-control"
-                                   min="1" placeholder="Nombres de Tickets" required>
+                            <input type="number" name="ticket-form-number" id="ticket-form-number" class="form-control" min="1" placeholder="Nombres de Tickets" required>
 
-                            <textarea name="ticket-form-message" rows="3" class="form-control" id="ticket-form-message"
-                                      placeholder="Requête Spéciales "></textarea>
+                            <textarea name="ticket-form-message" rows="3" class="form-control" id="ticket-form-message" placeholder="Requête Spéciales "></textarea>
 
                             <div class="col-lg-4 col-md-10 col-8 mx-auto">
                                 <button type="submit" class="form-control">Acheter</button>
@@ -879,9 +872,11 @@
 <input type="hidden" name="session_id" value="{{ (session_id??false) }}">
 
 <!-- JAVASCRIPT FILES -->
+{% if heatmapDataClickData or heatmapDataEyeData or heatmapDataMouseData %}
 <script>
+
     let icon_menu_burger = document.getElementById('icon_burger_id');
-    icon_menu_burger.addEventListener('click', function(){
+    icon_menu_burger?.addEventListener('click', function(){
         let menu = document.getElementsByClassName('fixed-top container_input_radio');
         console.log(menu)
         menu[0].classList.toggle('hidden');
@@ -889,6 +884,7 @@
         img.classList.toggle('hidden');
     });
 </script>
+{% endif %}
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/heatmap.min.js') }}"></script>
 <script src="{{ asset('js/change-interface.js') }}"></script>
