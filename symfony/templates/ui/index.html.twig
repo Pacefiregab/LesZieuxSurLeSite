@@ -252,7 +252,7 @@
             <div class="row justify-content-center">
 
                 <div class="col-12 text-center">
-                    <h2 class="mb-4">Rencontrer vos Artistes</h1>
+                    <h1 class="mb-4">Rencontrer vos Artistes</h1>
                 </div>
 
                 <div class="col-lg-5 col-12">
@@ -880,8 +880,9 @@
 
 <!-- JAVASCRIPT FILES -->
 <script>
+
     let icon_menu_burger = document.getElementById('icon_burger_id');
-    icon_menu_burger.addEventListener('click', function(){
+    icon_menu_burger?.addEventListener('click', function(){
         let menu = document.getElementsByClassName('fixed-top container_input_radio');
         console.log(menu)
         menu[0].classList.toggle('hidden');
