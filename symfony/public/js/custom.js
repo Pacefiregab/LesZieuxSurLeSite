@@ -42,7 +42,7 @@ let flag = undefined;
 let startDate = Date.now()/1000; //default data
 let endDate;
 
-let isSuccess = false;
+let isSuccess = 0;
 
 let eyeRecord = []
 let clickRecord = []
@@ -77,7 +77,7 @@ function initEventCapture() {
         clickRecord = []
         scrollRecord = []
         mouseRecord = []
-        isSuccess = false
+        isSuccess = 0
     }
 
     flag = $('input[name="flag"]').val();
@@ -85,9 +85,10 @@ function initEventCapture() {
         $('#ticket-form').submit(function (event) {
             event.preventDefault();
             if(
-                ($(this).find('[name=TicketForm]:checked').val() === '+' || ($(this).find('[name=TicketFormSelect]').val() === '+' ))
+                ($(this).find('[name=TicketForm]:checked').val() === '+'
+                    || $(this).find('[name=TicketFormSelect] option:selected').attr('value') === '+' )
                 && $(this).find('[name=ticket-form-number]').val() == 4 ) {
-                isSuccess = true;
+                isSuccess = 1;
                 sendRecord(ws);
             }
         });
@@ -101,7 +102,7 @@ function initEventCapture() {
         const $target = $(event.target);
 
         if ($target.data('flag') === flag) {
-            isSuccess = true;
+            isSuccess = 1;
             sendRecord(ws);
         }
     });

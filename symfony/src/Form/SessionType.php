@@ -16,7 +16,7 @@ class SessionType extends AbstractType
             ->add('date_end')
             ->add('title')
             ->add('template')
-        ;
+            ->add('$isSuccess');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
