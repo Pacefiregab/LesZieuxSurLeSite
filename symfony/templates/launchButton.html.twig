@@ -1,10 +1,10 @@
-<div>
-    <button onclick="launchSession()" id="launchButton">Lancer session</button>
+<div id="areaLaunching">
+    <button onclick="launchSession()" id="launchButton">Démarrer</button>
     {% set iterables = personas ?? templates ?? null %}
     {% if iterables %}
         <div>
             <input name="entityType" type="hidden" value="{{ personas is defined ? 'persona' : 'template' }}">
-            <select name="entityForLaunch">
+            <select id="selectLaunch" name="entityForLaunch">
                 <option value="">Aléatoire</option>
                 {% for iterable in iterables %}
                     <option value="{{ iterable.id }}">{{ iterable.name }}</option>
