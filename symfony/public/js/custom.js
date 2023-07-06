@@ -53,6 +53,10 @@ let sreenWidth = 1920
 let screenHeight = 1080
 let headerHeight = 85
 
+let menuHeader = 80
+
+let stickyHeader = false
+
 let scrollPosition = 0
 let windowWidth = document.body.clientWidth;
 let windowHeight = document.body.clientHeight;
@@ -61,6 +65,7 @@ const duration = $('input[name="duration"]').val();
 function initEventCapture() {
     // wait to connect
     const ws = new WebSocket("ws://localhost:8887", ["Tobii.Interaction"])
+    stickyHeader = $('input[name="header_hidden"]').val();
     ws.onopen = () => {
         ws.send('startGazePoint');
         startDate = Date.now()/1000;
@@ -96,7 +101,9 @@ function initEventCapture() {
 
     $(document).on('click', function (event) {
         clickRecord.push({
-            X: event.pageX, Y: event.pageY, time: event.timeStamp,
+            X: event.pageX,
+            Y: (stickyHeader && event.clientY < menuHeader) ? event.clientY : event.pageY,
+            time: event.timeStamp,
         })
 
         const $target = $(event.target);
@@ -118,7 +125,9 @@ function initEventCapture() {
 function startMouseRecord(){
     window.addEventListener('mousemove', (event) => {
         mouseRecord.push({
-            x: event.clientX, y: event.clientY + scrollPosition, time: Date.now()
+            x: event.clientX,
+            y: (stickyHeader && event.clientY < menuHeader) ? event.clientY: event.pageY,
+            time: Date.now()
         })
     });
 }
@@ -186,6 +195,9 @@ function processEyePosition(eyeX, eyeY) {
     if (eyeY < 0) {
         //si la position de l'oeil est négative en hauteur, alors on est en dehors de l'écran
         iY = 0;
+    } else if (stickyHeader && eyeY < menuHeader) {
+        //si le header est sticky et que la position de l'oeil est sur le header
+        iY = Math.floor(eyeY);
     } else {
         //sinon, on ajoute la valeur du eye tracker avec la valeur de scroll
         iY = Math.floor(eyeY) + scrollPosition;
